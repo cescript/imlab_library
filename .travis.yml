@@ -13,7 +13,7 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
-            - g++-7.3.0
+            - gcc-7
       env:
          - MATRIX_EVAL="CC=gcc-7.3.0
 
