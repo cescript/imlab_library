@@ -21,6 +21,7 @@ before_install:
     - eval "${MATRIX_EVAL}"
 
 script:
+    - mkdir bins
     - mkdir -p ./build
     - cd ./build
     - cmake -DCMAKE_BUILD_TYPE=Debug ..
