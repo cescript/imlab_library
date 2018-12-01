@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdint.h>
 #include "imcore.h"
+#include "prcore.h"
+#include "iocore.h"
 #include <time.h>
 
 int main()
