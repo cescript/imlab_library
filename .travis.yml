@@ -1,4 +1,6 @@
 language: c
+compiler:
+    - gcc-7
 script:
     - mkdir -p ./build
     - cd ./build
