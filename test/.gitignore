@@ -1,0 +1,35 @@
+# Ignore compiled source files #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.obj
+*.ps1
+*.out
+
+#ignore files
+imlab_dummy_test.c
+
+# Test Inputs&Outputs #
+######################
+.json
+.txt
+.jpg
+.jpeg
+.png
+.bmp
+.mat
+.fern
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

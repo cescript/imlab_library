@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="structcolor__t" kind="struct" prot="public">
+    <compoundname>color_t</compoundname>
+    <includes refid="imcore_8h" local="no">imcore.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structcolor__t_1ae856c29e3ddcdc14ed9508f82f74b70b" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t color_t::blue</definition>
+        <argsstring></argsstring>
+        <name>blue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/imcore.h" line="17" column="1" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/imcore.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structcolor__t_1a47c54ebb68cbe2a81ac914856827ddc6" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t color_t::green</definition>
+        <argsstring></argsstring>
+        <name>green</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/imcore.h" line="17" column="1" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/imcore.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structcolor__t_1a3e7019d20863c570099ff140fb168061" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t color_t::red</definition>
+        <argsstring></argsstring>
+        <name>red</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/imcore.h" line="17" column="1" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/imcore.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/cescript/CLionProjects/imlab/include/header/imcore.h" line="16" column="1" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/imcore.h" bodystart="16" bodyend="18"/>
+    <listofallmembers>
+      <member refid="structcolor__t_1ae856c29e3ddcdc14ed9508f82f74b70b" prot="public" virt="non-virtual"><scope>color_t</scope><name>blue</name></member>
+      <member refid="structcolor__t_1a47c54ebb68cbe2a81ac914856827ddc6" prot="public" virt="non-virtual"><scope>color_t</scope><name>green</name></member>
+      <member refid="structcolor__t_1a3e7019d20863c570099ff140fb168061" prot="public" virt="non-virtual"><scope>color_t</scope><name>red</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

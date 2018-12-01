@@ -1,0 +1,29 @@
+# todo list for the IMLAB Image and Matrix Library
+# RULES
+# 1. any ToDo item should start and end in a single line
+# 2. PROJECT must be created via (Project(P), Priority(A->E))
+# 3. JOBS must be defined after (Priority(A->E))
+# USAGE
+# # is used for commenting out in the ToDO file. Only lines starting with # are treated as comments
+# ------------------------------------------------------------------------------
+# (P,A,1) creates a new PROJECT. The characters are meant as follows:
+#   P: given line is not a single task instead a project. Turning P into X shows that the project is closed.
+#   A: it has the highest priority (A: highest, E: lowest)
+#   1: (optional) identification number for the job is (1: any number is okay)
+# ------------------------------------------------------------------------------
+# (A) shows the JOB for the previously created PROJECT
+#   A: it has the highest priority under the given PROJECT (A(A): highest, E(E): lowest)
+#   Turning A into X shows that the given JOB is done. If all the JOBS are done, this means the PROJECT is done.
+# ------------------------------------------------------------------------------
+# + can be used to TAG the PROJECT or JOB for searches
+# @ can be used for assigning context to the job
+# ------------------------------------------------------------------------------
+
+(P,A) a source file should only include _private.h file or other _private.h files from other projects
+    (X) clean up the .h includes from the source files
+    (X) make a clean separation between .h and _private.h files
+    (X) look at the IMLAB_API keyword as an alternative and auto .h file generation
+
+(P,A) update the mlcore module to work with IMLAB correctly
+
+(P,X) create an easy to use GUI interface for the ToDo file.

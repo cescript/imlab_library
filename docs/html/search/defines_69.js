@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['idx',['idx',['../core_8h.html#a764d05461f4e45802297d9fc5a6bbbeb',1,'core.h']]],
+  ['im_5fclassorreg',['IM_CLASSORREG',['../mlcore_8h.html#a198c8ec65b2d24cf8e8d3e191ee972d2',1,'mlcore.h']]],
+  ['im_5fmax_5fmulti_5fclass',['IM_MAX_MULTI_CLASS',['../mlcore_8h.html#a7fd783fec58180495d1e34ffbd117439',1,'mlcore.h']]],
+  ['im_5fverbose_5ferror',['IM_VERBOSE_ERROR',['../core_8h.html#a90aac298ea110cc75f29fbdf0e08d4b3',1,'core.h']]],
+  ['im_5fverbose_5fsuccess',['IM_VERBOSE_SUCCESS',['../core_8h.html#aedd32875dee1c6f87ac68f8ee23bf5ce',1,'core.h']]],
+  ['im_5fverbose_5fwarning',['IM_VERBOSE_WARNING',['../core_8h.html#a0f459ed553910f78fdbaa0eb322a2753',1,'core.h']]],
+  ['imlab_5fplatform_5funknown',['IMLAB_PLATFORM_UNKNOWN',['../core_8h.html#aae6636ce35e0b83971b4a023946cc5b7',1,'core.h']]],
+  ['imlab_5fuse_5fopenmp',['IMLAB_USE_OPENMP',['../core_8h.html#a5c3cd107eb5b965fdf961b1aaac6ce3c',1,'core.h']]],
+  ['in_5frange',['in_range',['../core__macros_8h.html#a6694ef4d22f43fc988881acbf7a728ef',1,'core_macros.h']]],
+  ['is_5f16s',['is_16s',['../core_8h.html#a3a0ac901f4c32e38dc3ea38ff757e378',1,'core.h']]],
+  ['is_5f16u',['is_16u',['../core_8h.html#aa8028b3a6e802e3046b7f5bbb978e00e',1,'core.h']]],
+  ['is_5f32f',['is_32f',['../core_8h.html#a0a1cae3b3910d554956d4d709a6c18b6',1,'core.h']]],
+  ['is_5f32s',['is_32s',['../core_8h.html#a15631a0757a053f32aaa44c96d6e4c30',1,'core.h']]],
+  ['is_5f32u',['is_32u',['../core_8h.html#a16fdc1d27b50bd09209922dc1549b5d0',1,'core.h']]],
+  ['is_5f64f',['is_64f',['../core_8h.html#aa5a28ba627f29f1342219bf0dc5a6695',1,'core.h']]],
+  ['is_5f8s',['is_8s',['../core_8h.html#a8b6da886bdf82531aecf01977c851957',1,'core.h']]],
+  ['is_5f8u',['is_8u',['../core_8h.html#afeef4f6dcfc90700e4600825460d7f56',1,'core.h']]],
+  ['is_5fimage',['is_image',['../core_8h.html#ab49f5e782cc4e7d830292f6a7c5b0258',1,'core.h']]],
+  ['is_5finteger',['is_integer',['../core_8h.html#a4a351faea6bd908be7505a7db1cd17a9',1,'core.h']]],
+  ['is_5fjson_5farray',['is_json_array',['../core_8h.html#aa7655e711eb223fc9105374fe72e7833',1,'core.h']]],
+  ['is_5fjson_5fobject',['is_json_object',['../core_8h.html#a599dd86cddd2e430728dda5878bf512c',1,'core.h']]],
+  ['is_5fnumeric',['is_numeric',['../core_8h.html#aeefb4b24909d9e7058d4dfeb28519990',1,'core.h']]],
+  ['is_5fsametype',['is_sametype',['../core_8h.html#adb210060fc96425d3a97be005c719fcd',1,'core.h']]]
+];

@@ -1,0 +1,328 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="prcore_8h" kind="file">
+    <compoundname>prcore.h</compoundname>
+    <includes local="no">omp.h</includes>
+    <includes local="no">math.h</includes>
+    <includes refid="core_8h" local="yes">core.h</includes>
+    <includedby refid="mlcore_8h" local="yes">C:/Users/cescript/CLionProjects/imlab/include/header/mlcore.h</includedby>
+    <includedby refid="imlab_8h" local="yes">C:/Users/cescript/CLionProjects/imlab/include/imlab.h</includedby>
+    <incdepgraph>
+      <node id="96">
+        <label>stdarg.h</label>
+      </node>
+      <node id="95">
+        <label>stdint.h</label>
+      </node>
+      <node id="93">
+        <label>core.h</label>
+        <link refid="core_8h"/>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
+        <childnode refid="98" relation="include">
+        </childnode>
+      </node>
+      <node id="91">
+        <label>omp.h</label>
+      </node>
+      <node id="97">
+        <label>string.h</label>
+      </node>
+      <node id="92">
+        <label>math.h</label>
+      </node>
+      <node id="98">
+        <label>core_macros.h</label>
+        <link refid="core__macros_8h"/>
+      </node>
+      <node id="90">
+        <label>C:/Users/cescript/CLionProjects/imlab/include/header/prcore.h</label>
+        <link refid="prcore.h"/>
+        <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="93" relation="include">
+        </childnode>
+      </node>
+      <node id="94">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="102">
+        <label>C:/Users/cescript/CLionProjects/imlab/include/imlab.h</label>
+        <link refid="imlab_8h"/>
+      </node>
+      <node id="100">
+        <label>C:/Users/cescript/CLionProjects/imlab/include/header/mlcore.h</label>
+        <link refid="mlcore_8h"/>
+        <childnode refid="101" relation="include">
+        </childnode>
+        <childnode refid="102" relation="include">
+        </childnode>
+      </node>
+      <node id="99">
+        <label>C:/Users/cescript/CLionProjects/imlab/include/header/prcore.h</label>
+        <link refid="prcore.h"/>
+        <childnode refid="100" relation="include">
+        </childnode>
+        <childnode refid="102" relation="include">
+        </childnode>
+      </node>
+      <node id="101">
+        <label>C:/Users/cescript/CLionProjects/imlab/include/header/cvcore.h</label>
+        <link refid="cvcore_8h"/>
+        <childnode refid="102" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="prcore_8h_1acf1d2697b85d64d285cc205b60555d19" prot="public" static="no">
+        <name>random_max</name>
+        <initializer>4294967295</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Maximum number can be genarted by IMLAB Random class_name </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/prcore.h" line="13" column="9" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/prcore.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="prcore_8h_1a5fe3fb9517461b7ee283f91f1801bad3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int32_t *</type>
+        <definition>int32_t* range</definition>
+        <argsstring>(int32_t start, int32_t end)</argsstring>
+        <name>range</name>
+        <param>
+          <type>int32_t</type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>end</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initial seed for the random number generator. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/prcore.h" line="21" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="prcore_8h_1ac6f87b7b239cb788099696c306cad7b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float pearson</definition>
+        <argsstring>(const float *vecA, const float *vecB, int length)</argsstring>
+        <name>pearson</name>
+        <param>
+          <type>const float *</type>
+          <declname>vecA</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>vecB</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>length</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/prcore.h" line="23" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="prcore_8h_1a01d66fd07f9f834de382263801805aa9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float covariance</definition>
+        <argsstring>(const float *vecA, const float *vecB, int length)</argsstring>
+        <name>covariance</name>
+        <param>
+          <type>const float *</type>
+          <declname>vecA</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>vecB</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>length</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/prcore.h" line="24" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="prcore_8h_1a4186dd1ef66c1f67b3c3cb3c9966ae87" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void random_seed</definition>
+        <argsstring>()</argsstring>
+        <name>random_seed</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Create a random seed for the random number generator. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/prcore.h" line="29" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="prcore_8h_1a0bcba8ca961300ea0e304939564e7937" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void random_setseed</definition>
+        <argsstring>(uint32_t state[4])</argsstring>
+        <name>random_setseed</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>state</declname>
+          <array>[4]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set the seed for the random number generator. This is useful when you need to generate controlled random numbers. Avoid using 0 as the initial seed. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/prcore.h" line="33" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="prcore_8h_1aa386911830923b9fe37c4a063d943e8a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void random_getseed</definition>
+        <argsstring>(uint32_t state[4])</argsstring>
+        <name>random_getseed</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>state</declname>
+          <array>[4]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get the current seed state to replicate PRNG process later. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/prcore.h" line="37" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="prcore_8h_1a74609982839bac0487db9da469710742" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t random</definition>
+        <argsstring>()</argsstring>
+        <name>random</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Wikipedia implementation of xorshift128 algorithm. This will produce a random integer in [0,2**32-1] range with a period of 2**128−1. Which is quite unpredictable and random for most of the applications. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/prcore.h" line="42" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="prcore_8h_1af59c32f2a637f2b490f61485cba2cd47" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int random_int</definition>
+        <argsstring>(int mint, int maxt)</argsstring>
+        <name>random_int</name>
+        <param>
+          <type>int</type>
+          <declname>mint</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>maxt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Generate a random integer in [mint, maxt] range with a uniform distribution. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/prcore.h" line="46" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="prcore_8h_1ab083f415ad1202b9d7ecc9e359d52c8d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float random_float</definition>
+        <argsstring>(float mint, float maxt)</argsstring>
+        <name>random_float</name>
+        <param>
+          <type>float</type>
+          <declname>mint</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>maxt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/prcore.h" line="48" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="prcore_8h_1aa1d0656f1a4490a5787585f4a423e092" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t *</type>
+        <definition>uint32_t* random_permutation</definition>
+        <argsstring>(uint32_t length)</argsstring>
+        <name>random_permutation</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>length</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/prcore.h" line="51" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="prcore_8h_1a6bfb070164617d37c5a17f9f41446f1f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void* random_sample</definition>
+        <argsstring>(uint8_t *in, uint32_t length, uint32_t sample, uint32_t elemsize)</argsstring>
+        <name>random_sample</name>
+        <param>
+          <type>uint8_t *</type>
+          <declname>in</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>length</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>sample</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>elemsize</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/prcore.h" line="53" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/cescript/CLionProjects/imlab/include/header/prcore.h"/>
+  </compounddef>
+</doxygen>

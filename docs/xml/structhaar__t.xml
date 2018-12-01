@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="structhaar__t" kind="struct" prot="public">
+    <compoundname>haar_t</compoundname>
+    <includes refid="cvcore_8h" local="no">cvcore.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structhaar__t_1add3aea41db626f7c4d464605d98c6de2" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int haar_t::size1</definition>
+        <argsstring></argsstring>
+        <name>size1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/cvcore.h" line="146" column="1" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/cvcore.h" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhaar__t_1a826920c2f0d94f8913e4cf591b9644de" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int haar_t::size2</definition>
+        <argsstring></argsstring>
+        <name>size2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/cvcore.h" line="147" column="1" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/cvcore.h" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhaar__t_1af3736c3d94b2a3906b308b3bd15aa661" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int haar_t::length</definition>
+        <argsstring></argsstring>
+        <name>length</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/cvcore.h" line="149" column="1" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/cvcore.h" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhaar__t_1a1376fab728efbf509c4a53ff5bfb4932" prot="public" static="no" mutable="no">
+        <type>struct haar_stage_t **</type>
+        <definition>struct haar_stage_t** haar_t::stages</definition>
+        <argsstring></argsstring>
+        <name>stages</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/cvcore.h" line="150" column="1" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/cvcore.h" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Haar cascade holder </para>    </detaileddescription>
+    <location file="C:/Users/cescript/CLionProjects/imlab/include/header/cvcore.h" line="145" column="1" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/cvcore.h" bodystart="145" bodyend="151"/>
+    <listofallmembers>
+      <member refid="structhaar__t_1af3736c3d94b2a3906b308b3bd15aa661" prot="public" virt="non-virtual"><scope>haar_t</scope><name>length</name></member>
+      <member refid="structhaar__t_1add3aea41db626f7c4d464605d98c6de2" prot="public" virt="non-virtual"><scope>haar_t</scope><name>size1</name></member>
+      <member refid="structhaar__t_1a826920c2f0d94f8913e4cf591b9644de" prot="public" virt="non-virtual"><scope>haar_t</scope><name>size2</name></member>
+      <member refid="structhaar__t_1a1376fab728efbf509c4a53ff5bfb4932" prot="public" virt="non-virtual"><scope>haar_t</scope><name>stages</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

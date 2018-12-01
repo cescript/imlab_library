@@ -1,0 +1,240 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="alcore_8h" kind="file">
+    <compoundname>alcore.h</compoundname>
+    <includes refid="core_8h" local="yes">core.h</includes>
+    <incdepgraph>
+      <node id="6">
+        <label>stdarg.h</label>
+      </node>
+      <node id="5">
+        <label>stdint.h</label>
+      </node>
+      <node id="3">
+        <label>core.h</label>
+        <link refid="core_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>string.h</label>
+      </node>
+      <node id="8">
+        <label>core_macros.h</label>
+        <link refid="core__macros_8h"/>
+      </node>
+      <node id="2">
+        <label>C:/Users/cescript/CLionProjects/imlab/include/header/alcore.h</label>
+        <link refid="alcore.h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structdisjoint__set__t" prot="public">disjoint_set_t</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="alcore_8h_1ac9029f94a7b163ba73860298637b996e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>struct <ref refid="structdisjoint__set__t" kindref="compound">disjoint_set_t</ref> *</type>
+        <definition>struct disjoint_set_t* disjoint_set_create</definition>
+        <argsstring>(uint32_t length)</argsstring>
+        <name>disjoint_set_create</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>length</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Create a disjoint set data structure <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the set </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A disjoint set data structure </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/alcore.h" line="25" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="alcore_8h_1ac0dd59244ddaad5e6781f82d6dc7cd62" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t disjoint_set_find</definition>
+        <argsstring>(struct disjoint_set_t *set, uint32_t idxP)</argsstring>
+        <name>disjoint_set_find</name>
+        <param>
+          <type>struct <ref refid="structdisjoint__set__t" kindref="compound">disjoint_set_t</ref> *</type>
+          <declname>set</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>idxP</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Fınds the root of the disjoint set element <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>set</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Disjoint set data structure </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idxP</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of the element </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Root of the given element </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/alcore.h" line="33" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="alcore_8h_1a8613f620972cb94f5492c7773ee02720" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="core_8h_1a387664de0ac452f11abed4a7d9c2cc5d" kindref="member">return_t</ref></type>
+        <definition>return_t disjoint_set_union</definition>
+        <argsstring>(struct disjoint_set_t *set, uint32_t idxP, uint32_t idxQ)</argsstring>
+        <name>disjoint_set_union</name>
+        <param>
+          <type>struct <ref refid="structdisjoint__set__t" kindref="compound">disjoint_set_t</ref> *</type>
+          <declname>set</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>idxP</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>idxQ</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Unions two element and updates the disjoint set tree <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>set</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Disjoint set data structure </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idxP</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of the first element </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idxQ</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of the second element </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Success or relative error </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/alcore.h" line="42" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="alcore_8h_1a1d6f2f132935d224150b99485d3924ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t disjoint_set_enumerate</definition>
+        <argsstring>(struct disjoint_set_t *set)</argsstring>
+        <name>disjoint_set_enumerate</name>
+        <param>
+          <type>struct <ref refid="structdisjoint__set__t" kindref="compound">disjoint_set_t</ref> *</type>
+          <declname>set</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Enumerate the roots of each element <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>set</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Disjoint set data structure </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Number of unique root elements </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/alcore.h" line="49" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="alcore_8h_1a00e8726150ab9fecada7250248767801" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void disjoint_set_free</definition>
+        <argsstring>(struct disjoint_set_t **set)</argsstring>
+        <name>disjoint_set_free</name>
+        <param>
+          <type>struct <ref refid="structdisjoint__set__t" kindref="compound">disjoint_set_t</ref> **</type>
+          <declname>set</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Free the memory allocated by the disjoint set data structure <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>set</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Disjoint set data structure </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/alcore.h" line="55" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="alcore_8h_1a0ba47839817cd147952396876ffbba35" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void disjoint_set_view</definition>
+        <argsstring>(struct disjoint_set_t *set)</argsstring>
+        <name>disjoint_set_view</name>
+        <param>
+          <type>struct <ref refid="structdisjoint__set__t" kindref="compound">disjoint_set_t</ref> *</type>
+          <declname>set</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Prints the current status of the disjoint set tree <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>set</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/alcore.h" line="61" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/cescript/CLionProjects/imlab/include/header/alcore.h"/>
+  </compounddef>
+</doxygen>

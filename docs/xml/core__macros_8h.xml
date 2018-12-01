@@ -1,0 +1,322 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="core__macros_8h" kind="file">
+    <compoundname>core_macros.h</compoundname>
+    <includedby refid="core_8h" local="yes">C:/Users/cescript/CLionProjects/imlab/include/header/core.h</includedby>
+    <invincdepgraph>
+      <node id="27">
+        <label>C:/Users/cescript/CLionProjects/imlab/include/header/core.h</label>
+        <link refid="core_8h"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>C:/Users/cescript/CLionProjects/imlab/include/imlab.h</label>
+        <link refid="imlab_8h"/>
+      </node>
+      <node id="35">
+        <label>C:/Users/cescript/CLionProjects/imlab/include/header/lacore.h</label>
+        <link refid="lacore_8h"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>C:/Users/cescript/CLionProjects/imlab/include/header/imcore.h</label>
+        <link refid="imcore_8h"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>C:/Users/cescript/CLionProjects/imlab/include/header/mlcore.h</label>
+        <link refid="mlcore_8h"/>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h</label>
+        <link refid="core_macros.h"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>C:/Users/cescript/CLionProjects/imlab/include/header/prcore.h</label>
+        <link refid="prcore_8h"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>C:/Users/cescript/CLionProjects/imlab/include/header/cvcore.h</label>
+        <link refid="cvcore_8h"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h</label>
+        <link refid="iocore_8h"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>C:/Users/cescript/CLionProjects/imlab/include/header/alcore.h</label>
+        <link refid="alcore_8h"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="core__macros_8h_1ab6ab11420dc74a071c4b33c1acda87bb" prot="public" static="no">
+        <name>swap</name>
+        <param><defname>_type</defname></param>
+        <param><defname>a</defname></param>
+        <param><defname>b</defname></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Swap the given two variable using the third temporary variable <programlisting><codeline><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>a<sp/>=<sp/>1.1,<sp/>b<sp/>=<sp/>2.2;</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core__macros_8h_1ab6ab11420dc74a071c4b33c1acda87bb" kindref="member">swap</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">,<sp/>a,b);<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>a<sp/>:<sp/>2.2,<sp/>b<sp/>:<sp/>1.1</highlight></codeline>
+</programlisting> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" line="15" column="9" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="core__macros_8h_1af3bdf8cfba7d88a65990f29cab066509" prot="public" static="no">
+        <name>clamp</name>
+        <param><defname>x</defname></param>
+        <param><defname>lower</defname></param>
+        <param><defname>higher</defname></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Clamp the given variable x, between the lower and higher limits <programlisting><codeline><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>a<sp/>=<sp/>1.4,<sp/>b<sp/>=<sp/>1.6,<sp/>c<sp/>=<sp/>b-a;</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core__macros_8h_1af3bdf8cfba7d88a65990f29cab066509" kindref="member">clamp</ref>(a,<sp/>0.5,1.5);<sp/></highlight><highlight class="comment">//<sp/>a<sp/>:<sp/>1.4<sp/>(unchanged)</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core__macros_8h_1af3bdf8cfba7d88a65990f29cab066509" kindref="member">clamp</ref>(b,<sp/>0.5,1.5);<sp/></highlight><highlight class="comment">//<sp/>b<sp/>:<sp/>1.5<sp/>(clamp<sp/>to<sp/>higher<sp/>limit)</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core__macros_8h_1af3bdf8cfba7d88a65990f29cab066509" kindref="member">clamp</ref>(c,<sp/>0.5,<sp/>1.5)<sp/></highlight><highlight class="comment">//<sp/>c<sp/>:<sp/>0.5<sp/>(clamp<sp/>to<sp/>lower<sp/>limit)</highlight></codeline>
+</programlisting> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" line="26" column="9" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="core__macros_8h_1ace4d0e49dcabe7b665ef7e3485e3eaa4" prot="public" static="no">
+        <name>equal</name>
+        <param><defname>a</defname></param>
+        <param><defname>b</defname></param>
+        <param><defname>eps</defname></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Compare the given variable a and b, and return true if they are in eps neighbourhood <programlisting><codeline><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>a<sp/>=<sp/>1.4,<sp/>b<sp/>=<sp/>1.6;</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core__macros_8h_1ace4d0e49dcabe7b665ef7e3485e3eaa4" kindref="member">equal</ref>(a,<sp/>b,<sp/>0.1);<sp/></highlight><highlight class="comment">//<sp/>false</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core__macros_8h_1ace4d0e49dcabe7b665ef7e3485e3eaa4" kindref="member">equal</ref>(a,<sp/>b,<sp/>0.3);<sp/></highlight><highlight class="comment">//<sp/>true</highlight></codeline>
+</programlisting> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" line="36" column="9" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="core__macros_8h_1a6f08c508646633d5630912df574d77bf" prot="public" static="no">
+        <name>roundup</name>
+        <param><defname>a</defname></param>
+        <param><defname>m</defname></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Return the positive closest multiple of m less than a <programlisting><codeline><highlight class="normal"><ref refid="core__macros_8h_1a6f08c508646633d5630912df574d77bf" kindref="member">roundup</ref>(16,5);<sp/></highlight><highlight class="comment">//<sp/>returns<sp/>15</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core__macros_8h_1a6f08c508646633d5630912df574d77bf" kindref="member">roundup</ref>(14,5);<sp/></highlight><highlight class="comment">//<sp/>returns<sp/>10</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core__macros_8h_1a6f08c508646633d5630912df574d77bf" kindref="member">roundup</ref>(19,5);<sp/></highlight><highlight class="comment">//<sp/>returns<sp/>15</highlight></codeline>
+</programlisting> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" line="48" column="9" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="core__macros_8h_1a35b6efb87a1de11b8dc8366c47ff359e" prot="public" static="no">
+        <name>remedy</name>
+        <param><defname>a</defname></param>
+        <param><defname>m</defname></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Return the remedy of a/m division <programlisting><codeline><highlight class="normal"><ref refid="core__macros_8h_1a35b6efb87a1de11b8dc8366c47ff359e" kindref="member">remedy</ref>(16,5);<sp/></highlight><highlight class="comment">//<sp/>returns<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core__macros_8h_1a35b6efb87a1de11b8dc8366c47ff359e" kindref="member">remedy</ref>(14,5);<sp/></highlight><highlight class="comment">//<sp/>returns<sp/>4</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core__macros_8h_1a35b6efb87a1de11b8dc8366c47ff359e" kindref="member">remedy</ref>(14.1,5);<sp/></highlight><highlight class="comment">//<sp/>returns<sp/>4.1</highlight></codeline>
+</programlisting> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" line="58" column="9" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="core__macros_8h_1a7f0c1b6b888fd3e7ae81ba6436eb01a7" prot="public" static="no">
+        <name>map</name>
+        <param><defname>_in</defname></param>
+        <param><defname>_imin</defname></param>
+        <param><defname>_imax</defname></param>
+        <param><defname>_omin</defname></param>
+        <param><defname>_omax</defname></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Map input value which in [_imin, _imax] range to value between [_omin, _omax] <programlisting><codeline><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>angle<sp/>=<sp/>90;</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core__macros_8h_1a7f0c1b6b888fd3e7ae81ba6436eb01a7" kindref="member">map</ref>(angle,<sp/>-180,180,<sp/>-pi,pi);<sp/></highlight><highlight class="comment">//<sp/>returns<sp/>pi/4</highlight></codeline>
+</programlisting> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" line="67" column="9" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="core__macros_8h_1ae1111e02ad4f30d04c6bdd565b8255cd" prot="public" static="no">
+        <name>deg2rad</name>
+        <param><defname>angle</defname></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Convert degrees to radians </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" line="72" column="9" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="core__macros_8h_1a991f5148e51ffec8c3b2e5bda4aed131" prot="public" static="no">
+        <name>rad2deg</name>
+        <param><defname>angle</defname></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Convert radians to degrees </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" line="76" column="9" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="core__macros_8h_1a6dbf8d45b3bc0c6fec0c7584d2aaac3c" prot="public" static="no">
+        <name>square</name>
+        <param><defname>x</defname></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Compute the square of the input parameter </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" line="81" column="9" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="core__macros_8h_1a55d486a228692860e7eddae41f70be15" prot="public" static="no">
+        <name>stringify</name>
+        <param><defname>txt</defname></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Stringify the given parameter or macro expression </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" line="86" column="9" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="core__macros_8h_1acc9fe5fd1a16b4fa0e0fc393f2cce549" prot="public" static="no">
+        <name>va_nargs</name>
+        <param><defname>...</defname></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Counts the number of arguments in variable length argument list. Argument count must be between 1-9. <programlisting><codeline><highlight class="preprocessor">#define<sp/>fun(...)<sp/>printf(&quot;fun<sp/>called<sp/>with<sp/>%d<sp/>arguments\n&quot;,<sp/>va_nargs(__VA_ARGS__));</highlight></codeline>
+<codeline><highlight class="preprocessor"></highlight><highlight class="normal">fun(1.2345);<sp/><sp/></highlight><highlight class="comment">//<sp/>&quot;fun<sp/>called<sp/>with<sp/>1<sp/>arguments&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">fun(1,2);<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>&quot;fun<sp/>called<sp/>with<sp/>2<sp/>arguments&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">fun(a,b,c,d);<sp/></highlight><highlight class="comment">//<sp/>&quot;fun<sp/>called<sp/>with<sp/>4<sp/>arguments&quot;</highlight></codeline>
+</programlisting> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" line="100" column="9" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="core__macros_8h_1a1a01f47a05a7d1443802269b392535ce" prot="public" static="no">
+        <name>call</name>
+        <param><defname>func</defname></param>
+        <param><defname>...</defname></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Call the given function_(#number of arguments) with the given arguments </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" line="110" column="9" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="core__macros_8h_1acd699ffd5bf73aa52900b06332220d42" prot="public" static="no">
+        <name>arg</name>
+        <param><defname>_i</defname></param>
+        <param><defname>...</defname></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get the argument _i in a variable length argument list (up to 9 arguments) </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" line="118" column="9" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="core__macros_8h_1a0e7550b1342cd67137767efb20acdfb4" prot="public" static="no">
+        <name>cat</name>
+        <param><defname>...</defname></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Concanate the given arguments (up to 9 arguments) <programlisting><codeline><highlight class="normal"><ref refid="core__macros_8h_1a0e7550b1342cd67137767efb20acdfb4" kindref="member">cat</ref>(1.2345);<sp/><sp/></highlight><highlight class="comment">//<sp/>1.2345</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core__macros_8h_1a0e7550b1342cd67137767efb20acdfb4" kindref="member">cat</ref>(1,2);<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>12</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core__macros_8h_1a0e7550b1342cd67137767efb20acdfb4" kindref="member">cat</ref>(a,b,c,d);<sp/></highlight><highlight class="comment">//<sp/>abcd</highlight></codeline>
+</programlisting> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" line="140" column="9" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" bodystart="140" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="core__macros_8h_1a49a78f412f88bbfd838db5dc7db0bbda" prot="public" static="no">
+        <name>max</name>
+        <param><defname>...</defname></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Max macro for different number of arguments (up to 9 arguments) <programlisting><codeline><highlight class="normal"><ref refid="core__macros_8h_1a49a78f412f88bbfd838db5dc7db0bbda" kindref="member">max</ref>(1,2);<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>2</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core__macros_8h_1a49a78f412f88bbfd838db5dc7db0bbda" kindref="member">max</ref>(<ref refid="core__macros_8h_1a260ee21b45f2e3e9ab912c1650d9e1d7" kindref="member">min</ref>(7,8),11,12);<sp/></highlight><highlight class="comment">//<sp/>12</highlight></codeline>
+</programlisting> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" line="162" column="9" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" bodystart="162" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="core__macros_8h_1a260ee21b45f2e3e9ab912c1650d9e1d7" prot="public" static="no">
+        <name>min</name>
+        <param><defname>...</defname></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Min macro for different number of arguments (up to 9 arguments) <programlisting><codeline><highlight class="normal"><ref refid="core__macros_8h_1a260ee21b45f2e3e9ab912c1650d9e1d7" kindref="member">min</ref>(1.2345);<sp/><sp/></highlight><highlight class="comment">//<sp/>1.2345</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core__macros_8h_1a260ee21b45f2e3e9ab912c1650d9e1d7" kindref="member">min</ref>(a,b,c,d);<sp/></highlight><highlight class="comment">//<sp/>compares<sp/>the<sp/>values<sp/>in<sp/>(a,b,c,d)<sp/>and<sp/>return<sp/>the<sp/>minimum</highlight></codeline>
+</programlisting> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" line="170" column="9" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" bodystart="170" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="core__macros_8h_1a6694ef4d22f43fc988881acbf7a728ef" prot="public" static="no">
+        <name>in_range</name>
+        <param><defname>_var</defname></param>
+        <param><defname>_min</defname></param>
+        <param><defname>_max</defname></param>
+        <initializer>((_var) &gt;= (_min) &amp;&amp; (_var) &lt;= (_max))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" line="194" column="9" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h" bodystart="194" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core_macros.h"/>
+  </compounddef>
+</doxygen>

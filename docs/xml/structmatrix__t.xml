@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="structmatrix__t" kind="struct" prot="public">
+    <compoundname>matrix_t</compoundname>
+    <includes refid="core_8h" local="no">core.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structmatrix__t_1a28fe788d31d147ed6d8e1e0eb56cd4b4" prot="public" static="no" mutable="no">
+        <type>struct imlab_type_t *</type>
+        <definition>struct imlab_type_t* matrix_t::_type</definition>
+        <argsstring></argsstring>
+        <name>_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" line="894" column="1" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" bodystart="894" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmatrix__t_1ade9e556ddbd64ecc82d0673c63a06425" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t matrix_t::_rows</definition>
+        <argsstring></argsstring>
+        <name>_rows</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" line="894" column="1" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" bodystart="894" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmatrix__t_1a6150671ecbe47b5e0be50a6ea6a0fa63" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t matrix_t::_cols</definition>
+        <argsstring></argsstring>
+        <name>_cols</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" line="894" column="1" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" bodystart="894" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmatrix__t_1a24b4fc4355792f00324a8e3692ab7916" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t matrix_t::_channels</definition>
+        <argsstring></argsstring>
+        <name>_channels</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" line="894" column="1" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" bodystart="894" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmatrix__t_1a82f2bfb0fb3699c5316ab4e37c0db699" prot="public" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* matrix_t::_data</definition>
+        <argsstring></argsstring>
+        <name>_data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" line="894" column="1" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" bodystart="894" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para><ref refid="structmatrix__t" kindref="compound">matrix_t</ref> is a n-channel 2D matrix container. </para>    </briefdescription>
+    <detaileddescription>
+<para><ref refid="structmatrix__t" kindref="compound">matrix_t</ref> structure is a generic c-like array that can hold any type of variable in dynamically allocated memory. Just like the arrays and vectors, matrix data is contigous in memory and can be accessed externally. Similar to vector objects, matrix object is also resizable but you cannot increase the size of the matrix by pushing elements. The main advantage of the matrix object onto the standart arrays is that the matrix objects can hold two dimensional data in a simple way. Using matrix object the user interactions with the 2D array becomes easier and the code would be understandable.</para><para>IMLAB defines the following functions for vector objects:<itemizedlist>
+<listitem><para><ref refid="core_8h_1a2248f650cacb1488751ff8ab82300752" kindref="member">width</ref> : returns the number of coloumns of the matrix</para></listitem><listitem><para><ref refid="core_8h_1aece6b4cf48e00b533a3a022244ad8206" kindref="member">cols</ref> : returns the number of coloumns of the matrix</para></listitem><listitem><para><ref refid="core_8h_1ac0f4877be8d0a1990393b6fc48236840" kindref="member">height</ref> : returns the number of rows of the matrix</para></listitem><listitem><para><ref refid="core_8h_1a4e8f84fef6fd8d43a680c07df40aba25" kindref="member">rows</ref> : returns the number of rows of the matrix</para></listitem><listitem><para><ref refid="core_8h_1aa45db831c8afdad298fdd8f018be54b3" kindref="member">channels</ref> : returns the number of channels of the matrix</para></listitem><listitem><para><ref refid="core_8h_1aa3e75e22b1f228e338988c2e0815a7cf" kindref="member">volume</ref> : returns the volume (rows*cols*channels) of the matrix</para></listitem><listitem><para><ref refid="core_8h_1ad3f79e7a2a8f1a28e2a2d0160bcc8204" kindref="member">mdata</ref> / <ref refid="core_8h_1a17dd213399b468eaf01f9852a3ca36fc" kindref="member">data</ref> : returns the pointer to the data of the matrix</para></listitem><listitem><para><ref refid="core_8h_1ac161f0f0a945b552762c995c759c9f5a" kindref="member">matrix_create</ref> : constructor function zero initializer</para></listitem><listitem><para><ref refid="core_8h_1a8c7c23897827cb7c83773edf1fa6109a" kindref="member">matrix_resize</ref> : change the size of the data holded in container</para></listitem><listitem><para><ref refid="core_8h_1ad0c77c70c8d497343a0a46edb6b5a366" kindref="member">matrix_free</ref> : destructor functions</para></listitem><listitem><para><ref refid="core_8h_1af58f7370d2d76be0c77300d0ef03b884" kindref="member">matrix_fill</ref> : set the struct with a constant value</para></listitem><listitem><para><ref refid="core_8h_1a17aaa0a0fcf1572d8a804bf2352b76cc" kindref="member">matrix_read</ref> : loads the matrix struct from the hard drive (uncompress data)</para></listitem><listitem><para><ref refid="core_8h_1a6887bff44be577ee78deb33fb1922372" kindref="member">matrix_write</ref> : saves the type struct to the hard drive (compress data)</para></listitem><listitem><para><ref refid="core_8h_1aed1a6797fa8dcb7916c39e35995a7bd2" kindref="member">matrix_copy</ref> : creates a copy of the input matrix (size and data) and returns it</para></listitem></itemizedlist>
+</para><para>Using a vector object is easy. Just decide the data type you need and call <ref refid="core_8h_1a160b0d4b8d0836eda9a50bfa71514de8" kindref="member">vector_create</ref> to create a new vector object. The data type can be any C data types, additional names declared in stdint.h or structs created by the user. <programlisting><codeline><highlight class="normal"><ref refid="structmatrix__t" kindref="compound">matrix_t</ref><sp/>*out<sp/>=<sp/><ref refid="structmatrix__t" kindref="compound">matrix_t</ref>(uint32_t);</highlight></codeline>
+</programlisting> The above code will create a matrix object and set the initial rows, cols and channels to zero and data pointer to the NULL. If you want to specify an initial size for the matrix just call: <programlisting><codeline><highlight class="normal"><ref refid="structmatrix__t" kindref="compound">matrix_t</ref><sp/>out<sp/>=<sp/><ref refid="core_8h_1ac161f0f0a945b552762c995c759c9f5a" kindref="member">matrix_create</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">,<sp/>1024,<sp/>1024);</highlight></codeline>
+</programlisting> This call of the <ref refid="core_8h_1ac161f0f0a945b552762c995c759c9f5a" kindref="member">matrix_create</ref> will create a floating point data pointer and allocate 1024*1024*sizeof(float) byte memory on the memory. If you want to marix to have more than one channels, you can add the third term as the number of channels. It is also possible to create a matrix from an existing ones or from c pointers. In this case the fourth argument should be the pointer to the data: <programlisting><codeline><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>numbers[9]<sp/>=<sp/>{1,2,3,<sp/>4,5,6,<sp/>7,8,9};</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="structmatrix__t" kindref="compound">matrix_t</ref><sp/>*out<sp/>=<sp/><ref refid="core_8h_1ac161f0f0a945b552762c995c759c9f5a" kindref="member">matrix_create</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">,<sp/>3,3,1,<sp/>numbers);</highlight></codeline>
+</programlisting> In this case matrix_create will allocate memory and do <bold>memcpy</bold> operation on the given pointer. If you want to create a matrix which has initially constant values you can use <ref refid="core_8h_1af58f7370d2d76be0c77300d0ef03b884" kindref="member">matrix_fill</ref> function: <programlisting><codeline><highlight class="normal"><ref refid="structmatrix__t" kindref="compound">matrix_t</ref><sp/>*out<sp/>=<sp/><ref refid="core_8h_1ac161f0f0a945b552762c995c759c9f5a" kindref="member">matrix_create</ref>(uint16_t,<sp/>100,<sp/>100,<sp/>2);</highlight></codeline>
+<codeline><highlight class="normal">uint16_t<sp/>val[2]<sp/>=<sp/>{12,<sp/>16};</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core_8h_1af58f7370d2d76be0c77300d0ef03b884" kindref="member">matrix_fill</ref>(out,<sp/>&amp;val);</highlight></codeline>
+</programlisting> The above code will generate a 100 x 100 matrix which has two dimensional inputs. The <ref refid="core_8h_1af58f7370d2d76be0c77300d0ef03b884" kindref="member">matrix_fill</ref> function will set all the first channel elements to 12 and the second channel elements to 16.</para><para>We can get the values from the matrix with various methods. In the simplest case if we know the data type of the matrix, we can obtain the data pointer and access the values via pointer just like standart c arrays. <programlisting><codeline><highlight class="normal"><ref refid="structmatrix__t" kindref="compound">matrix_t</ref><sp/>*out;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*matrix_data<sp/>=<sp/><ref refid="core_8h_1ad3f79e7a2a8f1a28e2a2d0160bcc8204" kindref="member">mdata</ref>(out);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/><ref refid="core_8h_1aa3e75e22b1f228e338988c2e0815a7cf" kindref="member">volume</ref>(out);<sp/>i++)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>val<sp/>=<sp/>matrix_data[i];</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting> Or we can access the data element using the special function <ref refid="core_8h_1ac6d6bb3c237a30597ffce28bc8a48254" kindref="member">at</ref> as follows: <programlisting><codeline><highlight class="normal"><ref refid="structmatrix__t" kindref="compound">matrix_t</ref><sp/>*out;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>r<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/><ref refid="core_8h_1a4e8f84fef6fd8d43a680c07df40aba25" kindref="member">rows</ref>(out);<sp/>r++)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>c<sp/>=<sp/>0;<sp/>c<sp/>&lt;<sp/><ref refid="core_8h_1aece6b4cf48e00b533a3a022244ad8206" kindref="member">cols</ref>(out);<sp/>c++)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>val<sp/>=<sp/><ref refid="core_8h_1ac6d6bb3c237a30597ffce28bc8a48254" kindref="member">at</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">,<sp/>out,<sp/>r,c);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para><para>You can also use the matrix container with the custom defined structures. Here is an example of how to use matrix container with the custom structures. <programlisting><codeline><highlight class="keyword">struct<sp/></highlight><highlight class="normal">person<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/>uint32_t<sp/>id;</highlight></codeline>
+<codeline><highlight class="normal"><sp/>uint32_t<sp/>birthday;</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="structmatrix__t" kindref="compound">matrix_t</ref><sp/>*people<sp/>=<sp/><ref refid="core_8h_1ac161f0f0a945b552762c995c759c9f5a" kindref="member">matrix_create</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>person,<sp/>5,<sp/>5);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">person<sp/>var<sp/>=<sp/>{1,<sp/>1990};</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>we<sp/>can<sp/>set<sp/>a<sp/>matrix<sp/>element<sp/>using<sp/>at</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core_8h_1ac6d6bb3c237a30597ffce28bc8a48254" kindref="member">at</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>person,<sp/>people,<sp/>0,0)<sp/>=<sp/>var;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>or<sp/>we<sp/>can<sp/>use<sp/>matrix_set</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core_8h_1af0adbd705a9183e8aa7f0b0a9dbb264b" kindref="member">matrix_set</ref>(people,<sp/>0,0,0,<sp/>&amp;var);</highlight></codeline>
+<codeline><highlight class="normal"><sp/>...</highlight></codeline>
+<codeline><highlight class="normal">matrix_free(&amp;people);</highlight></codeline>
+</programlisting> The above code will generate a person structure and create a matrix container for that structure. Set the first element of the matrix and deallocate the memory when the all job is done.</para><para><simplesect kind="warning"><para>If the custom type has any dynamically allocated memory pointer an additional care must be taken in order to avoid memory leaks.</para></simplesect>
+If the structure contains any pointer member than <ref refid="core_8h_1ad0c77c70c8d497343a0a46edb6b5a366" kindref="member">matrix_free</ref> will not free the memory allocated for the member and result in have memory leakage. Lets look at the problem with a similar example; <programlisting><codeline><highlight class="keyword">struct<sp/></highlight><highlight class="normal">person<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/>uint32_t<sp/>id;</highlight></codeline>
+<codeline><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name;</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="structmatrix__t" kindref="compound">matrix_t</ref><sp/>*people<sp/>=<sp/><ref refid="core_8h_1ac161f0f0a945b552762c995c759c9f5a" kindref="member">matrix_create</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>person,<sp/>5,<sp/>5);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">person<sp/>var<sp/>=<sp/>{1,<sp/>strdup(</highlight><highlight class="stringliteral">&quot;any<sp/>dynamically<sp/>allocated<sp/>memory<sp/>inside<sp/>the<sp/>custom<sp/>type<sp/>will<sp/>cause<sp/>memory<sp/>leak&quot;</highlight><highlight class="normal">)};</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>we<sp/>can<sp/>set<sp/>a<sp/>matrix<sp/>element<sp/>using<sp/>at</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core_8h_1ac6d6bb3c237a30597ffce28bc8a48254" kindref="member">at</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>person,<sp/>people,<sp/>0,0)<sp/>=<sp/>var;</highlight></codeline>
+<codeline><highlight class="normal"><sp/>...</highlight></codeline>
+<codeline><highlight class="normal">matrix_free(&amp;people);</highlight></codeline>
+</programlisting> In this case the size of the structure is 40 byte but freeing 40 byte will only remove the memory of id and name variable but not the memory allocated for the name pointer. The only way to completely clean the object is first freeing the name pointer and than calling the <ref refid="core_8h_1ad0c77c70c8d497343a0a46edb6b5a366" kindref="member">matrix_free</ref>.</para><para>In order to make this process simple, IMLAB defines a function called <ref refid="core_8h_1a805dd9c2c14404e3ea44a0d35b2723ea" kindref="member">matrix_destructor</ref>. This function is taking a destructor function for the created type and during <ref refid="core_8h_1ad0c77c70c8d497343a0a46edb6b5a366" kindref="member">matrix_free</ref> IMLAB first calls the given destructor function and then free up the memory.</para><para><programlisting><codeline><highlight class="keyword">struct<sp/></highlight><highlight class="normal">person<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/>uint32_t<sp/>id;</highlight></codeline>
+<codeline><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name;</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>create<sp/>a<sp/>destructor<sp/>for<sp/>the<sp/>person<sp/>type</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>person_destructor(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*elements,<sp/>uint32_t<sp/>plength)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">*people<sp/>=<sp/>elements;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i=0;<sp/>i<sp/>&lt;<sp/>plength;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>free(people[i].name);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="structmatrix__t" kindref="compound">matrix_t</ref><sp/>*people<sp/>=<sp/><ref refid="core_8h_1ac161f0f0a945b552762c995c759c9f5a" kindref="member">matrix_create</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>person,<sp/>5,<sp/>5);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>set<sp/>the<sp/>destructor<sp/>for<sp/>the<sp/>matrix</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core_8h_1a805dd9c2c14404e3ea44a0d35b2723ea" kindref="member">matrix_destructor</ref>(people,<sp/>person_destructor);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">person<sp/>var<sp/>=<sp/>{1,<sp/>strdup(</highlight><highlight class="stringliteral">&quot;in<sp/>this<sp/>case<sp/>this<sp/>memory<sp/>will<sp/>be<sp/>released<sp/>by<sp/>the<sp/>user<sp/>defined<sp/>destructor:<sp/>person_destructor()&quot;</highlight><highlight class="normal">)};</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core_8h_1ac6d6bb3c237a30597ffce28bc8a48254" kindref="member">at</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>person,<sp/>people,<sp/>0,0)<sp/>=<sp/>var;</highlight></codeline>
+<codeline><highlight class="normal">...</highlight></codeline>
+<codeline><highlight class="normal">matrix_free(&amp;people);</highlight></codeline>
+</programlisting></para><para><simplesect kind="see"><para><ref refid="core_8h_1ac161f0f0a945b552762c995c759c9f5a" kindref="member">matrix_create</ref> </para><simplesectsep/><para><ref refid="core_8h_1a8c7c23897827cb7c83773edf1fa6109a" kindref="member">matrix_resize</ref> </para><simplesectsep/><para><ref refid="core_8h_1ad0c77c70c8d497343a0a46edb6b5a366" kindref="member">matrix_free</ref> </para><simplesectsep/><para><ref refid="core_8h_1af58f7370d2d76be0c77300d0ef03b884" kindref="member">matrix_fill</ref> </para><simplesectsep/><para>matrix_load </para><simplesectsep/><para>matrix_save </para></simplesect>
+</para>    </detaileddescription>
+    <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" line="894" column="1" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" bodystart="894" bodyend="894"/>
+    <listofallmembers>
+      <member refid="structmatrix__t_1a24b4fc4355792f00324a8e3692ab7916" prot="public" virt="non-virtual"><scope>matrix_t</scope><name>_channels</name></member>
+      <member refid="structmatrix__t_1a6150671ecbe47b5e0be50a6ea6a0fa63" prot="public" virt="non-virtual"><scope>matrix_t</scope><name>_cols</name></member>
+      <member refid="structmatrix__t_1a82f2bfb0fb3699c5316ab4e37c0db699" prot="public" virt="non-virtual"><scope>matrix_t</scope><name>_data</name></member>
+      <member refid="structmatrix__t_1ade9e556ddbd64ecc82d0673c63a06425" prot="public" virt="non-virtual"><scope>matrix_t</scope><name>_rows</name></member>
+      <member refid="structmatrix__t_1a28fe788d31d147ed6d8e1e0eb56cd4b4" prot="public" virt="non-virtual"><scope>matrix_t</scope><name>_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

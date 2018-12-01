@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="structpoint__t" kind="struct" prot="public">
+    <compoundname>point_t</compoundname>
+    <includes refid="core_8h" local="no">core.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structpoint__t_1a52cadee6a9e5c7a3a8cdadfaf9484be5" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float point_t::x</definition>
+        <argsstring></argsstring>
+        <name>x</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" line="1250" column="1" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" bodystart="1250" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structpoint__t_1a156addd058bd74241b0151b8711ac887" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float point_t::y</definition>
+        <argsstring></argsstring>
+        <name>y</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" line="1250" column="1" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" bodystart="1250" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structpoint__t_1a69a2c6f88651ca5ea34bce2174a838a0" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float point_t::z</definition>
+        <argsstring></argsstring>
+        <name>z</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" line="1250" column="1" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" bodystart="1250" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>3D point type </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" line="1249" column="1" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" bodystart="1249" bodyend="1251"/>
+    <listofallmembers>
+      <member refid="structpoint__t_1a52cadee6a9e5c7a3a8cdadfaf9484be5" prot="public" virt="non-virtual"><scope>point_t</scope><name>x</name></member>
+      <member refid="structpoint__t_1a156addd058bd74241b0151b8711ac887" prot="public" virt="non-virtual"><scope>point_t</scope><name>y</name></member>
+      <member refid="structpoint__t_1a69a2c6f88651ca5ea34bce2174a838a0" prot="public" virt="non-virtual"><scope>point_t</scope><name>z</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

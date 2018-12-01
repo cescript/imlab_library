@@ -1,0 +1,637 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="iocore_8h" kind="file">
+    <compoundname>iocore.h</compoundname>
+    <includes refid="core_8h" local="yes">core.h</includes>
+    <includedby refid="imlab_8h" local="yes">C:/Users/cescript/CLionProjects/imlab/include/imlab.h</includedby>
+    <incdepgraph>
+      <node id="63">
+        <label>stdarg.h</label>
+      </node>
+      <node id="62">
+        <label>stdint.h</label>
+      </node>
+      <node id="60">
+        <label>core.h</label>
+        <link refid="core_8h"/>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+      </node>
+      <node id="64">
+        <label>string.h</label>
+      </node>
+      <node id="65">
+        <label>core_macros.h</label>
+        <link refid="core__macros_8h"/>
+      </node>
+      <node id="59">
+        <label>C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h</label>
+        <link refid="iocore.h"/>
+        <childnode refid="60" relation="include">
+        </childnode>
+      </node>
+      <node id="61">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="67">
+        <label>C:/Users/cescript/CLionProjects/imlab/include/imlab.h</label>
+        <link refid="imlab_8h"/>
+      </node>
+      <node id="66">
+        <label>C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h</label>
+        <link refid="iocore.h"/>
+        <childnode refid="67" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="user-defined">
+      <header>IMLAB JSON get mehods</header>
+      <description><para>These are the definitions of the public functions for getting each element from the object or array. Use these functions if you need any scalar or array type element from any json array or object. These functions are overloaded based on the number of input arguments. So use json_get_X(data, name, id) to get a data from the object or json_get_X(data, id) from the array. </para></description>
+      <memberdef kind="define" id="iocore_8h_1a73fa920decf57b1407149c3d464c2489" prot="public" static="no">
+        <name>json_get</name>
+        <param><defname>...</defname></param>
+        <briefdescription>
+<para>This function will return the json_t* holded in object-&gt;element[&quot;name&quot;]. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" line="278" column="9" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" bodystart="278" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="iocore_8h_1a861e9f27ff8f3fabf3ce61917687aa41" prot="public" static="no">
+        <name>json_get_boolean</name>
+        <param><defname>...</defname></param>
+        <briefdescription>
+<para>This function will return the boolean (int8_t) holded in the object-&gt;element[&quot;name&quot;]. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" line="280" column="9" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" bodystart="280" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="iocore_8h_1a40d0399bca5ef4d456cf30e122274a00" prot="public" static="no">
+        <name>json_get_number</name>
+        <param><defname>...</defname></param>
+        <briefdescription>
+<para>This function will return the string (char*) holded in the object-&gt;element[&quot;name&quot;]. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" line="282" column="9" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" bodystart="282" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="iocore_8h_1ac23f6cac13e37d730139c6088e34f88e" prot="public" static="no">
+        <name>json_get_string</name>
+        <param><defname>...</defname></param>
+        <briefdescription>
+<para>This function will return the number (double) holded in the object-&gt;element[&quot;name&quot;]. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" line="284" column="9" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" bodystart="284" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="iocore_8h_1ab62ddf328a8aab02922099d7fa468b22" prot="public" static="no">
+        <name>json_get_array</name>
+        <param><defname>...</defname></param>
+        <briefdescription>
+<para>This function will return the array (struct json_array_t*) holded in the object-&gt;element[&quot;name&quot;]. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" line="286" column="9" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" bodystart="286" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="iocore_8h_1a4a73641573ab4496a0c36e8ee3356bf5" prot="public" static="no">
+        <name>json_get_object</name>
+        <param><defname>...</defname></param>
+        <briefdescription>
+<para>This function will return the object (struct json_object_t*) holded in the object-&gt;element[&quot;name&quot;]. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" line="288" column="9" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" bodystart="288" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="iocore_8h_1a5afe9881a9f439f6ea00eda2863a419f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>struct csv_t *</type>
+        <definition>struct csv_t* csv_open</definition>
+        <argsstring>(char *filename, uint32_t skip_rows, uint32_t buffer_size)</argsstring>
+        <name>csv_open</name>
+        <param>
+          <type>char *</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>skip_rows</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>buffer_size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>CSV is simple but very efficient CSV (Comma Seperated Values) reader library designed for IMLAB Image Processing Library. It has has been written in C89 standart and in the same exact way with the IMLAB library. It is designed to be readable, easy to use and easy to remember. It has a single header (import and use) file and all the functions are created under the json_ namespace. A simple code written with CSV looks like this.</para><para><programlisting><codeline><highlight class="keyword">struct<sp/></highlight><highlight class="normal">csv_t<sp/>*table<sp/>=<sp/><ref refid="iocore_8h_1a5afe9881a9f439f6ea00eda2863a419f" kindref="member">csv_open</ref>(</highlight><highlight class="stringliteral">&quot;sample.csv&quot;</highlight><highlight class="normal">,<sp/>0,<sp/>1024);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="core_8h_1aece6b4cf48e00b533a3a022244ad8206" kindref="member">cols</ref><sp/>=<sp/><ref refid="iocore_8h_1a8345f671eec3da34c75e40662f566719" kindref="member">csv_get_column_size</ref>(table);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>scan<sp/>the<sp/>header<sp/>line</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="iocore_8h_1ac3a639e422e3487737a6e4065ad5b0a8" kindref="member">csv_get_next_line</ref>(table);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>print<sp/>the<sp/>header</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/><ref refid="core_8h_1aece6b4cf48e00b533a3a022244ad8206" kindref="member">cols</ref>;<sp/>i++)</highlight></codeline>
+<codeline><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;%s<sp/>\t<sp/>&quot;</highlight><highlight class="normal">,<sp/><ref refid="iocore_8h_1a2a1426dd02638c1d1f1431e0f5550344" kindref="member">csv_get_string</ref>(table,<sp/>i));</highlight></codeline>
+<codeline><highlight class="normal"><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">printf(</highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>print<sp/>the<sp/>values</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">while</highlight><highlight class="normal">(<ref refid="iocore_8h_1ac3a639e422e3487737a6e4065ad5b0a8" kindref="member">csv_get_next_line</ref>(table))</highlight></codeline>
+<codeline><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal"><sp/>=<sp/><ref refid="iocore_8h_1ace43d30fff75174ffa367aba7f5c8bf5" kindref="member">csv_get_long</ref>(table,<sp/>0);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name<sp/>=<sp/><ref refid="iocore_8h_1a2a1426dd02638c1d1f1431e0f5550344" kindref="member">csv_get_string</ref>(table,<sp/>1);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>score<sp/>=<sp/><ref refid="iocore_8h_1a3b106c7a9cb5e8e6f121f3a7bb119eb6" kindref="member">csv_get_double</ref>(table,<sp/>2);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;[%02d]<sp/>\t<sp/>[%s]<sp/>\t<sp/>[%3.2f]\n&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/>name,<sp/>score);</highlight></codeline>
+<codeline><highlight class="normal"><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="iocore_8h_1a00f7a7780a25213bf9cdb562b9d88ec8" kindref="member">csv_close</ref>(&amp;table);</highlight></codeline>
+</programlisting> Open a csv file and return the handler <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input filename with csv extension </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>skip_rows</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of rows to be skipped </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Max length of the single cell element in bytes (typical: 1024) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A pointer to the created csv structure </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" line="49" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="iocore_8h_1a8345f671eec3da34c75e40662f566719" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t csv_get_column_size</definition>
+        <argsstring>(struct csv_t *in)</argsstring>
+        <name>csv_get_column_size</name>
+        <param>
+          <type>struct csv_t *</type>
+          <declname>in</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns the number of columns in the current csv file <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>in</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input pointer to the csv structure </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Number of columns in the file </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" line="56" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="iocore_8h_1ac3a639e422e3487737a6e4065ad5b0a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int csv_get_next_line</definition>
+        <argsstring>(struct csv_t *in)</argsstring>
+        <name>csv_get_next_line</name>
+        <param>
+          <type>struct csv_t *</type>
+          <declname>in</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Scan the next row of the current file and parse the cells <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>in</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input pointer to the csv structure </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Return the number scanned line (zero or one) </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" line="63" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="iocore_8h_1ace43d30fff75174ffa367aba7f5c8bf5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>long</type>
+        <definition>long csv_get_long</definition>
+        <argsstring>(struct csv_t *in, uint32_t col)</argsstring>
+        <name>csv_get_long</name>
+        <param>
+          <type>struct csv_t *</type>
+          <declname>in</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>col</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get the integer value in the current row and given column <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>in</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input pointer to the csv structure </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>col</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Column index of the integer data (0 based) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Integer value of the cell (current row, col) </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" line="72" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="iocore_8h_1a2a1426dd02638c1d1f1431e0f5550344" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* csv_get_string</definition>
+        <argsstring>(struct csv_t *in, uint32_t col)</argsstring>
+        <name>csv_get_string</name>
+        <param>
+          <type>struct csv_t *</type>
+          <declname>in</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>col</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get the string value in the current row and given column <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>in</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input pointer to the csv structure </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>col</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Column index of the string data (0 based) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>String value of the cell (current row, col) </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" line="80" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="iocore_8h_1a3b106c7a9cb5e8e6f121f3a7bb119eb6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double csv_get_double</definition>
+        <argsstring>(struct csv_t *in, uint32_t col)</argsstring>
+        <name>csv_get_double</name>
+        <param>
+          <type>struct csv_t *</type>
+          <declname>in</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>col</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get the double value in the current row and given column <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>in</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input pointer to the csv structure </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>col</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Column index of the double data (0 based) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Double value of the cell (current row, col) </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" line="88" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="iocore_8h_1a00f7a7780a25213bf9cdb562b9d88ec8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void csv_close</definition>
+        <argsstring>(struct csv_t **out)</argsstring>
+        <name>csv_close</name>
+        <param>
+          <type>struct csv_t **</type>
+          <declname>out</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Close the given file and deallocates the memory <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Address of the pointer to the csv structure </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" line="94" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="iocore_8h_1af051a1d56591a21ce8fba6ef1c7c5081" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="core_8h_1a387664de0ac452f11abed4a7d9c2cc5d" kindref="member">return_t</ref></type>
+        <definition>return_t imlab_mkdir</definition>
+        <argsstring>(const char *pathname)</argsstring>
+        <name>imlab_mkdir</name>
+        <param>
+          <type>const char *</type>
+          <declname>pathname</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Create a directory with the given name and set the mode to the given mode <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pathname</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the path </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" line="101" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="iocore_8h_1ad90720d98b0fd5340b6706fb9bc5fc1a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* imlab_filename</definition>
+        <argsstring>(const char *filename, const char *extension)</argsstring>
+        <name>imlab_filename</name>
+        <param>
+          <type>const char *</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>extension</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Create and return a unique filename that is not in the current directory. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the file </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>extension</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Extension of the filename </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>filename_d.extension formatted char pointer </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" line="109" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="iocore_8h_1acf5bb2b81f90cbe58e203cc040864c4c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structvector__t" kindref="compound">vector_t</ref> *</type>
+        <definition>vector_t* json_read</definition>
+        <argsstring>(const char *filename)</argsstring>
+        <name>json_read</name>
+        <param>
+          <type>const char *</type>
+          <declname>filename</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>JSON is simple but very efficient JSON reader library designed for IMLAB Image Processing Library. It has has been written in C89 standart and in the same exact way with the IMLAB library. It is designed to be readable, easy to use and easy to remember. It has a single header (import and use) file and all the functions are created under the json_ namespace. A simple code written with JSON looks like this.</para><para><programlisting><codeline><highlight class="normal"><ref refid="structvector__t" kindref="compound">vector_t</ref><sp/>*root<sp/>=<sp/><ref refid="iocore_8h_1acf5bb2b81f90cbe58e203cc040864c4c" kindref="member">json_read</ref>(</highlight><highlight class="stringliteral">&quot;haarcascade_frontalface_alt.json&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>s<sp/>=<sp/><ref refid="core_8h_1aab37196bc836e9a106deac981b0a28e7" kindref="member">length</ref>(root);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>s1<sp/>=<sp/><ref refid="iocore_8h_1a40d0399bca5ef4d456cf30e122274a00" kindref="member">json_get_number</ref>(root,<sp/></highlight><highlight class="stringliteral">&quot;size1&quot;</highlight><highlight class="normal">,<sp/>0);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>s1<sp/>=<sp/><ref refid="iocore_8h_1a40d0399bca5ef4d456cf30e122274a00" kindref="member">json_get_number</ref>(root,<sp/></highlight><highlight class="stringliteral">&quot;size2&quot;</highlight><highlight class="normal">,<sp/>0);</highlight></codeline>
+<codeline><highlight class="normal">printf(</highlight><highlight class="stringliteral">&quot;Cascade<sp/>Box<sp/>Size:<sp/>%d<sp/>x<sp/>%d\n&quot;</highlight><highlight class="normal">,<sp/>s1,<sp/>s2);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>we<sp/>can<sp/>get<sp/>stages<sp/>array<sp/>from<sp/>the<sp/>current<sp/>node<sp/>using<sp/>json_get_array</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="structvector__t" kindref="compound">vector_t</ref><sp/>*stages<sp/>=<sp/><ref refid="iocore_8h_1ab62ddf328a8aab02922099d7fa468b22" kindref="member">json_get_array</ref>(root,<sp/></highlight><highlight class="stringliteral">&quot;stages&quot;</highlight><highlight class="normal">,<sp/>0);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>stages<sp/>is<sp/>an<sp/>array<sp/>which<sp/>holds<sp/>a<sp/>number<sp/>and<sp/>an<sp/>array<sp/>inside</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(i=0;<sp/>i<sp/>&lt;<sp/><ref refid="core_8h_1aab37196bc836e9a106deac981b0a28e7" kindref="member">length</ref>(stages);<sp/>i++)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>while<sp/>getting<sp/>item<sp/>from<sp/>array<sp/>just<sp/>use<sp/>two<sp/>variable<sp/>array<sp/>name<sp/>and<sp/>index</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structvector__t" kindref="compound">vector_t</ref><sp/>*obj<sp/>=<sp/><ref refid="iocore_8h_1a4a73641573ab4496a0c36e8ee3356bf5" kindref="member">json_get_object</ref>(stages,<sp/>i);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>stage_threshold<sp/>=<sp/><ref refid="iocore_8h_1a40d0399bca5ef4d456cf30e122274a00" kindref="member">json_get_number</ref>(obj,<sp/></highlight><highlight class="stringliteral">&quot;thres&quot;</highlight><highlight class="normal">,<sp/>0);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structvector__t" kindref="compound">vector_t</ref><sp/>*trees<sp/>=<sp/><ref refid="iocore_8h_1ab62ddf328a8aab02922099d7fa468b22" kindref="member">json_get_array</ref>(obj,<sp/></highlight><highlight class="stringliteral">&quot;trees&quot;</highlight><highlight class="normal">,<sp/>0);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(j=0;<sp/>j<sp/>&lt;<sp/><ref refid="core_8h_1aab37196bc836e9a106deac981b0a28e7" kindref="member">length</ref>(trees);<sp/>j++)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>...</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para><para>As seen in the sample code, any JSON object or array is holded by the <ref refid="structvector__t" kindref="compound">vector_t</ref> structure. In order to hold different types in a single vector, IMLAB defines a new structure namely struct json_data_t. This structure is consist of a type identifier and a void pointer to the real data. A JSON data could be created with the following constructors:</para><para><programlisting><codeline><highlight class="normal"><ref refid="structvector__t" kindref="compound">vector_t</ref><sp/>*root<sp/>=<sp/><ref refid="core_8h_1a160b0d4b8d0836eda9a50bfa71514de8" kindref="member">vector_create</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>json_data_t,<sp/>10);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">json_data_t<sp/>temp;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>sets<sp/>the<sp/>temp<sp/>to<sp/>JSON<sp/>boolean<sp/>0<sp/>(false)</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">json_boolean(0,<sp/>&amp;temp);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>inserts<sp/>it<sp/>into<sp/>the<sp/>root<sp/>array</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core_8h_1af09d64899cb5a7eb37453f495cc929f9" kindref="member">vector_push</ref>(root,<sp/>&amp;temp);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>sets<sp/>the<sp/>temp<sp/>to<sp/>1.27</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">json_number(1.27,<sp/>&amp;temp);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>inserts<sp/>it<sp/>into<sp/>the<sp/>root<sp/>array</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core_8h_1af09d64899cb5a7eb37453f495cc929f9" kindref="member">vector_push</ref>(root,<sp/>&amp;temp);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>sets<sp/>the<sp/>temp<sp/>to<sp/>JSON<sp/>string</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">json_string(</highlight><highlight class="stringliteral">&quot;This<sp/>is<sp/>a<sp/>sample<sp/>JSON<sp/>string!&quot;</highlight><highlight class="normal">,<sp/>&amp;temp);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>inserts<sp/>it<sp/>into<sp/>the<sp/>root<sp/>array</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core_8h_1af09d64899cb5a7eb37453f495cc929f9" kindref="member">vector_push</ref>(root,<sp/>&amp;temp);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>sets<sp/>the<sp/>temp<sp/>to<sp/>JSON<sp/>object</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="structvector__t" kindref="compound">vector_t</ref><sp/>*</highlight><highlight class="keywordtype">object</highlight><highlight class="normal"><sp/>=<sp/><ref refid="core_8h_1a160b0d4b8d0836eda9a50bfa71514de8" kindref="member">vector_create</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>json_object_t,<sp/>1);</highlight></codeline>
+<codeline><highlight class="normal">json_object(</highlight><highlight class="keywordtype">object</highlight><highlight class="normal">,<sp/>&amp;temp);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>inserts<sp/>it<sp/>into<sp/>the<sp/>root<sp/>array</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core_8h_1af09d64899cb5a7eb37453f495cc929f9" kindref="member">vector_push</ref>(root,<sp/>&amp;temp);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>sets<sp/>the<sp/>temp<sp/>to<sp/>JSON<sp/>object</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="structvector__t" kindref="compound">vector_t</ref><sp/>*array<sp/>=<sp/><ref refid="core_8h_1a160b0d4b8d0836eda9a50bfa71514de8" kindref="member">vector_create</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>json_data_t,<sp/>1);</highlight></codeline>
+<codeline><highlight class="normal">json_array(array,<sp/>&amp;temp);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>inserts<sp/>it<sp/>into<sp/>the<sp/>root<sp/>array</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="core_8h_1af09d64899cb5a7eb37453f495cc929f9" kindref="member">vector_push</ref>(root,<sp/>&amp;temp);</highlight></codeline>
+</programlisting> An array element can hold number of different typed objects under its element pointer. A JSON array can be constructed by <ref refid="core_8h_1a160b0d4b8d0836eda9a50bfa71514de8" kindref="member">vector_create(struct json_data_t)</ref>. struct json_data_t is the key type for the all JSON library. It has a type indicator and a generic value holder. This propoerty of json_data_t provides the JSON array to hold any data type.</para><para>JSON array is consist of pointer to the generic json data holder type json_t*. Each data can be accessed via its position in the array. IMLAB JSON library provides the following helpful macros to get or set any value inside the array.<itemizedlist>
+<listitem><para>json_push(vector_t*, data)</para></listitem><listitem><para><ref refid="iocore_8h_1a73fa920decf57b1407149c3d464c2489" kindref="member">json_get(vector_t*, id)</ref></para></listitem><listitem><para><ref refid="iocore_8h_1a861e9f27ff8f3fabf3ce61917687aa41" kindref="member">json_get_boolean(vector_t*, id)</ref></para></listitem><listitem><para><ref refid="iocore_8h_1ac23f6cac13e37d730139c6088e34f88e" kindref="member">json_get_string(vector_t*, id)</ref></para></listitem><listitem><para><ref refid="iocore_8h_1a40d0399bca5ef4d456cf30e122274a00" kindref="member">json_get_number(vector_t*, id)</ref></para></listitem><listitem><para><ref refid="iocore_8h_1ab62ddf328a8aab02922099d7fa468b22" kindref="member">json_get_array(vector_t*, id)</ref></para></listitem><listitem><para><ref refid="iocore_8h_1a4a73641573ab4496a0c36e8ee3356bf5" kindref="member">json_get_object(vector_t*, id)</ref> An object element can hold a number of different type object and their names under its element pointer. A JSON object can be constructed by json_object_create().</para></listitem><listitem><para>json_object_create(int capacity) : This function creates an json_object_t object which can store <ref refid="core_8h_1a356cce4442240ba05926d09fc49cfa20" kindref="member">capacity</ref> json_t* inside</para></listitem></itemizedlist>
+</para><para>JSON object is consist of pointer to the generic json data holder type json_t*. Each data can be accessed by its name or id. IMLAB JSON library provides the following helpful macros to get or set any value inside the object.<itemizedlist>
+<listitem><para>json_push(json_t*, data, name)</para></listitem><listitem><para><ref refid="iocore_8h_1a73fa920decf57b1407149c3d464c2489" kindref="member">json_get(json_t*, name, id)</ref></para></listitem><listitem><para>json_get_id(object, name)</para></listitem><listitem><para>json_get_name(object, id)</para></listitem><listitem><para><ref refid="iocore_8h_1a861e9f27ff8f3fabf3ce61917687aa41" kindref="member">json_get_boolean(json_t*, name, id)</ref></para></listitem><listitem><para><ref refid="iocore_8h_1ac23f6cac13e37d730139c6088e34f88e" kindref="member">json_get_string(json_t*, name, id)</ref></para></listitem><listitem><para><ref refid="iocore_8h_1a40d0399bca5ef4d456cf30e122274a00" kindref="member">json_get_number(json_t*, name, id)</ref></para></listitem><listitem><para><ref refid="iocore_8h_1ab62ddf328a8aab02922099d7fa468b22" kindref="member">json_get_array(json_t*, name, id)</ref></para></listitem><listitem><para><ref refid="iocore_8h_1a4a73641573ab4496a0c36e8ee3356bf5" kindref="member">json_get_object(json_t*, name, id)</ref></para></listitem></itemizedlist>
+</para><para>If the object name is empty than the function will use the given id as the index and return the value. This could be faster if the object has too many data elements and you already know the index of the element. This data structure will hold a single data element which should have a type name and value. JSON_T is the most generic container for any json type object. It holds a single data element which should have a type name and value. Value is defined as void pointer so that it can hold all types of data without any problem. In the user side this type is the generic input type for all the json functions and return types for most the json functions (excepts for the type specified functions).</para><para>The following functions accepts the json_t* input:<itemizedlist>
+<listitem><para>json_get_length(json_t*) : This function return the length of the given data. If the data is static (number, string, primitive) it returns 1 otherwise the length of the given data.</para></listitem><listitem><para>json_get_[boolean, number, string, array, object](json_t*, name, id) : Returns the data holded in the elements of the given data (object) with the specified type.</para></listitem><listitem><para>json_get_[boolean, number, string, array, object](json_t*, id) : Returns the data holded in the elements of the given data (array) with the specified type. This is the reader function for any json file. This function reads the json data in the given file and parse the all name value pairs into the json_t* data. </para></listitem></itemizedlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" line="244" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="iocore_8h_1a5b00832cc433a49dc302e6a15aa4794e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="core_8h_1a387664de0ac452f11abed4a7d9c2cc5d" kindref="member">return_t</ref></type>
+        <definition>return_t json_write</definition>
+        <argsstring>(const char *filename, vector_t *input)</argsstring>
+        <name>json_write</name>
+        <param>
+          <type>const char *</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type><ref refid="structvector__t" kindref="compound">vector_t</ref> *</type>
+          <declname>input</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>This is the serializer function for any json file. This function reads the parsed json data and serialize it into the given file. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" line="249" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="iocore_8h_1ad2bb3109ca09de3135a017c73162bde6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="core_8h_1a387664de0ac452f11abed4a7d9c2cc5d" kindref="member">return_t</ref></type>
+        <definition>return_t json_serialize</definition>
+        <argsstring>(vector_t *input, string_t *buffer)</argsstring>
+        <name>json_serialize</name>
+        <param>
+          <type><ref refid="structvector__t" kindref="compound">vector_t</ref> *</type>
+          <declname>input</declname>
+        </param>
+        <param>
+          <type><ref refid="structstring__t" kindref="compound">string_t</ref> *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Serialize the given JSON structure into the string buffer <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>input</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>JSON structure created by json_create or json_read. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Empty string pointer which will be filled by the function. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer_length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Initial buffer length which will be updated by the function. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Return positive if no error occurs. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" line="258" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="iocore_8h_1acbf6227816f08216b27da4d4b9aa591d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="core_8h_1a387664de0ac452f11abed4a7d9c2cc5d" kindref="member">return_t</ref></type>
+        <definition>return_t json_free</definition>
+        <argsstring>(vector_t **in)</argsstring>
+        <name>json_free</name>
+        <param>
+          <type><ref refid="structvector__t" kindref="compound">vector_t</ref> **</type>
+          <declname>in</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Free up the memory holded by the json object <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>in</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input json object to be freed </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>RETURN_SUCCESS if the cleaning is succesfull </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" line="265" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="iocore_8h_1a78a77006d07f7801530a695f3343e9d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structvector__t" kindref="compound">vector_t</ref> *</type>
+        <definition>vector_t* json_create</definition>
+        <argsstring>(void)</argsstring>
+        <name>json_create</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>This is a constructor for JSON null object. This is usefull in order to prevent errors. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h" line="269" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Here the defintions of the Input/output functions provided by the IMLAB library. </para>    </detaileddescription>
+    <location file="C:/Users/cescript/CLionProjects/imlab/include/header/iocore.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="structstring__t" kind="struct" prot="public">
+    <compoundname>string_t</compoundname>
+    <includes refid="core_8h" local="no">core.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structstring__t_1a09cf91702ad1d0609e0692d69dd48b51" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t string_t::_length</definition>
+        <argsstring></argsstring>
+        <name>_length</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" line="1154" column="1" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" bodystart="1154" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structstring__t_1acb05dfc36dc9f6f530425f34827c5e79" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t string_t::_capacity</definition>
+        <argsstring></argsstring>
+        <name>_capacity</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" line="1154" column="1" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" bodystart="1154" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structstring__t_1a9e1183c1cc7a1ba154e6af0f5e27f36c" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* string_t::_data</definition>
+        <argsstring></argsstring>
+        <name>_data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" line="1154" column="1" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" bodystart="1154" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para><ref refid="structstring__t" kindref="compound">string_t</ref> is a string type to hold char pointers as string </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" line="1154" column="1" bodyfile="C:/Users/cescript/CLionProjects/imlab/include/header/core.h" bodystart="1154" bodyend="1154"/>
+    <listofallmembers>
+      <member refid="structstring__t_1acb05dfc36dc9f6f530425f34827c5e79" prot="public" virt="non-virtual"><scope>string_t</scope><name>_capacity</name></member>
+      <member refid="structstring__t_1a9e1183c1cc7a1ba154e6af0f5e27f36c" prot="public" virt="non-virtual"><scope>string_t</scope><name>_data</name></member>
+      <member refid="structstring__t_1a09cf91702ad1d0609e0692d69dd48b51" prot="public" virt="non-virtual"><scope>string_t</scope><name>_length</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
