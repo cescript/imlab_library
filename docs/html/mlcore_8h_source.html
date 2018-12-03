@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.5"/>
-<title>IMLAB Image Processing and Matrix Library: E:/library/include/modules/mlcore.h Source File</title>
+<title>IMLAB Image Processing and Matrix Library: E:/imlab_library/include/mlcore.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,7 +22,7 @@
 </script>
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
     jax: ["input/TeX","output/HTML-CSS"],
 });
 </script><script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
@@ -196,14 +196,14 @@ $(document).ready(function(){initNavTree('mlcore_8h_source.html','');});
 <div class="ttc" id="mlcore_8h_html_a8b5aba4511809b572b94674e4fcf2808"><div class="ttname"><a href="mlcore_8h.html#a8b5aba4511809b572b94674e4fcf2808">glm_predict</a></div><div class="ttdeci">return_t glm_predict(matrix_t *in, matrix_t *label, struct glm_t *model)</div></div>
 <div class="ttc" id="mlcore_8h_html_a8cf74184496eae1b7ecda94e2bf6c4c1"><div class="ttname"><a href="mlcore_8h.html#a8cf74184496eae1b7ecda94e2bf6c4c1">fern_visualize</a></div><div class="ttdeci">matrix_t * fern_visualize(uint32_t out_width, uint32_t out_height, uint32_t scale, struct fern_t *model)</div></div>
 <div class="ttc" id="mlcore_8h_html_a7223d43664068df589cbbececad99c08"><div class="ttname"><a href="mlcore_8h.html#a7223d43664068df589cbbececad99c08">glm_create</a></div><div class="ttdeci">struct glm_t * glm_create(uint32_t solver, char options[])</div><div class="ttdoc">glm_t Functions are included </div></div>
-<div class="ttc" id="structmatrix__t_html"><div class="ttname"><a href="structmatrix__t.html">matrix_t</a></div><div class="ttdoc">matrix_t is a n-channel 2D matrix container. </div><div class="ttdef"><b>Definition:</b> core.h:894</div></div>
-<div class="ttc" id="structvector__t_html"><div class="ttname"><a href="structvector__t.html">vector_t</a></div><div class="ttdoc">vector_t is a vector container just like standart std vector in C++. </div><div class="ttdef"><b>Definition:</b> core.h:510</div></div>
+<div class="ttc" id="structmatrix__t_html"><div class="ttname"><a href="structmatrix__t.html">matrix_t</a></div><div class="ttdoc">matrix_t is a n-channel 2D matrix container. </div><div class="ttdef"><b>Definition:</b> core.h:891</div></div>
+<div class="ttc" id="structvector__t_html"><div class="ttname"><a href="structvector__t.html">vector_t</a></div><div class="ttdoc">vector_t is a vector container just like standart std vector in C++. </div><div class="ttdef"><b>Definition:</b> core.h:507</div></div>
 <div class="ttc" id="mlcore_8h_html_af5c57abcf272b1d0b74a92bfefeb5777"><div class="ttname"><a href="mlcore_8h.html#af5c57abcf272b1d0b74a92bfefeb5777">fern_set</a></div><div class="ttdeci">return_t fern_set(struct fern_t *model, return_t(*select)(float *, float *, float *, void **, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t **, float **, uint32_t), uint32_t(*binarize)(float *data, uint32_t *p, float *t), void *aux)</div></div>
 <div class="ttc" id="mlcore_8h_html_a2e5ecf5f45b22a75d181947c0a26c948"><div class="ttname"><a href="mlcore_8h.html#a2e5ecf5f45b22a75d181947c0a26c948">fern_create</a></div><div class="ttdeci">struct fern_t * fern_create(uint8_t solver, char options[])</div></div>
 <div class="ttc" id="prcore_8h_html"><div class="ttname"><a href="prcore_8h.html">prcore.h</a></div></div>
 <div class="ttc" id="core_8h_html"><div class="ttname"><a href="core_8h.html">core.h</a></div><div class="ttdoc">File containing example of doxygen usage for quick reference. </div></div>
-<div class="ttc" id="core_8h_html_a17dd213399b468eaf01f9852a3ca36fc"><div class="ttname"><a href="core_8h.html#a17dd213399b468eaf01f9852a3ca36fc">data</a></div><div class="ttdeci">#define data(_type,...)</div><div class="ttdoc">Returns the data pointer for the given imlab container. </div><div class="ttdef"><b>Definition:</b> core.h:184</div></div>
-<div class="ttc" id="core_8h_html_a387664de0ac452f11abed4a7d9c2cc5d"><div class="ttname"><a href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5d">return_t</a></div><div class="ttdeci">return_t</div><div class="ttdoc">IMLAB return type Return type for most of the IMLAB function. Returns a negative integer when an erro...</div><div class="ttdef"><b>Definition:</b> core.h:268</div></div>
+<div class="ttc" id="core_8h_html_a17dd213399b468eaf01f9852a3ca36fc"><div class="ttname"><a href="core_8h.html#a17dd213399b468eaf01f9852a3ca36fc">data</a></div><div class="ttdeci">#define data(_type,...)</div><div class="ttdoc">Returns the data pointer for the given imlab container. </div><div class="ttdef"><b>Definition:</b> core.h:176</div></div>
+<div class="ttc" id="core_8h_html_a387664de0ac452f11abed4a7d9c2cc5d"><div class="ttname"><a href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5d">return_t</a></div><div class="ttdeci">return_t</div><div class="ttdoc">IMLAB return type Return type for most of the IMLAB function. Returns a negative integer when an erro...</div><div class="ttdef"><b>Definition:</b> core.h:260</div></div>
 <div class="ttc" id="mlcore_8h_html_ac629c18fca9b9123cb10b43cf903aacf"><div class="ttname"><a href="mlcore_8h.html#ac629c18fca9b9123cb10b43cf903aacf">glm_view</a></div><div class="ttdeci">return_t glm_view(struct glm_t *model)</div></div>
 <div class="ttc" id="mlcore_8h_html_ab014d45e54490c8a7338b8def4f8289b"><div class="ttname"><a href="mlcore_8h.html#ab014d45e54490c8a7338b8def4f8289b">fern_read</a></div><div class="ttdeci">struct fern_t * fern_read(const char *filename)</div></div>
 <div class="ttc" id="mlcore_8h_html_a4c43396bc5dc4ae61b2682316c69ce1e"><div class="ttname"><a href="mlcore_8h.html#a4c43396bc5dc4ae61b2682316c69ce1e">fern_train</a></div><div class="ttdeci">return_t fern_train(matrix_t *input, matrix_t *output, struct fern_t *model)</div><div class="ttdoc">HIGH LEVEL FUNCTIONS TO CALL FROM THE IMLAB APPLICATIONS. </div></div>
@@ -216,7 +216,7 @@ $(document).ready(function(){initNavTree('mlcore_8h_source.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_2b62a22b82aac776549c15514a2aafcf.html">modules</a></li><li class="navelem"><a class="el" href="mlcore_8h.html">mlcore.h</a></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="mlcore_8h.html">mlcore.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>

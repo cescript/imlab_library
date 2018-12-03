@@ -1,5 +1,12 @@
 var dir_d44c64559bbebec7f509842c48db8b23 =
 [
-    [ "modules", "dir_2b62a22b82aac776549c15514a2aafcf.html", "dir_2b62a22b82aac776549c15514a2aafcf" ],
-    [ "imlab.h", "imlab_8h.html", null ]
+    [ "alcore.h", "alcore_8h.html", "alcore_8h" ],
+    [ "core.h", "core_8h.html", "core_8h" ],
+    [ "core_macros.h", "core__macros_8h.html", "core__macros_8h" ],
+    [ "cvcore.h", "cvcore_8h.html", "cvcore_8h" ],
+    [ "imcore.h", "imcore_8h.html", "imcore_8h" ],
+    [ "iocore.h", "iocore_8h.html", "iocore_8h" ],
+    [ "lacore.h", "lacore_8h.html", "lacore_8h" ],
+    [ "mlcore.h", "mlcore_8h.html", "mlcore_8h" ],
+    [ "prcore.h", "prcore_8h.html", "prcore_8h" ]
 ];

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.5"/>
-<title>IMLAB Image Processing and Matrix Library: E:/library/include/modules/core.h File Reference</title>
+<title>IMLAB Image Processing and Matrix Library: E:/imlab_library/include/core.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,7 +22,7 @@
 </script>
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
     jax: ["input/TeX","output/HTML-CSS"],
 });
 </script><script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
@@ -146,8 +146,6 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:aae6636ce35e0b83971b4a023946cc5b7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8h.html#aae6636ce35e0b83971b4a023946cc5b7">IMLAB_PLATFORM_UNKNOWN</a>&#160;&#160;&#160;1</td></tr>
-<tr class="separator:aae6636ce35e0b83971b4a023946cc5b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90aac298ea110cc75f29fbdf0e08d4b3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8h.html#a90aac298ea110cc75f29fbdf0e08d4b3">IM_VERBOSE_ERROR</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a90aac298ea110cc75f29fbdf0e08d4b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f459ed553910f78fdbaa0eb322a2753"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8h.html#a0f459ed553910f78fdbaa0eb322a2753">IM_VERBOSE_WARNING</a>&#160;&#160;&#160;1</td></tr>
@@ -183,8 +181,8 @@ Macros</h2></td></tr>
 <tr class="memitem:af3a84bb35e343ad05dfe98930d2445a0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8h.html#af3a84bb35e343ad05dfe98930d2445a0">type</a>(type_name)</td></tr>
 <tr class="memdesc:af3a84bb35e343ad05dfe98930d2445a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new IMLAB container compatible type from the given type name.  <a href="#af3a84bb35e343ad05dfe98930d2445a0">More...</a><br/></td></tr>
 <tr class="separator:af3a84bb35e343ad05dfe98930d2445a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2280a4d2504b5434cc7885dc127f12b5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8h.html#a2280a4d2504b5434cc7885dc127f12b5">message</a>(cond, msg)&#160;&#160;&#160;<a class="el" href="core_8h.html#acb1498be34b04cf145f6b2abdae81139">print_message_func</a>(cond, __LINE__, __func__, msg)</td></tr>
-<tr class="separator:a2280a4d2504b5434cc7885dc127f12b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af44702706fe28657f52f963fb39b5dbc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8h.html#af44702706fe28657f52f963fb39b5dbc">message</a>(cond,...)&#160;&#160;&#160;<a class="el" href="core_8h.html#a4a3db6826b4518990c6c0626671b7fca">print_message_func</a>(cond, __LINE__, __func__, __VA_ARGS__)</td></tr>
+<tr class="separator:af44702706fe28657f52f963fb39b5dbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0571ef46332e2c3a940591c0ef238a45"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8h.html#a0571ef46332e2c3a940591c0ef238a45">array_create</a>(...)</td></tr>
 <tr class="memdesc:a0571ef46332e2c3a940591c0ef238a45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new array with the specified input paramaters. This macro definition calls the array_create function with the correct values of arguments. This macro overloaded with respect to number of arguments. The actual function is implemented to support one to four input arguments. The macro implementation could take up to five arguments as follows:  <a href="#a0571ef46332e2c3a940591c0ef238a45">More...</a><br/></td></tr>
 <tr class="separator:a0571ef46332e2c3a940591c0ef238a45"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -249,19 +247,19 @@ Macros</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:a387664de0ac452f11abed4a7d9c2cc5d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5d">return_t</a> { <br/>
-&#160;&#160;<a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5da9580aa0567f97e920c0d34aaec19f23f">RETURN_ERROR_NOT_IMAGE</a> = -7, 
-<a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5da029392ba69be14bf52411b0a4cc83e34">RETURN_ERROR_NULL_TYPE</a> = -6, 
-<a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5dac2ba993c8780477a85ee45563ba5935c">RETURN_ERROR_TYPE_MISMATCH</a> = -5, 
-<a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5da91de8030ad3983d68f74dfa42d5c6d4a">RETURN_ERROR_DIMENSION_MISMATCH</a> = -4, 
+&#160;&#160;<a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5dadf51bbca1cc7e664d1365391ae3f27f6">ERROR_NOT_IMAGE</a> = -7, 
+<a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5dab6f9d4e07deb3cb3b26fa0e41e80ac43">ERROR_NULL_TYPE</a> = -6, 
+<a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5da184cb5c773b00312c24915a687a372fc">ERROR_TYPE_MISMATCH</a> = -5, 
+<a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5dae33142e173d2fada867d9b23fcaf270e">ERROR_DIMENSION_MISMATCH</a> = -4, 
 <br/>
-&#160;&#160;<a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5dac0210b023b69e9377b51715d5a9cb784">RETURN_ERROR_OUT_OF_MEMORY</a> = -3, 
-<a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5da0860998dec5c82769c3cd1f5e4b2780f">RETURN_ERROR_UNABLE_TO_OPEN</a> = -2, 
-<a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5da0d69fbc6071c40de52479590e5ac5121">RETURN_ERROR</a> = -1, 
-<a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5dab982cbffafc9ffd71344fa63bb58a21e">RETURN_SUCCESS</a> = 0, 
+&#160;&#160;<a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5dac0a554045048d2fb61387cf735676f69">ERROR_OUT_OF_MEMORY</a> = -3, 
+<a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5daab4f9fa3b5340d7467bf642a7bd532e1">ERROR_UNABLE_TO_OPEN</a> = -2, 
+<a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5da2fd6f336d08340583bd620a7f5694c90">ERROR</a> = -1, 
+<a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5dac7f69f7c9e5aea9b8f54cf02870e2bf8">SUCCESS</a> = 0, 
 <br/>
-&#160;&#160;<a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5da61a532f9f2334f1c9c0f11cc696b42df">RETURN_WARNING_NOT_SUPPORTED</a> = 1, 
-<a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5da2419ddd6b96980f15e9f9a55fbe65625">RETURN_WARNING_NOTHING_DONE</a> = 2, 
-<a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5dab13aaecdc52300a21d82f75c3802043e">RETURN_WARNING_UNKNOWN</a> = 3
+&#160;&#160;<a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5da984de77c680eaff141ec910e25568a81">WARNING</a> = 1, 
+<a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5da3447a85c2d0091e3e6fe74eafcf61144">WARNING_NOT_SUPPORTED</a> = 2, 
+<a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5da870b0b9ed5a9263adcdda85e8012927c">WARNING_NOTHING_DONE</a> = 3
 <br/>
  }</td></tr>
 <tr class="memdesc:a387664de0ac452f11abed4a7d9c2cc5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">IMLAB return type Return type for most of the IMLAB function. Returns a negative integer when an error occurs. Than this error can be categorized using the value of the return. Return a positive integer when everything done without any problem.  <a href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5d">More...</a><br/></td></tr>
@@ -269,8 +267,9 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:acb1498be34b04cf145f6b2abdae81139"><td class="memItemLeft" align="right" valign="top"><a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5d">return_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8h.html#acb1498be34b04cf145f6b2abdae81139">print_message_func</a> (<a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5d">return_t</a> cond, int line, const char *func, const char *msg)</td></tr>
-<tr class="separator:acb1498be34b04cf145f6b2abdae81139"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a3db6826b4518990c6c0626671b7fca"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8h.html#a4a3db6826b4518990c6c0626671b7fca">print_message_func</a> (<a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5d">return_t</a> cond, int line, const char *func, const char *fmt,...)</td></tr>
+<tr class="memdesc:a4a3db6826b4518990c6c0626671b7fca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print colored and formatted debug message into the stderr. This function called via message macro.  <a href="#a4a3db6826b4518990c6c0626671b7fca">More...</a><br/></td></tr>
+<tr class="separator:a4a3db6826b4518990c6c0626671b7fca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0299600e6d3dba5acead5053154ae799"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8h.html#a0299600e6d3dba5acead5053154ae799">array_size</a> (void *head, uint32_t dim)</td></tr>
 <tr class="separator:a0299600e6d3dba5acead5053154ae799"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f5d08adf92318efd3aa3418606e686f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="core_8h.html#a3f5d08adf92318efd3aa3418606e686f">array_free</a> (void *head)</td></tr>
@@ -618,18 +617,6 @@ Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define IM_VERBOSE_WARNING&#160;&#160;&#160;1</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aae6636ce35e0b83971b4a023946cc5b7"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define IMLAB_PLATFORM_UNKNOWN&#160;&#160;&#160;1</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1006,7 +993,7 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a2280a4d2504b5434cc7885dc127f12b5"></a>
+<a class="anchor" id="af44702706fe28657f52f963fb39b5dbc"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -1020,12 +1007,12 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">msg&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="core_8h.html#acb1498be34b04cf145f6b2abdae81139">print_message_func</a>(cond, __LINE__, __func__, msg)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="core_8h.html#a4a3db6826b4518990c6c0626671b7fca">print_message_func</a>(cond, __LINE__, __func__, __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1206,27 +1193,27 @@ Functions</h2></td></tr>
 
 <p>IMLAB return type Return type for most of the IMLAB function. Returns a negative integer when an error occurs. Than this error can be categorized using the value of the return. Return a positive integer when everything done without any problem. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><em><a class="anchor" id="a387664de0ac452f11abed4a7d9c2cc5da9580aa0567f97e920c0d34aaec19f23f"></a>RETURN_ERROR_NOT_IMAGE</em>&nbsp;</td><td class="fielddoc">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><em><a class="anchor" id="a387664de0ac452f11abed4a7d9c2cc5dadf51bbca1cc7e664d1365391ae3f27f6"></a>ERROR_NOT_IMAGE</em>&nbsp;</td><td class="fielddoc">
 </td></tr>
-<tr><td class="fieldname"><em><a class="anchor" id="a387664de0ac452f11abed4a7d9c2cc5da029392ba69be14bf52411b0a4cc83e34"></a>RETURN_ERROR_NULL_TYPE</em>&nbsp;</td><td class="fielddoc">
+<tr><td class="fieldname"><em><a class="anchor" id="a387664de0ac452f11abed4a7d9c2cc5dab6f9d4e07deb3cb3b26fa0e41e80ac43"></a>ERROR_NULL_TYPE</em>&nbsp;</td><td class="fielddoc">
 </td></tr>
-<tr><td class="fieldname"><em><a class="anchor" id="a387664de0ac452f11abed4a7d9c2cc5dac2ba993c8780477a85ee45563ba5935c"></a>RETURN_ERROR_TYPE_MISMATCH</em>&nbsp;</td><td class="fielddoc">
+<tr><td class="fieldname"><em><a class="anchor" id="a387664de0ac452f11abed4a7d9c2cc5da184cb5c773b00312c24915a687a372fc"></a>ERROR_TYPE_MISMATCH</em>&nbsp;</td><td class="fielddoc">
 </td></tr>
-<tr><td class="fieldname"><em><a class="anchor" id="a387664de0ac452f11abed4a7d9c2cc5da91de8030ad3983d68f74dfa42d5c6d4a"></a>RETURN_ERROR_DIMENSION_MISMATCH</em>&nbsp;</td><td class="fielddoc">
+<tr><td class="fieldname"><em><a class="anchor" id="a387664de0ac452f11abed4a7d9c2cc5dae33142e173d2fada867d9b23fcaf270e"></a>ERROR_DIMENSION_MISMATCH</em>&nbsp;</td><td class="fielddoc">
 </td></tr>
-<tr><td class="fieldname"><em><a class="anchor" id="a387664de0ac452f11abed4a7d9c2cc5dac0210b023b69e9377b51715d5a9cb784"></a>RETURN_ERROR_OUT_OF_MEMORY</em>&nbsp;</td><td class="fielddoc">
+<tr><td class="fieldname"><em><a class="anchor" id="a387664de0ac452f11abed4a7d9c2cc5dac0a554045048d2fb61387cf735676f69"></a>ERROR_OUT_OF_MEMORY</em>&nbsp;</td><td class="fielddoc">
 </td></tr>
-<tr><td class="fieldname"><em><a class="anchor" id="a387664de0ac452f11abed4a7d9c2cc5da0860998dec5c82769c3cd1f5e4b2780f"></a>RETURN_ERROR_UNABLE_TO_OPEN</em>&nbsp;</td><td class="fielddoc">
+<tr><td class="fieldname"><em><a class="anchor" id="a387664de0ac452f11abed4a7d9c2cc5daab4f9fa3b5340d7467bf642a7bd532e1"></a>ERROR_UNABLE_TO_OPEN</em>&nbsp;</td><td class="fielddoc">
 </td></tr>
-<tr><td class="fieldname"><em><a class="anchor" id="a387664de0ac452f11abed4a7d9c2cc5da0d69fbc6071c40de52479590e5ac5121"></a>RETURN_ERROR</em>&nbsp;</td><td class="fielddoc">
+<tr><td class="fieldname"><em><a class="anchor" id="a387664de0ac452f11abed4a7d9c2cc5da2fd6f336d08340583bd620a7f5694c90"></a>ERROR</em>&nbsp;</td><td class="fielddoc">
 </td></tr>
-<tr><td class="fieldname"><em><a class="anchor" id="a387664de0ac452f11abed4a7d9c2cc5dab982cbffafc9ffd71344fa63bb58a21e"></a>RETURN_SUCCESS</em>&nbsp;</td><td class="fielddoc">
+<tr><td class="fieldname"><em><a class="anchor" id="a387664de0ac452f11abed4a7d9c2cc5dac7f69f7c9e5aea9b8f54cf02870e2bf8"></a>SUCCESS</em>&nbsp;</td><td class="fielddoc">
 </td></tr>
-<tr><td class="fieldname"><em><a class="anchor" id="a387664de0ac452f11abed4a7d9c2cc5da61a532f9f2334f1c9c0f11cc696b42df"></a>RETURN_WARNING_NOT_SUPPORTED</em>&nbsp;</td><td class="fielddoc">
+<tr><td class="fieldname"><em><a class="anchor" id="a387664de0ac452f11abed4a7d9c2cc5da984de77c680eaff141ec910e25568a81"></a>WARNING</em>&nbsp;</td><td class="fielddoc">
 </td></tr>
-<tr><td class="fieldname"><em><a class="anchor" id="a387664de0ac452f11abed4a7d9c2cc5da2419ddd6b96980f15e9f9a55fbe65625"></a>RETURN_WARNING_NOTHING_DONE</em>&nbsp;</td><td class="fielddoc">
+<tr><td class="fieldname"><em><a class="anchor" id="a387664de0ac452f11abed4a7d9c2cc5da3447a85c2d0091e3e6fe74eafcf61144"></a>WARNING_NOT_SUPPORTED</em>&nbsp;</td><td class="fielddoc">
 </td></tr>
-<tr><td class="fieldname"><em><a class="anchor" id="a387664de0ac452f11abed4a7d9c2cc5dab13aaecdc52300a21d82f75c3802043e"></a>RETURN_WARNING_UNKNOWN</em>&nbsp;</td><td class="fielddoc">
+<tr><td class="fieldname"><em><a class="anchor" id="a387664de0ac452f11abed4a7d9c2cc5da870b0b9ed5a9263adcdda85e8012927c"></a>WARNING_NOTHING_DONE</em>&nbsp;</td><td class="fielddoc">
 </td></tr>
 </table>
 
@@ -2043,12 +2030,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="acb1498be34b04cf145f6b2abdae81139"></a>
+<a class="anchor" id="a4a3db6826b4518990c6c0626671b7fca"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5d">return_t</a> print_message_func </td>
+          <td class="memname">int print_message_func </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5d">return_t</a>&#160;</td>
           <td class="paramname"><em>cond</em>, </td>
@@ -2069,7 +2056,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>msg</em>&#160;</td>
+          <td class="paramname"><em>fmt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -2078,6 +2071,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Print colored and formatted debug message into the stderr. This function called via message macro. </p>
 
 </div>
 </div>
@@ -3025,7 +3020,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_2b62a22b82aac776549c15514a2aafcf.html">modules</a></li><li class="navelem"><a class="el" href="core_8h.html">core.h</a></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="core_8h.html">core.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>

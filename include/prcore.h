@@ -34,7 +34,7 @@ Get the current seed state to replicate PRNG process later.
 */
 void random_getseed(uint32_t state[4]);
 /**
-Wikipedia implementation of xorshift128 algorithm. This will produce a random integer in [0,2**32-1] range with a period of 2**128−1.
+Wikipedia implementation of xorshift128 algorithm. This will produce a random integer in \f$[0,2^32-1]\f$ range with a period of \f$2^128-1\f$.
 Which is quite unpredictable and random for most of the applications.
 */
 uint32_t random();

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.5"/>
-<title>IMLAB Image Processing and Matrix Library: E:/library/include/modules/prcore.h Source File</title>
+<title>IMLAB Image Processing and Matrix Library: E:/imlab_library/include/prcore.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,7 +22,7 @@
 </script>
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
     jax: ["input/TeX","output/HTML-CSS"],
 });
 </script><script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
@@ -121,33 +121,33 @@ $(document).ready(function(){initNavTree('prcore_8h_source.html','');});
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
 <div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="prcore_8h.html#acf1d2697b85d64d285cc205b60555d19">   13</a></span>&#160;<span class="preprocessor">#define random_max 4294967295 // 2**32-1</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">// general probability and statistic functions</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;int32_t *<a class="code" href="prcore_8h.html#a5fe3fb9517461b7ee283f91f1801bad3">range</a>(int32_t start, int32_t end);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">// return pearson correlation coefficient of two vector</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keywordtype">float</span> <a class="code" href="prcore_8h.html#ac6f87b7b239cb788099696c306cad7b7">pearson</a>(<span class="keyword">const</span> <span class="keywordtype">float</span> *vecA, <span class="keyword">const</span> <span class="keywordtype">float</span> *vecB, <span class="keywordtype">int</span> <a class="code" href="core_8h.html#aab37196bc836e9a106deac981b0a28e7">length</a>);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">float</span> <a class="code" href="prcore_8h.html#a01d66fd07f9f834de382263801805aa9">covariance</a>(<span class="keyword">const</span> <span class="keywordtype">float</span> *vecA, <span class="keyword">const</span> <span class="keywordtype">float</span> *vecB, <span class="keywordtype">int</span> <a class="code" href="core_8h.html#aab37196bc836e9a106deac981b0a28e7">length</a>);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">void</span> <a class="code" href="prcore_8h.html#a4186dd1ef66c1f67b3c3cb3c9966ae87">random_seed</a>();</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keywordtype">void</span> <a class="code" href="prcore_8h.html#a0bcba8ca961300ea0e304939564e7937">random_setseed</a>(uint32_t state[4]);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordtype">void</span> <a class="code" href="prcore_8h.html#aa386911830923b9fe37c4a063d943e8a">random_getseed</a>(uint32_t state[4]);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;uint32_t <a class="code" href="prcore_8h.html#a74609982839bac0487db9da469710742">random</a>();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keywordtype">int</span> <a class="code" href="prcore_8h.html#af59c32f2a637f2b490f61485cba2cd47">random_int</a>(<span class="keywordtype">int</span> mint, <span class="keywordtype">int</span> maxt);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">// uniform random float between given range</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keywordtype">float</span> <a class="code" href="prcore_8h.html#ab083f415ad1202b9d7ecc9e359d52c8d">random_float</a>(<span class="keywordtype">float</span> mint, <span class="keywordtype">float</span> maxt);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">// int *perm = (int*) malloc(N*sizeof(N));</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;uint32_t *<a class="code" href="prcore_8h.html#aa1d0656f1a4490a5787585f4a423e092">random_permutation</a>(uint32_t <a class="code" href="core_8h.html#aab37196bc836e9a106deac981b0a28e7">length</a>);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">// general probability and statistic functions</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;int32_t *<a class="code" href="prcore_8h.html#a5fe3fb9517461b7ee283f91f1801bad3">range</a>(int32_t start, int32_t end);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">// return pearson correlation coefficient of two vector</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keywordtype">float</span> <a class="code" href="prcore_8h.html#ac6f87b7b239cb788099696c306cad7b7">pearson</a>(<span class="keyword">const</span> <span class="keywordtype">float</span> *vecA, <span class="keyword">const</span> <span class="keywordtype">float</span> *vecB, <span class="keywordtype">int</span> <a class="code" href="core_8h.html#aab37196bc836e9a106deac981b0a28e7">length</a>);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keywordtype">float</span> <a class="code" href="prcore_8h.html#a01d66fd07f9f834de382263801805aa9">covariance</a>(<span class="keyword">const</span> <span class="keywordtype">float</span> *vecA, <span class="keyword">const</span> <span class="keywordtype">float</span> *vecB, <span class="keywordtype">int</span> <a class="code" href="core_8h.html#aab37196bc836e9a106deac981b0a28e7">length</a>);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">void</span> <a class="code" href="prcore_8h.html#a4186dd1ef66c1f67b3c3cb3c9966ae87">random_seed</a>();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keywordtype">void</span> <a class="code" href="prcore_8h.html#a0bcba8ca961300ea0e304939564e7937">random_setseed</a>(uint32_t state[4]);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">void</span> <a class="code" href="prcore_8h.html#aa386911830923b9fe37c4a063d943e8a">random_getseed</a>(uint32_t state[4]);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;uint32_t <a class="code" href="prcore_8h.html#a74609982839bac0487db9da469710742">random</a>();</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">int</span> <a class="code" href="prcore_8h.html#af59c32f2a637f2b490f61485cba2cd47">random_int</a>(<span class="keywordtype">int</span> mint, <span class="keywordtype">int</span> maxt);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">// uniform random float between given range</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keywordtype">float</span> <a class="code" href="prcore_8h.html#ab083f415ad1202b9d7ecc9e359d52c8d">random_float</a>(<span class="keywordtype">float</span> mint, <span class="keywordtype">float</span> maxt);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">// int *perm = (int*) malloc(N*sizeof(N));</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;uint32_t *<a class="code" href="prcore_8h.html#aa1d0656f1a4490a5787585f4a423e092">random_permutation</a>(uint32_t <a class="code" href="core_8h.html#aab37196bc836e9a106deac981b0a28e7">length</a>);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordtype">void</span> *<a class="code" href="prcore_8h.html#a6bfb070164617d37c5a17f9f41446f1f">random_sample</a>(uint8_t *in, uint32_t <a class="code" href="core_8h.html#aab37196bc836e9a106deac981b0a28e7">length</a>, uint32_t sample, uint32_t <a class="code" href="core_8h.html#aea54a7ab7d3ae3f659e8e7e306a75b4e">elemsize</a>);</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keywordtype">void</span> *<a class="code" href="prcore_8h.html#a6bfb070164617d37c5a17f9f41446f1f">random_sample</a>(uint8_t *in, uint32_t <a class="code" href="core_8h.html#aab37196bc836e9a106deac981b0a28e7">length</a>, uint32_t sample, uint32_t <a class="code" href="core_8h.html#aea54a7ab7d3ae3f659e8e7e306a75b4e">elemsize</a>);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="prcore_8h_html_ac6f87b7b239cb788099696c306cad7b7"><div class="ttname"><a href="prcore_8h.html#ac6f87b7b239cb788099696c306cad7b7">pearson</a></div><div class="ttdeci">float pearson(const float *vecA, const float *vecB, int length)</div></div>
 <div class="ttc" id="prcore_8h_html_a5fe3fb9517461b7ee283f91f1801bad3"><div class="ttname"><a href="prcore_8h.html#a5fe3fb9517461b7ee283f91f1801bad3">range</a></div><div class="ttdeci">int32_t * range(int32_t start, int32_t end)</div></div>
 <div class="ttc" id="core_8h_html"><div class="ttname"><a href="core_8h.html">core.h</a></div><div class="ttdoc">File containing example of doxygen usage for quick reference. </div></div>
 <div class="ttc" id="prcore_8h_html_ab083f415ad1202b9d7ecc9e359d52c8d"><div class="ttname"><a href="prcore_8h.html#ab083f415ad1202b9d7ecc9e359d52c8d">random_float</a></div><div class="ttdeci">float random_float(float mint, float maxt)</div></div>
 <div class="ttc" id="prcore_8h_html_aa386911830923b9fe37c4a063d943e8a"><div class="ttname"><a href="prcore_8h.html#aa386911830923b9fe37c4a063d943e8a">random_getseed</a></div><div class="ttdeci">void random_getseed(uint32_t state[4])</div></div>
 <div class="ttc" id="prcore_8h_html_af59c32f2a637f2b490f61485cba2cd47"><div class="ttname"><a href="prcore_8h.html#af59c32f2a637f2b490f61485cba2cd47">random_int</a></div><div class="ttdeci">int random_int(int mint, int maxt)</div></div>
-<div class="ttc" id="core_8h_html_aea54a7ab7d3ae3f659e8e7e306a75b4e"><div class="ttname"><a href="core_8h.html#aea54a7ab7d3ae3f659e8e7e306a75b4e">elemsize</a></div><div class="ttdeci">#define elemsize(_var)</div><div class="ttdoc">Return the size of the element hold in the data pointer. </div><div class="ttdef"><b>Definition:</b> core.h:133</div></div>
+<div class="ttc" id="core_8h_html_aea54a7ab7d3ae3f659e8e7e306a75b4e"><div class="ttname"><a href="core_8h.html#aea54a7ab7d3ae3f659e8e7e306a75b4e">elemsize</a></div><div class="ttdeci">#define elemsize(_var)</div><div class="ttdoc">Return the size of the element hold in the data pointer. </div><div class="ttdef"><b>Definition:</b> core.h:125</div></div>
 <div class="ttc" id="prcore_8h_html_a01d66fd07f9f834de382263801805aa9"><div class="ttname"><a href="prcore_8h.html#a01d66fd07f9f834de382263801805aa9">covariance</a></div><div class="ttdeci">float covariance(const float *vecA, const float *vecB, int length)</div></div>
 <div class="ttc" id="prcore_8h_html_a6bfb070164617d37c5a17f9f41446f1f"><div class="ttname"><a href="prcore_8h.html#a6bfb070164617d37c5a17f9f41446f1f">random_sample</a></div><div class="ttdeci">void * random_sample(uint8_t *in, uint32_t length, uint32_t sample, uint32_t elemsize)</div></div>
 <div class="ttc" id="prcore_8h_html_aa1d0656f1a4490a5787585f4a423e092"><div class="ttname"><a href="prcore_8h.html#aa1d0656f1a4490a5787585f4a423e092">random_permutation</a></div><div class="ttdeci">uint32_t * random_permutation(uint32_t length)</div></div>
@@ -160,7 +160,7 @@ $(document).ready(function(){initNavTree('prcore_8h_source.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_2b62a22b82aac776549c15514a2aafcf.html">modules</a></li><li class="navelem"><a class="el" href="prcore_8h.html">prcore.h</a></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="prcore_8h.html">prcore.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>

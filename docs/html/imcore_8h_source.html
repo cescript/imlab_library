@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.5"/>
-<title>IMLAB Image Processing and Matrix Library: E:/library/include/modules/imcore.h Source File</title>
+<title>IMLAB Image Processing and Matrix Library: E:/imlab_library/include/imcore.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,7 +22,7 @@
 </script>
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
     jax: ["input/TeX","output/HTML-CSS"],
 });
 </script><script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
@@ -209,18 +209,18 @@ $(document).ready(function(){initNavTree('imcore_8h_source.html','');});
 <div class="ttc" id="imcore_8h_html_a0b09ac29c0ed5c3810aed434e0d070e1"><div class="ttname"><a href="imcore_8h.html#a0b09ac29c0ed5c3810aed434e0d070e1">imbinarize</a></div><div class="ttdeci">return_t imbinarize(matrix_t *in, uint32_t block_width, uint32_t block_height, float threshold, matrix_t *out)</div></div>
 <div class="ttc" id="imcore_8h_html_ab8d5fe72803eff28ed40f6d698864ff4"><div class="ttname"><a href="imcore_8h.html#ab8d5fe72803eff28ed40f6d698864ff4">rgb2any</a></div><div class="ttdeci">return_t rgb2any(matrix_t *in, const float tr[3][4], matrix_t *out)</div></div>
 <div class="ttc" id="imcore_8h_html_add63017370f19987d17e6ab89d4b874d"><div class="ttname"><a href="imcore_8h.html#add63017370f19987d17e6ab89d4b874d">draw_point</a></div><div class="ttdeci">void draw_point(matrix_t *img, struct point_t p1, struct color_t clr, int thickness)</div></div>
-<div class="ttc" id="structmatrix__t_html"><div class="ttname"><a href="structmatrix__t.html">matrix_t</a></div><div class="ttdoc">matrix_t is a n-channel 2D matrix container. </div><div class="ttdef"><b>Definition:</b> core.h:894</div></div>
-<div class="ttc" id="structpoint__t_html"><div class="ttname"><a href="structpoint__t.html">point_t</a></div><div class="ttdoc">3D point type </div><div class="ttdef"><b>Definition:</b> core.h:1249</div></div>
+<div class="ttc" id="structmatrix__t_html"><div class="ttname"><a href="structmatrix__t.html">matrix_t</a></div><div class="ttdoc">matrix_t is a n-channel 2D matrix container. </div><div class="ttdef"><b>Definition:</b> core.h:891</div></div>
+<div class="ttc" id="structpoint__t_html"><div class="ttname"><a href="structpoint__t.html">point_t</a></div><div class="ttdoc">3D point type </div><div class="ttdef"><b>Definition:</b> core.h:1246</div></div>
 <div class="ttc" id="imcore_8h_html_aacf7eaa2a246adf442b9a64bba05ae60"><div class="ttname"><a href="imcore_8h.html#aacf7eaa2a246adf442b9a64bba05ae60">gray2rgb</a></div><div class="ttdeci">return_t gray2rgb(matrix_t *in, matrix_t *out)</div></div>
 <div class="ttc" id="structcolor__t_html_a3e7019d20863c570099ff140fb168061"><div class="ttname"><a href="structcolor__t.html#a3e7019d20863c570099ff140fb168061">color_t::red</a></div><div class="ttdeci">uint8_t red</div><div class="ttdef"><b>Definition:</b> imcore.h:17</div></div>
 <div class="ttc" id="core_8h_html"><div class="ttname"><a href="core_8h.html">core.h</a></div><div class="ttdoc">File containing example of doxygen usage for quick reference. </div></div>
 <div class="ttc" id="imcore_8h_html_aa787d9ef8a0a63a695efd42aa736b329"><div class="ttname"><a href="imcore_8h.html#aa787d9ef8a0a63a695efd42aa736b329">matrix2image</a></div><div class="ttdeci">return_t matrix2image(matrix_t *in, uint8_t opt, matrix_t *out)</div></div>
-<div class="ttc" id="structrectangle__t_html"><div class="ttname"><a href="structrectangle__t.html">rectangle_t</a></div><div class="ttdoc">Rectangle typed structure. </div><div class="ttdef"><b>Definition:</b> core.h:1220</div></div>
+<div class="ttc" id="structrectangle__t_html"><div class="ttname"><a href="structrectangle__t.html">rectangle_t</a></div><div class="ttdoc">Rectangle typed structure. </div><div class="ttdef"><b>Definition:</b> core.h:1217</div></div>
 <div class="ttc" id="imcore_8h_html_a9fa2fa7691da01356a2c99447cbfe926"><div class="ttname"><a href="imcore_8h.html#a9fa2fa7691da01356a2c99447cbfe926">imscale2x</a></div><div class="ttdeci">return_t imscale2x(matrix_t *in, matrix_t *out)</div></div>
 <div class="ttc" id="imcore_8h_html_ad1dc55c1067a97728dd23a9fa6506a0b"><div class="ttname"><a href="imcore_8h.html#ad1dc55c1067a97728dd23a9fa6506a0b">window_create</a></div><div class="ttdeci">struct window_t * window_create(char *windowname, uint32_t options)</div></div>
 <div class="ttc" id="imcore_8h_html_a6ab27282ddc8d0cb3359fc6bdd428c22"><div class="ttname"><a href="imcore_8h.html#a6ab27282ddc8d0cb3359fc6bdd428c22">HSV</a></div><div class="ttdeci">struct color_t HSV(uint8_t h, uint8_t s, uint8_t v)</div></div>
-<div class="ttc" id="core_8h_html_a17dd213399b468eaf01f9852a3ca36fc"><div class="ttname"><a href="core_8h.html#a17dd213399b468eaf01f9852a3ca36fc">data</a></div><div class="ttdeci">#define data(_type,...)</div><div class="ttdoc">Returns the data pointer for the given imlab container. </div><div class="ttdef"><b>Definition:</b> core.h:184</div></div>
-<div class="ttc" id="core_8h_html_a387664de0ac452f11abed4a7d9c2cc5d"><div class="ttname"><a href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5d">return_t</a></div><div class="ttdeci">return_t</div><div class="ttdoc">IMLAB return type Return type for most of the IMLAB function. Returns a negative integer when an erro...</div><div class="ttdef"><b>Definition:</b> core.h:268</div></div>
+<div class="ttc" id="core_8h_html_a17dd213399b468eaf01f9852a3ca36fc"><div class="ttname"><a href="core_8h.html#a17dd213399b468eaf01f9852a3ca36fc">data</a></div><div class="ttdeci">#define data(_type,...)</div><div class="ttdoc">Returns the data pointer for the given imlab container. </div><div class="ttdef"><b>Definition:</b> core.h:176</div></div>
+<div class="ttc" id="core_8h_html_a387664de0ac452f11abed4a7d9c2cc5d"><div class="ttname"><a href="core_8h.html#a387664de0ac452f11abed4a7d9c2cc5d">return_t</a></div><div class="ttdeci">return_t</div><div class="ttdoc">IMLAB return type Return type for most of the IMLAB function. Returns a negative integer when an erro...</div><div class="ttdef"><b>Definition:</b> core.h:260</div></div>
 <div class="ttc" id="imcore_8h_html_a93557010bd1f32df838533a7db934843"><div class="ttname"><a href="imcore_8h.html#a93557010bd1f32df838533a7db934843">draw_rectangle</a></div><div class="ttdeci">void draw_rectangle(matrix_t *img, struct rectangle_t r, struct color_t clr, int thickness)</div></div>
 <div class="ttc" id="imcore_8h_html_a6a0b649c2889557e08f86066d634fcb5"><div class="ttname"><a href="imcore_8h.html#a6a0b649c2889557e08f86066d634fcb5">rgb2lab</a></div><div class="ttdeci">void rgb2lab(struct color_t C1, float *L, float *a, float *b)</div></div>
 <div class="ttc" id="imcore_8h_html_ad9f757e0ac52fb964876c5820e444d88"><div class="ttname"><a href="imcore_8h.html#ad9f757e0ac52fb964876c5820e444d88">integral</a></div><div class="ttdeci">return_t integral(matrix_t *in, matrix_t *sums, matrix_t *ssum)</div></div>
@@ -260,7 +260,7 @@ $(document).ready(function(){initNavTree('imcore_8h_source.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_2b62a22b82aac776549c15514a2aafcf.html">modules</a></li><li class="navelem"><a class="el" href="imcore_8h.html">imcore.h</a></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="imcore_8h.html">imcore.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>

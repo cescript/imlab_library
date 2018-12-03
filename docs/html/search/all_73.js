@@ -12,6 +12,7 @@ var searchData=
   ['string_5frestart',['string_restart',['../core_8h.html#a097eefcfd24338555d7d6619540b6949',1,'core.h']]],
   ['string_5ft',['string_t',['../structstring__t.html',1,'']]],
   ['stringify',['stringify',['../core__macros_8h.html#a55d486a228692860e7eddae41f70be15',1,'core_macros.h']]],
+  ['success',['SUCCESS',['../core_8h.html#a387664de0ac452f11abed4a7d9c2cc5dac7f69f7c9e5aea9b8f54cf02870e2bf8',1,'core.h']]],
   ['svml1',['SVML1',['../mlcore_8h.html#aa5baf269a0dfe2cf601c5a8dc5640ff7',1,'mlcore.h']]],
   ['svml2',['SVML2',['../mlcore_8h.html#acc01adaa2dfc8fb261d023972a650040',1,'mlcore.h']]],
   ['svrl1',['SVRL1',['../mlcore_8h.html#a842110a9f13c6cf9dac1047e61492e5c',1,'mlcore.h']]],

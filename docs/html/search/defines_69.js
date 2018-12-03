@@ -6,7 +6,6 @@ var searchData=
   ['im_5fverbose_5ferror',['IM_VERBOSE_ERROR',['../core_8h.html#a90aac298ea110cc75f29fbdf0e08d4b3',1,'core.h']]],
   ['im_5fverbose_5fsuccess',['IM_VERBOSE_SUCCESS',['../core_8h.html#aedd32875dee1c6f87ac68f8ee23bf5ce',1,'core.h']]],
   ['im_5fverbose_5fwarning',['IM_VERBOSE_WARNING',['../core_8h.html#a0f459ed553910f78fdbaa0eb322a2753',1,'core.h']]],
-  ['imlab_5fplatform_5funknown',['IMLAB_PLATFORM_UNKNOWN',['../core_8h.html#aae6636ce35e0b83971b4a023946cc5b7',1,'core.h']]],
   ['imlab_5fuse_5fopenmp',['IMLAB_USE_OPENMP',['../core_8h.html#a5c3cd107eb5b965fdf961b1aaac6ce3c',1,'core.h']]],
   ['in_5frange',['in_range',['../core__macros_8h.html#a6694ef4d22f43fc988881acbf7a728ef',1,'core_macros.h']]],
   ['is_5f16s',['is_16s',['../core_8h.html#a3a0ac901f4c32e38dc3ea38ff757e378',1,'core.h']]],
