@@ -258,6 +258,7 @@ struct imlab_type_t *imlab_type_create(char *type_name, uint32_t type_size);
  * Return a positive integer when everything done without any problem.
  */
 typedef enum return_ {
+    ERROR_UNABLE_TO_READ = -8,
     ERROR_NOT_IMAGE = -7,
     ERROR_NULL_TYPE = -6,
     ERROR_TYPE_MISMATCH = -5,
