@@ -133,37 +133,4 @@ return_t feature_extract(matrix_t *img, struct feature_t *model, float *output);
 return_t feature_image(matrix_t *img, struct feature_t *model, matrix_t *output);
 
 
-
-
-struct haar_feature_t;
-struct haar_tree_t;
-struct haar_stage_t;
-
-/**
- * Haar cascade holder
- */
-typedef struct haar_t {
-    int size1;
-    int size2;
-
-    int length;
-    struct haar_stage_t **stages;
-} haar_t;
-
-struct haar_feature_t* haar_feature_create(double thr, int hl, double lv, int ln, int hr, double rv, int rn,  int tilt, int length);
-struct haar_tree_t* haar_tree_create(int length);
-struct haar_stage_t* haar_stage_create(double thr, int length);
-struct haar_t* haar_create(int s1, int s2, int length);
-/**
- * Reads haar json file and parse the input into the haar_t structure
- * @param filename Input file to be read
- * @return Return success or relative error
- */
-struct haar_t* haar_read(const char *filename);
-
-
-
-
-
-
 #endif
