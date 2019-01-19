@@ -1239,7 +1239,13 @@ struct rectangle_t rectangle(int32_t x, int32_t y, int32_t width, int32_t height
  */
 float rectangle_overlap(struct rectangle_t r1, struct rectangle_t r2, uint8_t mode);
 
-vector_t* rectangle_merge(vector_t *rect, float threshold, uint8_t method);
+/**
+ * Merge given rectange vector and return the merged rectangles.
+ * @param rect Vector of rectangles to be merged
+ * @param overlap_threshold Minimum normalized intersection area. If any two rectangle has more overlap than this threshold, two vectors are assumed to be connected.
+ * @param min_groups_size Minimum number of element in each group. If the number of connected components are less than this value, group will be discarded.
+ */
+vector_t *rectangle_merge(vector_t *rect, float overlap_threshold, uint32_t min_groups_size);
 
 /**
  * @brief 3D point type
