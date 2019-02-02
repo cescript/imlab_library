@@ -245,8 +245,9 @@ vector_t* json_read(const char *filename);
 
 /**
 This is the serializer function for any json file. This function reads the parsed json data  and serialize it into the given file.
+@param mode can be 0 for compressed json file and > 0 for pretty formatted output
 */
-return_t json_write(const char *filename, vector_t *input);
+return_t json_write(const char *filename, vector_t *input, int mode);
 
 /**
  * Serialize the given JSON structure into the string buffer
