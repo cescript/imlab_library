@@ -16,7 +16,7 @@ int main() {
         printf("Loading a JSON file into the memory %d / %d\n", i+1, 1);
         root = json_read("../test/test_data/sample.json");
         printf("JSON file succesfully loaded into the memory\n");
-        json_write("results//sample_shrinked.json", root);
+        json_write("results//sample_shrinked.json", root, 0);
         // json_serialize(root, &buffer);
         printf("JSON file succesfully shrinked\n");
         vector_free(&root);
