@@ -303,7 +303,46 @@ vector_t* json_get_array_2(vector_t *input, int id);
 vector_t* json_get_object_2(vector_t *input, int id);
 #endif
 
+// DECLARATIONS OF THE USER API FUNCTIONS
+struct json_data_t
+{
+    uint32_t type; // empty, primitive, int, float, double, string, array, object or serialized buffer
+    void *value;   // reference to json variable
+};
+// single json object consist of a data packet and a name
+struct json_object_t
+{
+    char *name;
+    struct json_data_t element;
+};
 
+/* CONSTRUCTOR FUNCTIONS FOR THE JSON OBJECT AND ARRAY TYPES */
+
+#ifndef DOXYGEN_SKIP_IMLAB_HIDDEN_MACRO_NAMES
+/// insert a data element into the end of the given object
+#define json_push(...) call(json_push, __VA_ARGS__);
+
+int json_push_3(vector_t *input, struct json_data_t value, char *name);
+/// insert a data element into the end of the given object
+int json_push_2(vector_t *input, struct json_data_t item);
+#endif
+
+/*
+CONSTRUCTOR FUNCTIONS FOR THE JSON DATA TYPE
+*/
+return_t json_object_create(char *name, struct json_data_t data, struct json_object_t *out);
+/** This function creates json_t object and sets the type and value to NULL. */
+return_t json_null(struct json_data_t *out);
+/** This function creates json_t object and sets the type to boolean type and value to the given integer value. Here -1 is "null", 0 is "false" and 1 is "true". */
+return_t json_boolean(uint8_t value, struct json_data_t *out);
+/** This function creates json_t object and sets the type to string type and value to the given string. */
+return_t json_string(char *value, struct json_data_t *out);
+/** This function creates json_t object and sets the type to number type and value to the given double value */
+return_t json_number(double value, struct json_data_t *out);
+/** This function creates json_t object and sets the type to array type and value to the given array pointer. */
+return_t json_array(vector_t *value, struct json_data_t *out);
+/** This function creates json_t object and sets the type to object type and value to the given object pointer. */
+return_t json_object(vector_t *value, struct json_data_t *out);
 
 /* END OF JSON PARSER DECLARATIONS */
 
