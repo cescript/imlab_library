@@ -132,5 +132,21 @@ return_t feature_extract(matrix_t *img, struct feature_t *model, float *output);
  */
 return_t feature_image(matrix_t *img, struct feature_t *model, matrix_t *output);
 
+/**
+ * \brief Read haar classifier from the given json file and return the Haar structure
+ * @param filename Filename of the haar classifier
+ */
+struct haar_t *haar_read(const char *filename);
+
+/**
+ * \brief Detects objects using the input cascade.
+ * @param img Input image
+ * @param cascade Haar cascade read by haar_read
+ * @param minSize Minimum size of the search object in pixels
+ * @param maxSize Maximum size of the search object in pixels
+ * @param scaleFactor Scale factor of the search window
+ * @param stepSize Step size between two search window
+ */
+vector_t *haar_detector(matrix_t *img, struct haar_t *cascade, float minSize, float maxSize, float scaleFactor, float stepSize);
 
 #endif
