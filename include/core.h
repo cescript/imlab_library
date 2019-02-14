@@ -124,7 +124,6 @@ uint32_t i2 = elemsize(vecA); // 2
  */
 #define elemsize(_var) imlab_type_elemsize((_var)->_type)
 
-
 /**
 @hideinitializer
 @brief Returns the data value at the given position for the given imlab object.
@@ -134,11 +133,13 @@ In the simplest case data takes two argument which is the type and imlab struct 
 @code{.c}
 matrix_t *matf = matrix_create(float, 100, 100);
 float mdata = at(float, matf); // mdata points to matf->_data(0,0,0)
+float mdata = atf(matf); // mdata points to matf->_data(0,0,0)
 @endcode
 #at macro can also be called with a starting index as follows:
 @code{.c}
 vector_t veci = vector_create(uint32_t, 100);
 uint32_t vdata = at(uint32_t, veci, 5); // vdata points to the veci->_data(5)
+uint32_t vdata = atui32(veci, 5); // vdata points to the veci->_data(5)
 @endcode
 This macro can also be used to access a specific position of a matrix:
 @code{.c}
@@ -149,6 +150,23 @@ uint32_t m3data = at(uint32_t, mati, 5, 7, 2); // m3data points to the mati->_da
 @endcode
 **/
 #define at(_type, ...) ( ((_type *)(arg_1(__VA_ARGS__)->_data))[idx(__VA_ARGS__)] )
+
+#ifndef DOXYGEN_SKIP_IMLAB_HIDDEN_MACRO_NAMES
+
+#define atf(...) (((float *)(arg_1(__VA_ARGS__)->_data))[idx(__VA_ARGS__)])
+#define atd(...) (((double *)(arg_1(__VA_ARGS__)->_data))[idx(__VA_ARGS__)])
+
+#define ati8(...) (((int8_t *)(arg_1(__VA_ARGS__)->_data))[idx(__VA_ARGS__)])
+#define atui8(...) (((uint8_t *)(arg_1(__VA_ARGS__)->_data))[idx(__VA_ARGS__)])
+
+#define ati16(...) (((int16_t *)(arg_1(__VA_ARGS__)->_data))[idx(__VA_ARGS__)])
+#define atui16(...) (((uint16_t *)(arg_1(__VA_ARGS__)->_data))[idx(__VA_ARGS__)])
+
+#define ati32(...) (((int32_t *)(arg_1(__VA_ARGS__)->_data))[idx(__VA_ARGS__)])
+#define atui32(...) (((uint32_t *)(arg_1(__VA_ARGS__)->_data))[idx(__VA_ARGS__)])
+
+#endif
+
 // get the data pointer of the matrix/vector
 /**
 @hideinitializer
