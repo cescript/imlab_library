@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include "core.h"
+#include "iocore.h"
 
 int main() {
 

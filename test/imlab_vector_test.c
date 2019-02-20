@@ -4,6 +4,7 @@
 #include <string.h>
 #include <time.h>
 #include "iocore.h"
+#include "prcore.h"
 
 typedef struct json_t {
     int type;
