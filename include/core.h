@@ -650,11 +650,17 @@ Release the allocated memory for the vector object.
 void vector_free(vector_t **var);
 
 /**
+Release the allocated memory by the vector object and reallocate with 1 length memory.
+@param _var Input vector to be freed.
+*/
+void vector_reset(vector_t **var);
+
+    /**
  * Sets a destructor for the data holded in the vector container
  * @param in Input vector
  * @param func Destructor function to be set
  */
-void vector_destructor(vector_t *in, void (*func)(void*, uint32_t));
+    void vector_destructor(vector_t *in, void (*func)(void *, uint32_t));
 
 /**
  *
