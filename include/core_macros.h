@@ -64,7 +64,7 @@
  map(angle, -180,180, -pi,pi); // returns pi/4
  \endcode
  */
-#define map(_in, _imin, _imax, _omin, _omax) ( ((_omax) - (_omin))*((_in)-(_imin)) / (((_imax) - (_imin)) + (_omin)) )
+#define map(_in, _imin, _imax, _omin, _omax) ( ((_omax) - (_omin))*((_in)-(_imin)) / (((_imax) - (_imin))) + (_omin) )
 
 /**@hideinitializer
  * Convert degrees to radians
