@@ -15,7 +15,6 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - gcc-7
-            - binutils-2.3
       env:
          - MATRIX_EVAL="CC=gcc-7"
 
