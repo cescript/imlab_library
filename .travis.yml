@@ -6,8 +6,9 @@ compiler:
 matrix:
   fast_finish: true
   include:
-    # works on Precise and Trusty
+    # default distro changed to xenial
     - os: linux
+    - dist: xenial
       addons:
         apt:
           sources:
