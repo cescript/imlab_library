@@ -1,4 +1,4 @@
-# imlab (under heavy development) ![Build Status](https://travis-ci.org/cescript/imlab.svg?branch=master)
+# imlab (under heavy development) [![Build Status](https://travis-ci.com/cescript/imlab_library.svg?branch=master)](https://travis-ci.com/cescript/imlab_library)
 
 # IMLAB Image Processing Library
 
