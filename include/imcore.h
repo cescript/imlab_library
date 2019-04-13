@@ -90,6 +90,7 @@ return_t bwdist(matrix_t *in, matrix_t *out);
 //    some more morphological operations
 //
 //color_transform.c
+return_t histogram(matrix_t *in, int32_t min, int32_t max, uint32_t **histogram);
 uint32_t imotsu(matrix_t *in);
 return_t imbinarize(matrix_t *in, uint32_t block_width, uint32_t block_height, float threshold, matrix_t *out);
 return_t imthreshold(matrix_t *in, uint32_t threshold, matrix_t *out);
@@ -110,14 +111,15 @@ matrix_t *maketform(float data[9]);
 matrix_t *rot2tform(float cx, float cy, float theta, float scale);
 matrix_t *pts2tform(struct point_t *src, struct point_t *dst, int len);
 return_t imtransform(matrix_t *in, matrix_t *tform, matrix_t *out);
-return_t integral(matrix_t *in, matrix_t *sums, matrix_t *ssum);
 
+return_t integral(matrix_t *in, matrix_t *sums, matrix_t *ssum);
+return_t box_filter(matrix_t *in, uint32_t block_width, uint32_t block_height, matrix_t *out);
 // find the median filtering result of the input image
 return_t medfilt2(matrix_t *input, uint32_t filter_width, uint32_t filter_height, matrix_t *output);
 
 // integral image functions
-float integral_get_float(matrix_t *in, int x0, int y0, int x1, int y1);
-double integral_get_double(matrix_t *in, int x0, int y0, int x1, int y1);
+float integral_get_float(matrix_t *in, int x0, int y0, int x1, int y1, int c);
+double integral_get_double(matrix_t *in, int x0, int y0, int x1, int y1, int c);
 
 
 // drawing functions
