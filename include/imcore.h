@@ -80,7 +80,16 @@ void imshow(matrix_t *image, struct window_t *display);
 int window_wait(struct window_t *display, int sleep);
 
 //image_bw.c
-return_t bwlabel(matrix_t *in, matrix_t *label, uint32_t *numCC);
+return_t bwlabel(matrix_t *in, matrix_t *label, uint32_t *numElements);
+
+// return number of connected components and index list
+/**
+ * @brief Compute the connected componenets of the input black and white image
+ * @param in Single channel input image with 0 represents the black (background) and 255 represents the white (object)
+ * @return Connected components as point_t
+*/
+vector_t **bwconncomp(matrix_t *in, uint32_t *numElements);
+
 return_t imerode(matrix_t *in, matrix_t *str, matrix_t *out);
 return_t imdilate(matrix_t *in, matrix_t *str, matrix_t *out);
 return_t label2rgb(matrix_t *in, int inmax, matrix_t *out);
