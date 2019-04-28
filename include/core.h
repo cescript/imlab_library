@@ -1295,7 +1295,12 @@ struct point_t point(float x, float y, float z);
  */
 float point_distance(struct point_t p1, struct point_t p2);
 
-
-
+/**
+ * @brief Fit minimum area rectangle to the input points by using the algorthm presented in "Finding best-ﬁtted rectangle for regions using a bisection method"
+ * @param input Array of points
+ * @param input_length Length of the input array
+ * @return  Returns the four vertices (TopLeft, TopRight, BottomLeft, BottomRight) of the minimum area recctangle fitted to the input points.
+ */
+return_t point_fit_rectangle(struct point_t *input, uint32_t input_length, struct point_t output[4]);
 
 #endif
