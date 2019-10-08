@@ -31,7 +31,7 @@ github_username:  cescript
 repository: cescript/imlab_development
 
 # Build settings
-theme: plainwhite
+theme: minima
 
 plainwhite:
   name: Bahri ABACI
