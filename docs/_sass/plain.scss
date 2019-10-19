@@ -196,7 +196,13 @@ main {
 			display: flex;
 			justify-content: center;
 		}
+
+		@media screen and (max-width: 1200px) {
+			.thumbnail {display:none;}
+		}
 	}
+
+	
 }
 
 #posts-label {
