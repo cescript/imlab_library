@@ -136,4 +136,4 @@ Bu yazımızda makine öğrenmesi yayınlarında sıklıkla karşımıza çıkan
 
 [RESOURCES]: # (List of the resources used by the blog post)
 [example]: /assets/post_resources/performance_metrics/performance_metric_example.png
-[roc_curve]: /assets/post_resources/performance_metric_example/roc_curve.png
+[roc_curve]: /assets/post_resources/performance_metrics/roc_curve.png
