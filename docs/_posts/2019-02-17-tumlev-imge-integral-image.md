@@ -60,7 +60,7 @@ void compute_integral_image(matrix_t *I, matrix_t *T)
     }
 }
 ```
-Verilen kodda $x-1$ ve $y-1$ ifadeleri $x=0$ ve $y=0$ durumlarında negatif olacağından, matematiksel ifadeye uygun olarak $$T(x,y)=\begin{cases}0,&x< 0 \lor y< 0 \\T(x,y),&otherwise\end{cases}$$ kabul edilmiştir.
+Verilen kodda $x-1$ ve $y-1$ ifadeleri $x=0$ ve $y=0$ durumlarında negatif olacağından, matematiksel ifadeye uygun olarak $$T(x,y)=\begin{cases}0,&x< 0 \lor y< 0 \T(x,y),&otherwise\end{cases}$$ kabul edilmiştir.
 
 Çalışmada tümlev imge kullanımına örnek olarak **box blur** süzegecinin gerçeklenmesi yapılmıştır. Bu süzgeç tamamı birlerden oluşan basit bir görüntü bulanıklaştırma süzgecidir. Evrişimin mantığı gereği tamamı birlerden oluşan bir çekirdek ile yapılan evrişim işlemi, çekirdeğin altında kalan alanın toplamına karşılık gelmektedir. Bu nedenle bu süzgecin tümlev imge yardımı ile gerçeklenmesi mümkün olmaktadır. Tümlev imge yardımı ile **box blur** süzegecinin gerçeklenmesi için IMLAB görüntü işleme kütüphanesi kullanılarak aşağıdaki kod yazılmıştır.
 

@@ -186,9 +186,10 @@ main {
   		flex-direction: row;
 		.thumbnail {
 			margin: 20px 30px 0 0;
-			width: 150px;
+			width: 75px;
 			object-fit: contain;
 			align-self: flex-start;
+			//border:2px dashed rgba(175,175,175,0.1);
 			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 			//align-self: center;
 		}
@@ -202,6 +203,25 @@ main {
 		}
 	}
 
+	// style for the table
+	table {
+		table-layout: fixed;
+		margin: 0 auto;
+		width: 100%;
+        overflow-x: auto;
+		// style for header and cells
+		th, td {
+			padding: 2px;
+			border: 1px solid rgba(0, 0, 0, 0.2);
+			text-align: center;
+			vertical-align: center;
+			overflow: hidden; 
+		}
+		// fill odd and even rows with different colors
+		tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+	}
 	
 }
 
