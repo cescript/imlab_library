@@ -225,6 +225,30 @@ main {
 	
 }
 
+.post-navigation {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-content: center;
+	box-sizing: border-box;
+
+	a {
+		text-decoration: none;
+		border-radius: 3px;
+		border: 1px solid gray;
+		padding: 8px 16px;
+		text-align:center;
+		font-size: 12px;
+		color: $linkColor;
+		text-transform: uppercase;
+		font-weight: bold;
+	}
+
+	a:hover {
+		box-shadow: 0 0 6px $linkColor;
+	}
+}
+
 #posts-label {
 	border-bottom: 1px solid #eee;
 	font-size: 15px;
