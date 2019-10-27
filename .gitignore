@@ -10,6 +10,7 @@
 
 # Ignore temporary files#
 #######################
+.vscode/
 build/
 bins/
 
