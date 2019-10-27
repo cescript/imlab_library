@@ -7,7 +7,5 @@ source "https://rubygems.org"
 # set the version
 gem 'jekyll', '3.7.4'
 
-# allow to use custom theme on github
-gem "jekyll-remote-theme"
 # add seo tag
 gem "jekyll-seo-tag", "2.1.0"
