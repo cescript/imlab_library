@@ -31,7 +31,7 @@ github_username:  cescript
 repository: cescript/imlab_development
 
 # Build settings
-theme: plainwhite
+remote_theme: cescript/plainwhite-jekyll
 
 plainwhite:
   name: Bahri ABACI
@@ -53,6 +53,7 @@ sitemap: true # set to true to generate sitemap.xml content
 
 plugins:
   - jekyll-seo-tag
+  - jekyll-remote-theme
 
 kramdown:
   input: GFM
