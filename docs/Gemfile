@@ -5,7 +5,7 @@ source "https://rubygems.org"
 #
 #     bundle exec jekyll serve
 # set the version
-gem 'jekyll', '3.7.3'
+gem 'jekyll', '3.7.4'
 
 # allow to use custom theme on github
 gem "jekyll-remote-theme"
