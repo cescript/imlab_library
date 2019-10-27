@@ -56,9 +56,9 @@ Test aşamasında ise imge üzerinde gezilerek öğrenilen bu öznitelik setleri
 
 Aşağıda IMLAB görüntü işleme kütüphanesi kullanılarak Viola-Jones özniteliklerinin iki farklı test imgesi üzerinde nasıl çalıştığı gösterilmiştir. İmge üzerinde kayan pencere yüz olup olmadığı test edilen pencereyi, pencerenin rengi ise (kırmızıdan yeşile) ise kaskat sınıflandırıcının kaçıncı kaskatta olduğunu göstermektedir. Pencere içerisinde beliren dikdörtgenler ise testte kullanılan haar özniteliklerini göstermektedir. Görselliği iyileştirmek amacı ile negatif katsayılı öznitelikler siyah, pozitif katsayılı öznitelikler beyaz ile renklendirilmiştir.
 
-<div id="videoSideBySide"><table align="center"><tbody><tr>         <td>
-<object class="BLOG_video_class" contentid="5aac0e164153ade0" height="350" id="BLOG_video-5aac0e164153ade0" width="350"></object></td><td>
-<object class="BLOG_video_class" contentid="29cf84f66b236963" height="350" id="BLOG_video-29cf84f66b236963" width="350"></object></td></tr></tbody></table></div>
+| Viola Jones Başarılı Tespit Adımları             |  Viola Jones Başarısız Tespit Adımları |
+:-------------------------:|:-------------------------:
+[![Viola-Jones Face detection Steps](/assets/post_resources/object_detection/viola_jones_face_detection.gif)](https://drive.google.com/file/d/1tuXJbGSdhaDjG7HZs-q38Q7ZO6w_fReF/preview "Link to original video") | [![Viola-Jones Face detection Steps](/assets/post_resources/object_detection/cv_dazzle_false_negative.gif)](https://drive.google.com/file/d/1hbpdcJnGXfOGc_LeFoFzScPI-xZaXt4H/preview "Link to original video")
 
 Videodan yüz olmayan bölgelerin bir kaç kaskat incelemesinden sonra elenirken, yüz olma potansiyeli bulunan bölgelerin daha detaylı (daha fazla sayıda haar özniteliği ile) incelendiği görülmektedir. Bu kaskat yapı Viola-Jones algoritmasının performansını artıran önemli bir bileşendir.
 
