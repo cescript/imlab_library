@@ -1303,4 +1303,12 @@ float point_distance(struct point_t p1, struct point_t p2);
  */
 return_t point_fit_rectangle(struct point_t *input, uint32_t input_length, struct point_t output[4]);
 
+/**
+ * Merge given point vector and return the merged points.
+ * @param rect Vector of points to be merged
+ * @param overlap_distance Eucledian distance threshold between points. If any two points have less distance than this threshold, two vector elements are assumed to be connected.
+ * @param min_groups_size Minimum number of element in each group. If the number of connected components are less than this value, group will be discarded.
+ */
+vector_t *point_merge(vector_t *points, float overlap_distance, uint32_t min_groups_size);
+
 #endif

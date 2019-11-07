@@ -346,4 +346,21 @@ return_t json_object(vector_t *value, struct json_data_t *out);
 
 /* END OF JSON PARSER DECLARATIONS */
 
+/* Start of the IMLAB File Operations */
+/**
+ * Return the length of the given file in bytes. Does not change the position of the cursor.
+ * @param in Input file opened with fopen
+ * @param start Get the size of the file (0) or get the readable bytes after the given position (current position in bytes)
+ * @return Size of the opened file in bytes
+ */
+long int get_file_size(FILE *in, long int start);
+
+/**
+ * Return the number of new lines in the given file. Does not change the position of the cursor.
+ * @param in Input file opened with fopen
+ * @param start Get the new lines count of the file (0) after the given position (current position in bytes)
+ * @return Number of new lines in the input file
+ */
+long int get_number_of_lines(FILE *in, long int start);
+
 #endif

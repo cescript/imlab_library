@@ -51,13 +51,7 @@ uint32_t getopt_double(char *option, char *param, double *values);
 #endif
 
 #define getopt(_type, _option, _param, _values) cat(getopt_, _type)(_option, _param, _values)
-/**
- * Return the length of the given file in bytes
- * @param in Input file opened with fopen
- * @param start Get the size of the file (0) or get the readable bytes after the given position (current position in bytes)
- * @return Size of the opened file in bytes
- */
-long int get_file_size(FILE *in, long int start);
+
 
 // read the bmp from the given file
 return_t read_bmp(char *filename, uint8_t **data, uint32_t *img_width, uint32_t *img_height, uint32_t *img_channels);

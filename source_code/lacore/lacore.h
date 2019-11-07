@@ -23,4 +23,12 @@ inline float fast_atan2f(float x, float y);
 */
 return_t eig(matrix_t *input, matrix_t *evalues, matrix_t *evectors);
 
+/**
+ * Simple Guassian Elemination for matrix division b = Ax --> x := b \ A
+ * @param inA Input matrix A in b = Ax equation
+ * @param inB Input matrix B in b = Ax equation
+ * @param out Output matrix x
+*/
+return_t matrix_divide(matrix_t *inA, matrix_t *inB, matrix_t *out);
+
 #endif //IMLAB_LACORE_H

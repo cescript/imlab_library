@@ -2,9 +2,10 @@
 #include <string.h>
 #include "private/core_private.h"
 #include "private/imcore_private.h"
+#include "private/lacore_private.h"
 
-return_t imcrop(matrix_t *in, struct rectangle_t crop_region, matrix_t *out) {
-
+return_t imcrop(matrix_t *in, struct rectangle_t crop_region, matrix_t *out) 
+{
     int cond1 = is_image(in) & is_image(out);
     check_condition(cond1, ERROR_NOT_IMAGE, "input and output must be an image");
 
@@ -61,8 +62,8 @@ return_t imcrop(matrix_t *in, struct rectangle_t crop_region, matrix_t *out) {
     return returnValue;
 }
 
-return_t imresize(matrix_t *in, uint32_t nwidth, uint32_t nheight, matrix_t *out) {
-
+return_t imresize(matrix_t *in, uint32_t nwidth, uint32_t nheight, matrix_t *out) 
+{
     int cond1 = is_image(in) & is_image(out);
     check_condition(cond1, ERROR_NOT_IMAGE, "input and output must be an image");
 
@@ -105,8 +106,8 @@ IF A==B AND A!=C AND B!=D => 2=B
 IF D==C AND D!=B AND C!=A => 3=C
 IF B==D AND B!=A AND D!=C => 4=D
  */
-return_t imscale2x(matrix_t *in, matrix_t *out) {
-
+return_t imscale2x(matrix_t *in, matrix_t *out) 
+{
      int cond1 = is_image(in) & is_image(out);
      check_condition(cond1, ERROR_NOT_IMAGE, "input and output must be an image");
 
@@ -209,8 +210,8 @@ return_t imscale2x(matrix_t *in, matrix_t *out) {
 
 
 
-matrix_t *maketform(float data[9]) {
-
+matrix_t *maketform(float data[9]) 
+{
     // check that the inpu is inversible
     double det =  data[0]*data[4]*data[8];
            det += data[3]*data[7]*data[2];
@@ -242,8 +243,8 @@ matrix_t *maketform(float data[9]) {
     return out;
 }
 
-matrix_t *rot2tform(float cx, float cy, float theta, float scale) {
-
+matrix_t *rot2tform(float cx, float cy, float theta, float scale) 
+{
     // first create a new empty matrix
     matrix_t *out = matrix_create(float);
     // TODO: define an epsilon here instead of static number
@@ -271,19 +272,23 @@ matrix_t *rot2tform(float cx, float cy, float theta, float scale) {
     return out;
 }
 
-matrix_t *pts2tform(struct point_t *src, struct point_t *dst, int pts_length) {
-
+matrix_t *pts2tform(struct point_t *src, struct point_t *dst, int pts_length) 
+{
     // do new copy for the output
     matrix_t *inv = matrix_create(float);
     // chack that the inputs are correct
     int cond1 = pts_length == 3 || pts_length ==4;
     check_condition(cond1, inv, "provide 3 or 4 points to find an affine transform!");
+
     // resize the matrix so that we can insert data in it
     matrix_resize(inv, 3,3,1);
 
     float *inv_data = data(float, inv);
+    inv_data[8] = 1;
+
     // SOLVE 3 POINT AFFINE (SCALE,ROTATION,SHEAR,TRANSITION) COEFFICIENTS
-    if(pts_length == 3) {
+    if(pts_length == 3) 
+    {
         // We should solve 6x6 matrix, since it is a block matrix, we can use simpler method
         float dst_data[] = {dst[0].x, dst[0].y, 1, dst[1].x, dst[1].y, 1, dst[2].x, dst[2].y, 1};
 
@@ -299,25 +304,50 @@ matrix_t *pts2tform(struct point_t *src, struct point_t *dst, int pts_length) {
         inv_data[5] = src[0].y*invA_data[6]+src[1].y*invA_data[7]+src[2].y*invA_data[8];
         inv_data[6] = 0;
         inv_data[7] = 0;
-        inv_data[8] = 1;
+    
         //do something here!
         matrix_free(&invA);
     }
-    else if(pts_length == 4) {
-        message(ERROR, "geometric transform with 4 points is not implemented yet!");
+    else if(pts_length == 4) 
+    {
+        float dst_data[] = 
+        {
+            dst[0].x, dst[0].y, 1, 0, 0, 0, -src[0].x * dst[0].x, -src[0].x * dst[0].y,
+            0, 0, 0, dst[0].x, dst[0].y, 1, -src[0].y * dst[0].x, -src[0].y * dst[0].y,
+
+            dst[1].x, dst[1].y, 1, 0, 0, 0, -src[1].x * dst[1].x, -src[1].x * dst[1].y,
+            0, 0, 0, dst[1].x, dst[1].y, 1, -src[1].y * dst[1].x, -src[1].y * dst[1].y,
+
+            dst[2].x, dst[2].y, 1, 0, 0, 0, -src[2].x * dst[2].x, -src[2].x * dst[2].y,
+            0, 0, 0, dst[2].x, dst[2].y, 1, -src[2].y * dst[2].x, -src[2].y * dst[2].y,
+
+            dst[3].x, dst[3].y, 1, 0, 0, 0, -src[3].x * dst[3].x, -src[3].x * dst[3].y,
+            0, 0, 0, dst[3].x, dst[3].y, 1, -src[3].y * dst[3].x, -src[3].y * dst[3].y,
+
+        };
+
+        float b_data[] = {src[0].x, src[0].y, src[1].x, src[1].y, src[2].x, src[2].y, src[3].x, src[3].y};
+
+        matrix_t *inA = matrix_create(float, 8, 8, 1, dst_data);
+        matrix_t *inB = matrix_create(float, 8, 1, 1, b_data);
+
+        matrix_divide(inA, inB, inv);
+
+        matrix_free(&inA);
+        matrix_free(&inB);
     }
 
     return inv;
 }
 
-struct point_t apply_tform(struct point_t in, matrix_t *tform) {
-
+struct point_t apply_tform(struct point_t in, matrix_t *tform) 
+{
     matrix_t *itform = maketform(data(float, tform));
     float *tr_data = data(float, tform);
 
     struct point_t out = {0, 0};
 
-    double zp = in.x*tr_data[6] + in.y*tr_data[6] + tr_data[8];
+    double zp = in.x*tr_data[6] + in.y*tr_data[7] + tr_data[8];
     // TODO: define an epsilon here instead of static number
     if(equal(zp, 0, 0.00001)) { return out; }
 
@@ -328,7 +358,8 @@ struct point_t apply_tform(struct point_t in, matrix_t *tform) {
     return out;
 }
 
-return_t imtransform(matrix_t *in, matrix_t *tr, matrix_t *out) {
+return_t imtransform(matrix_t *in, matrix_t *tr, matrix_t *out) 
+{
 
     int cond1 = is_image(in) & is_image(out);
     check_condition(cond1, ERROR_NOT_IMAGE, "input and output must be an image");
@@ -338,7 +369,8 @@ return_t imtransform(matrix_t *in, matrix_t *tr, matrix_t *out) {
     uint32_t nheight = height(out);
 
     // otherwise decide the size based on the input size
-    if(nwidth==0 && nheight==0) {
+    if(nwidth==0 && nheight==0) 
+    {
         // TODO: auto find the meaningful image region and create it
         /*
         // auto find new width and height UL,UR,BL,BR corners of the input
@@ -377,12 +409,13 @@ return_t imtransform(matrix_t *in, matrix_t *tr, matrix_t *out) {
     float *tr_data = data(float, tr);
 
     //#pragma omp parallel for private(shidx, x, y, h, w, d)
-    for(h=0; h < height(out); h++) {
+    for(h=0; h < height(out); h++) 
+    {
         shidx = h*width(out);
 
-        for(w=0; w < width(out); w++) {
-
-            double zp = w*tr_data[6] + h*tr_data[6] + tr_data[8];
+        for(w=0; w < width(out); w++) 
+        {
+            double zp = w*tr_data[6] + h*tr_data[7] + tr_data[8];
             // TODO: define an epsilon here instead of static number
             if(equal(zp, 0, 0.00001)) { continue; }
 
@@ -393,7 +426,8 @@ return_t imtransform(matrix_t *in, matrix_t *tr, matrix_t *out) {
             // check whether the x,y is outside the image
             if( (x < 0) || (y < 0) || (x > width(in)-1) || (y > height(in)-1) ) { continue; }
 
-            for(d=0; d < channels(in); d++) {
+            for(d=0; d < channels(in); d++) 
+            {
                 out_data[channels(out)*(w+shidx) + d] = in_data[ channels(in)*(x+width(in)*y) + d];
             }
         }

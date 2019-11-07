@@ -1,8 +1,10 @@
 #include <stdlib.h>
 #include <math.h>
 #include "private/core_private.h"
+#include "private/alcore_private.h"
 
-struct point_t point(float x, float y, float z) {
+struct point_t point(float x, float y, float z) 
+{
     struct point_t pt;
     pt.x = x;
     pt.y = y;
@@ -11,7 +13,8 @@ struct point_t point(float x, float y, float z) {
     return pt;
 };
 
-float point_distance(struct point_t p1, struct point_t p2) {
+float point_distance(struct point_t p1, struct point_t p2) 
+{
     double dx = (double)(p1.x - p2.x);
     double dy = (double)(p1.y - p2.y);
     double dz = (double)(p1.z - p2.z);
@@ -122,3 +125,77 @@ return_t point_fit_rectangle(struct point_t *input, uint32_t input_length, struc
 
     return SUCCESS;
 }
+
+// merge multiple points into the new one
+vector_t *point_merge(vector_t *points, float overlap_distance, uint32_t min_groups_size)
+{
+    uint32_t i, j, l;
+    // create a disjoint set data structure
+    struct disjoint_set_t *point_set = disjoint_set_create(length(points));
+    // get the pointer to the data
+    struct point_t *point_data = data(struct point_t, points);
+
+    // go on every rectangle and connect overlapping ones
+    for (i = 0; i < length(points); i++)
+    {
+        for (j = 0; j < length(points); j++)
+        {
+
+            if (i == j)
+            {
+                continue;
+            }
+            // get the overlapping area between the two rectangle
+            float distance = point_distance(point_data[i], point_data[j]);
+
+            // connect if the overlapping area is larger than the threshold value
+            if (distance < overlap_distance)
+            {
+                disjoint_set_union(point_set, i, j);
+            }
+        }
+    }
+    // call enumerate and assign unique labels to all elements
+    uint32_t number_of_connected_components = disjoint_set_enumerate(point_set);
+
+    // create output vector for merged points
+    vector_t *merged = vector_create(struct point_t);
+
+    // get the mean of the overlapping rectangles
+    for (l = 0; l < number_of_connected_components; l++)
+    {
+        uint32_t element_count = 0;
+        struct point_t pointClusterCenter = {0};
+
+        // check all the points and sum the ones labeled as label
+        for (i = 0; i < length(points); i++)
+        {
+            // if the label of the current point matches l
+            if (l == point_set->label[i])
+            {
+                element_count++;
+
+                pointClusterCenter.x += point_data[i].x;
+                pointClusterCenter.y += point_data[i].y;
+                pointClusterCenter.z += point_data[i].z;
+            }
+        }
+
+        if (element_count > min_groups_size)
+        {
+            // normalize the summation
+            pointClusterCenter.x /= element_count;
+            pointClusterCenter.y /= element_count;
+            pointClusterCenter.z /= element_count;
+
+            // add the group to the output set
+            vector_push(merged, &pointClusterCenter);
+        }
+    }
+
+    // free the disjoint set structure
+    disjoint_set_free(&point_set);
+
+    // return the merged points
+    return merged;
+};

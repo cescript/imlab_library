@@ -1,3 +1,6 @@
+#include "private/lacore_private.h"
+#include <stdlib.h>
+
 /*
 // Not well defined functions. Make them clear and write this file again
 
@@ -101,92 +104,122 @@ return_t matrix_multiply(matrix_t inA, matrix_t inB, matrix_t *out) {
     // done
     return SUCCESS;
 }
+*/
 
 // If the current diagonal element is zero, find the next element
 // TODO: add imlab epsilon istead of 0.000001 thing
-#define cast_and_divide(type, inA, out)\
-do{\
-    int i,j;\
-    int c, d, row, col, swap;\
-    int ChannelSize = rows(out)*cols(out);\
-    type *swap_buffer = (type*) malloc(max(cols(inA),cols(out))*sizeof(type));\
-    for(c=0; c < channels(out); c++) {\
-        type *inA_data = data(inA) + c*ChannelSize;\
-        type *out_data = data(out) + c*ChannelSize;\
-        for(d=0; d < rows(inA); d++) {\
-            col = d, row = d, swap = 0;\
-            while( equal(inA_data[d + row*cols(inA)], 0, 0.0000001) ) {\
-                row++;\
-                if(row==rows(inA)) { printf("Cannot solve A\\B, A is not inversible!\n"); return 1; }\
-                swap = 1;\
-            }\
-            if(swap) {\
-                memcpy(swap_buffer, &inA_data[d*cols(inA)], cols(inA)*sizeof(type));\
-                memcpy(&inA_data[d*cols(inA)], &inA_data[row*cols(inA)], cols(inA)*sizeof(type));\
-                memcpy(&inA_data[row*cols(inA)], swap_buffer, cols(inA)*sizeof(type));\
-                memcpy(swap_buffer, &out_data[d*cols(out)], cols(out)*sizeof(type));\
-                memcpy(&out_data[d*cols(out)], &out_data[row*cols(out)], cols(out)*sizeof(type));\
-                memcpy(&out_data[row*cols(out)], swap_buffer, cols(out)*sizeof(type));\
-            }\
-            double eliminator = 0;\
-            double diag = 0;\
-            for (row=0; row < rows(inA); row++) {\
-                if(row != d) {\
-                    eliminator = -inA_data[d + row*cols(inA)] / inA_data[d + d*cols(inA)];\
-                    for(col=0; col < cols(inA); col++) { inA_data[col + row*cols(inA)] +=  eliminator*inA_data[col + d*cols(inA)]; }\
-                    for(col=0; col < cols(out); col++) { out_data[col + row*cols(out)] +=  eliminator*out_data[col + d*cols(out)]; }\
-                } else {\
-                    diag = 1.0 / inA_data[d + d*cols(inA)];\
-                    for(col=0; col < cols(inA); col++) { inA_data[col + row*cols(inA)] *=  diag; }\
-                    for(col=0; col < cols(out); col++) { out_data[col + row*cols(out)] *=  diag; }\
-                }\
-            }\
-        }\
-    }\
-    free(swap_buffer);\
-}while(0);
+#define cast_and_divide(_type, inA, out)                                                                 \
+    do                                                                                                  \
+    {                                                                                                   \
+        int i, j;                                                                                       \
+        int c, d, row, col, swap;                                                                       \
+        _type *swap_buffer = (_type *)malloc(max(cols(inA), cols(out)) * sizeof(_type));                \
+        _type *inA_data = mdata(inA, 0);                                                                \
+        _type *out_data = mdata(out, 0);                                                                \
+        for (d = 0; d < rows(inA); d++)                                                                 \
+        {                                                                                               \
+            col = d, row = d, swap = 0;                                                                 \
+            while (equal(inA_data[d + row * cols(inA)], 0, 0.0000001))                                  \
+            {                                                                                           \
+                row++;                                                                                  \
+                if (row == rows(inA))                                                                   \
+                {                                                                                       \
+                    printf("Cannot solve A\\B, A is not inversible!\n");                                \
+                   break;                                                                               \
+                }                                                                                       \
+                swap = 1;                                                                               \
+            }                                                                                           \
+            if (swap)                                                                                   \
+            {                                                                                           \
+                memcpy(swap_buffer, &inA_data[d * cols(inA)], cols(inA) * sizeof(_type));                \
+                memcpy(&inA_data[d * cols(inA)], &inA_data[row * cols(inA)], cols(inA) * sizeof(_type)); \
+                memcpy(&inA_data[row * cols(inA)], swap_buffer, cols(inA) * sizeof(_type));              \
+                memcpy(swap_buffer, &out_data[d * cols(out)], cols(out) * sizeof(_type));                \
+                memcpy(&out_data[d * cols(out)], &out_data[row * cols(out)], cols(out) * sizeof(_type)); \
+                memcpy(&out_data[row * cols(out)], swap_buffer, cols(out) * sizeof(_type));              \
+            }                                                                                           \
+            double eliminator = 0;                                                                      \
+            double diag = 0;                                                                            \
+            for (row = 0; row < rows(inA); row++)                                                       \
+            {                                                                                           \
+                if (row != d)                                                                           \
+                {                                                                                       \
+                    eliminator = -inA_data[d + row * cols(inA)] / inA_data[d + d * cols(inA)];          \
+                    for (col = 0; col < cols(inA); col++)                                               \
+                    {                                                                                   \
+                        inA_data[col + row * cols(inA)] += eliminator * inA_data[col + d * cols(inA)];  \
+                    }                                                                                   \
+                    for (col = 0; col < cols(out); col++)                                               \
+                    {                                                                                   \
+                        out_data[col + row * cols(out)] += eliminator * out_data[col + d * cols(out)];  \
+                    }                                                                                   \
+                }                                                                                       \
+                else                                                                                    \
+                {                                                                                       \
+                    diag = 1.0 / inA_data[d + d * cols(inA)];                                           \
+                    for (col = 0; col < cols(inA); col++)                                               \
+                    {                                                                                   \
+                        inA_data[col + row * cols(inA)] *= diag;                                        \
+                    }                                                                                   \
+                    for (col = 0; col < cols(out); col++)                                               \
+                    {                                                                                   \
+                        out_data[col + row * cols(out)] *= diag;                                        \
+                    }                                                                                   \
+                }                                                                                       \
+            }                                                                                           \
+        }                                                                                               \
+        free(swap_buffer);                                                                              \
+    } while (0);
 
-return_t matrix_divide(matrix_t inA, matrix_t inB, matrix_t *out) {
 
-    int cond1 = type(inA) == type(inB) && type(inB) == type(*out) && is_numeric(inA);
-    check_arguments(cond1, "input and out must have same numeric type for division", ERROR_TYPE_MISMATCH);
+return_t matrix_divide(matrix_t *inA, matrix_t *inB, matrix_t *out) 
+{
+    int cond1 = is_sametype(inA,inB) && is_sametype(inB, out) && is_numeric(inA);
+    check_condition(cond1, ERROR_TYPE_MISMATCH, "input and out must have same numeric type for division");
 
     int cond2 = channels(inA) == channels(inB);
-    check_arguments(cond2, "input channels do not match!", ERROR_DIMENSION_MISMATCH);
+    check_condition(cond2, ERROR_DIMENSION_MISMATCH , "input channels do not match!");
 
     int cond3 = cols(inA) == rows(inA);
-    check_arguments(cond3, "first input must be a square matrix", ERROR_DIMENSION_MISMATCH);
+    check_condition(cond3, ERROR_DIMENSION_MISMATCH , "first input must be a square matrix");
 
     int cond4 = cols(inA) == rows(inB);
-    check_arguments(cond4, "input dimensions do not match", ERROR_DIMENSION_MISMATCH);
+    check_condition(cond4, ERROR_DIMENSION_MISMATCH , "input dimensions do not match");
 
-    if( channels(inA) != 1 ) {
-        print_warning("%s: multichannel matrix division is not defined!\n dividing each channel seperately!\n", __func__);
-    }
+    int cond5 = channels(inA) == 1;
+    check_condition(cond4, ERROR_DIMENSION_MISMATCH, "multichannel matrix division is not defined");
 
     // resize before use it
-    matrix_resize(out[0], rows(inB), cols(inB), channels(inA));
-    matrix_t sinA = matrix_create(inA, 1); // create a copy of the input matrix
-    // copy the inA content to the output
-    memcpy(data(out), data(inB), rows(inB)*cols(inB)*channels(inB)*imlab_type_elemsize(inA));
+    matrix_resize(out, rows(inB), cols(inB), 1);
+    matrix_t *sinA = matrix_create(inA, mdata(inA, 0)); // create a copy of the input matrix
 
-    uint32_t type = type(inA);
+    // copy the inA content to the output
+    memcpy(mdata(out, 0), mdata(inB, 0), rows(inB)*cols(inB)*elemsize(inA));
+
     // cast the numeric type and call multilier function
-    if(type == IMLAB_8U || type == IMLAB_8S) {
-        cast_and_divide(uint8_t, sinA, out[0]);
-    }else if(type == IMLAB_16U || type == IMLAB_16S) {
-        cast_and_divide(uint16_t, sinA, out[0]);
-    }else if(type == IMLAB_32U || type == IMLAB_32S) {
-        cast_and_divide(uint32_t, sinA, out[0]);
-    }else if(type == IMLAB_32F) {
-        cast_and_divide(float, sinA, out[0]);
-    }else if(type == IMLAB_64F) {
-        cast_and_divide(double, sinA, out[0]);
+    if (is_8u(inA) || is_8s(inA))
+    {
+        cast_and_divide(uint8_t, sinA, out);
+    }
+    else if (is_16u(inA) || is_16s(inA))
+    {
+        cast_and_divide(uint16_t, sinA, out);
+    }
+    else if (is_32u(inA) || is_32s(inA))
+    {
+        cast_and_divide(uint32_t, sinA, out);
+    }
+    else if (is_32f(inA))
+    {
+        cast_and_divide(float, sinA, out);
+    }
+    else if (is_64f(inA))
+    {
+        cast_and_divide(double, sinA, out);
     }
 
-    matrix_free(sinA);
+    matrix_free(&sinA);
 
     return SUCCESS;
 }
 
-*/
