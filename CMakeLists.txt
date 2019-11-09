@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(imlab_test C)
+project(imlab C)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -7,24 +7,85 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_C_FLAGS_DEBUG "-std=c99 -fgnu89-inline -pg -D_DEBUG -Wall -Wno-int-conversion -Wno-parentheses -Wno-unused-variable -Wno-unknown-pragmas -Wno-unused-result -Wno-format -Wno-format-extra-args")
 set(CMAKE_C_FLAGS_RELEASE "-std=c99 -fgnu89-inline -O2")
 
+# add OS definitions
+if (WIN32)
+    add_definitions(-DWIN32)
+elseif (UNIX)
+    add_definitions(-DUNIX)
+elseif (APPLE)
+    add_definitions(-DAPPLE)
+endif (WIN32)
+
+# set the include directory
+set(IMLAB_DIRECTORY ${PROJECT_SOURCE_DIR}/library/)
+set(IMLAB_INCLUDE_DIRECTORY ${IMLAB_DIRECTORY}/include/)
+set(IMLAB_LIBRARY_DIRECTORY ${IMLAB_DIRECTORY}/lib/)
+set(IMLAB_TEST_BINARIES_DIRECTORY ${PROJECT_SOURCE_DIR}/bins/)
+
 # set build type to release
 set(CMAKE_BUILD_TYPE Release)
 
-set(IMLAB_INCLUDE_DIRECTORY ${PROJECT_SOURCE_DIR}/include/)
-set(IMLAB_LIBRARY_DIRECTORY ${PROJECT_SOURCE_DIR}/lib/)
-set(IMLAB_TEST_BINARIES_DIRECTORY ${PROJECT_SOURCE_DIR}/bins/)
+# find the source header of the library
+set(inc_core   "source_code/core/")
+set(inc_alcore "source_code/alcore/")
+set(inc_cvcore "source_code/cvcore/")
+set(inc_imcore "source_code/imcore/")
+set(inc_iocore "source_code/iocore/")
+set(inc_lacore "source_code/lacore/")
+set(inc_mlcore "source_code/mlcore/")
+set(inc_prcore "source_code/prcore/")
 
-message(STATUS "INCLUDE_DIRECTORY: ${IMLAB_INCLUDE_DIRECTORY}")
-message(STATUS "LIBRARY_DIRECTORY: ${IMLAB_LIBRARY_DIRECTORY}")
+# concat private headers
+set(HEADER_INCLUDES ${inc_core} ${inc_alcore} ${inc_cvcore} ${inc_imcore} ${inc_iocore} ${inc_lacore} ${inc_mlcore} ${inc_prcore})
 
-# add imlab path to the link directories
-link_directories(${IMLAB_LIBRARY_DIRECTORY})
+# concat public headers
+file(GLOB header_main   "source_code/*.h")
+file(GLOB header_core   "${inc_core}/*.h")
+file(GLOB header_alcore "${inc_alcore}/*.h")
+file(GLOB header_cvcore "${inc_cvcore}/*.h")
+file(GLOB header_imcore "${inc_imcore}/*.h")
+file(GLOB header_iocore "${inc_iocore}/*.h")
+file(GLOB header_lacore "${inc_lacore}/*.h")
+file(GLOB header_mlcore "${inc_mlcore}/*.h")
+file(GLOB header_prcore "${inc_prcore}/*.h")
 
-# get the all folders in the samples directory
-set(test_sub_folder "test")
+set(IMLAB_PUBLIC_HEADER_FILES ${header_main};${header_core};${header_alcore};${header_cvcore};${header_imcore};${header_iocore};${header_lacore};${header_mlcore};${header_prcore})
+
+# find the source files of the library
+file(GLOB src_core   "source_code/core/sources/*.c")
+file(GLOB src_alcore "source_code/alcore/sources/*.c")
+file(GLOB src_cvcore "source_code/cvcore/sources/*.c")
+file(GLOB src_imcore "source_code/imcore/sources/*.c")
+file(GLOB src_iocore "source_code/iocore/sources/*.c")
+file(GLOB src_lacore "source_code/lacore/sources/*.c")
+file(GLOB src_mlcore "source_code/mlcore/sources/*.c")
+file(GLOB src_prcore "source_code/prcore/sources/*.c")
+
+# set the source files and header files for the imlab library
+set(IMLAB_SOURCE_FILES ${src_core} ${src_alcore} ${src_cvcore} ${src_imcore} ${src_iocore} ${src_lacore} ${src_mlcore} ${src_prcore})
+# message(STATUS ${IMLAB_SOURCE_FILES})
+
+# create imlab library
+add_library(imlab STATIC ${IMLAB_SOURCE_FILES})
+
+# add all the private headers into the include directory of the project
+include_directories(${HEADER_INCLUDES})
+
+# set the source files and header files for the imlab library
+message(STATUS ${IMLAB_PUBLIC_HEADER_FILES})
+
+# set target properties of the library
+set_target_properties(imlab PROPERTIES LINKER_LANGUAGE C)
+set_target_properties(imlab PROPERTIES PUBLIC_HEADER "${IMLAB_PUBLIC_HEADER_FILES}")
+
+# install the imlab library
+INSTALL(TARGETS imlab 
+    ARCHIVE DESTINATION ${IMLAB_LIBRARY_DIRECTORY}
+    PUBLIC_HEADER DESTINATION ${IMLAB_INCLUDE_DIRECTORY}
+)
 
 # get all .c files under each sub folder
-file(GLOB test_files ${test_sub_folder}/*.c)
+file(GLOB test_files "test/*.c")
 
 #for each c file in the samples directory
 foreach(test_target ${test_files})
@@ -38,9 +99,6 @@ foreach(test_target ${test_files})
     # create an executable_name via omitting the posix
     string(REPLACE ".c" "" executable_name ${test_source_name})
     add_executable(${executable_name} ${test_target})
-
-    #we created the lib, now test it with samples
-    target_include_directories(${executable_name} PUBLIC ${IMLAB_INCLUDE_DIRECTORY})
 
     # change the output dir of the target
     set_target_properties( ${executable_name} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${IMLAB_TEST_BINARIES_DIRECTORY} )
