@@ -47,8 +47,8 @@ static uint32_t *lbp_lookup(int neighbors, int max_flip, uint32_t *hist_max) {
 }
 
 // creates a default LBP model
-uint32_t lbp_parameters(uint32_t width, uint32_t height, char options[], struct lbp_parameters_t *model) {
-
+uint32_t lbp_parameters(uint32_t width, uint32_t height, uint32_t channels, char options[], struct lbp_parameters_t *model) 
+{
     // fill the default values
     model->radius    = 1;
     model->neighbors = 8;
@@ -65,7 +65,8 @@ uint32_t lbp_parameters(uint32_t width, uint32_t height, char options[], struct 
     getopt(uint32_t, options, "block", model->b_size);
 
     // number of neighbors must be between 1-16
-    if(model->neighbors > 16 || model->neighbors < 1) {
+    if(model->neighbors > 16 || model->neighbors < 1) 
+    {
         model->neighbors  = max_2(min_2(model->neighbors, 16), 1);
         message(WARNING, "number of neighbors must be between 1-16");
     }
@@ -75,7 +76,8 @@ uint32_t lbp_parameters(uint32_t width, uint32_t height, char options[], struct 
 
     /// if uniform mode is on, compute the uniform struct lbp_t
     model->hist_bin_size = pow(2, model->neighbors);
-    if(model->uniform != model->neighbors) {
+    if(model->uniform != model->neighbors) 
+    {
         /// create the uniform lbp look up table
         model->table = lbp_lookup(model->neighbors, model->uniform, &model->hist_bin_size);
         if(model->table == NULL) {
@@ -90,66 +92,80 @@ uint32_t lbp_parameters(uint32_t width, uint32_t height, char options[], struct 
 }
 
 // "radius:1 neighbors:8 uniform:0 "
-struct feature_t *lbp_create(int width, int height, char options[]) {
+struct feature_t *lbp_create(uint32_t width, uint32_t height, uint32_t channels, char options[]) 
+{
     // create a feature model for the output
     struct feature_t *model = (struct feature_t*) malloc(sizeof(struct feature_t));
     check_memory(model, NULL);
+
     // fill the algorithm name
     model->algorithm = CV_LBP;
     model->image_width = width;
     model->image_height = height;
+    model->image_channels = channels;
     // get space for the parameters of the algorithm
+
     model->parameters = malloc(sizeof(struct lbp_parameters_t));
-    if(model->parameters == NULL) {
+    if(model->parameters == NULL) 
+    {
         free(model);
         return NULL;
     }
     // fill the parameters
-    model->feature_size = lbp_parameters(width, height, options, model->parameters);
-    if(model->feature_size == 0) {
+    model->feature_size = lbp_parameters(width, height, channels, options, model->parameters);
+
+    if(model->feature_size == 0) 
+    {
         free(model->parameters);
         free(model);
         return NULL;
     }
     // get the default feature extraction method
     model->method = lbp_extract;
+
     // return the created model
     return model;
 }
 
-void lbp_view(struct feature_t *par_model) {
-
+void lbp_view(struct feature_t *par_model) 
+{
     struct lbp_parameters_t *model = par_model->parameters;
 
     printf("Parameters of the Local binary Pattern Model\n");
     printf("Options:\n");
-    printf("> Radius       : %d\n", model->radius);
-    printf("> Neighbors    : %d\n", model->neighbors);
-    printf("> Block Size   : [%d %d]\n", model->b_size[0], model->b_size[1]);
-    printf("> Uniform LBP  : %d\n", model->uniform);
+    printf("> Radius          : %d\n", model->radius);
+    printf("> Neighbors       : %d\n", model->neighbors);
+    printf("> Block Size      : [%d %d]\n", model->b_size[0], model->b_size[1]);
+    printf("> Uniform LBP     : %d\n", model->uniform);
 
     printf("Computed Values:\n");
-    printf("> Feature Size : %d\n", model->feature_size);
-    printf("> Histogram Bin: %d\n", model->hist_bin_size);
+    printf("> Feature Size    : %d\n", model->feature_size);
+    printf("> Histogram Bin   : %d\n", model->hist_bin_size);
     printf("> LBP image size  : [%d %d]\n", model->win_width - 2*model->radius, model->win_height - 2*model->radius);
 }
 
-uint32_t  lbp_feature_size(struct feature_t *model) {
-    if(model == NULL) {
+uint32_t  lbp_feature_size(struct feature_t *model) 
+{
+    if(model == NULL) 
+    {
         return 0;
     }
     return ((struct lbp_parameters_t*)model)->feature_size;
 }
 
-uint32_t  lbp_width(struct lbp_parameters_t *model) {
-    if(model == NULL) {
+uint32_t  lbp_width(struct lbp_parameters_t *model) 
+{
+    if(model == NULL) 
+    {
         return 0;
     }
     return model->win_width - 2*model->radius;
 }
 
-uint32_t  lbp_height(struct lbp_parameters_t *model) {
-    if(model == NULL) {
+uint32_t  lbp_height(struct lbp_parameters_t *model) 
+{
+    if(model == NULL) 
+    {
         return 0;
     }
     return model->win_height - 2*model->radius;
@@ -207,15 +223,18 @@ void Computestruct lbp_t8(const unsigned char *src, unsigned char *dst, int cols
 }
 */
 
-void lbp_3x3(matrix_t *in, int *lbp_feat) {
+void lbp_3x3(matrix_t *in, int *lbp_feat) 
+{
 
     uint32_t i,j;
     unsigned char cx, code;
     // @TODO add support for floating point images
     uint8_t *in_data = data(uint8_t, in);
     // extract lbp on 3x3 neighborhood
-	for(j=1; j < height(in)-1; j++) {
-		for(i=1; i < width(in)-1; i++) {
+	for(j=1; j < height(in)-1; j++) 
+    {
+		for(i=1; i < width(in)-1; i++)
+        {
 
             cx = in_data[i + j*width(in)];
 			code = 0;
@@ -233,13 +252,14 @@ void lbp_3x3(matrix_t *in, int *lbp_feat) {
 	}
 }
 
-void lbp_nxn(matrix_t *in, int *lbp_feat, struct lbp_parameters_t *model) {
+void lbp_nxn(matrix_t *in, int *lbp_feat, struct lbp_parameters_t *model) 
+{
 
     uint32_t i,j;
 
     // extract lbp on NxN neighborhood
-	for(i=0; i < model->neighbors; i++) {
-
+	for(i=0; i < model->neighbors; i++) 
+    {
         float xp =  model->radius*cosf(2*imlab_pi*i / (float)model->neighbors);
         float yp = -model->radius*sinf(2*imlab_pi*i / (float)model->neighbors);
 
@@ -263,8 +283,10 @@ void lbp_nxn(matrix_t *in, int *lbp_feat, struct lbp_parameters_t *model) {
         // @TODO add support for floating point images
         uint8_t *in_data = data(uint8_t, in);
 		float fxy;
-        for(j=model->radius; j < height(in)-model->radius; j++) {
-            for(i=model->radius; i < width(in)-model->radius; i++) {
+        for(j=model->radius; j < height(in)-model->radius; j++) 
+        {
+            for(i=model->radius; i < width(in)-model->radius; i++) 
+            {
 
                 // neighbor is on the subpixel, use bilinear interpolation
                 fxy  = w1*in_data[ i+fx + (j+fy)*width(in) ] + w2*in_data[ i+cx + (j+fy)*width(in) ];
@@ -274,13 +296,15 @@ void lbp_nxn(matrix_t *in, int *lbp_feat, struct lbp_parameters_t *model) {
             }
         }
         printf("lbp_feat: %d\n",  lbp_feat[ i-model->radius + (j-model->radius)*(width(in)-2*model->radius) ] );
+
         // shift the computed value
         lbp_feat[ i-model->radius + (j-model->radius)*(width(in)-2*model->radius) ] <<= 1;
     }
     //done
 }
 
-static void lbp_cell_histogram(int *lbp_feat, float *feature, float *cell_sum, int width, int height, int wi, int hj, struct lbp_parameters_t *model) {
+static void lbp_cell_histogram(int *lbp_feat, float *feature, float *cell_sum, int width, int height, int wi, int hj, struct lbp_parameters_t *model) 
+{
 
     uint32_t i,j, bi,bj, idx;
     // TODO: remove this
@@ -291,9 +315,11 @@ static void lbp_cell_histogram(int *lbp_feat, float *feature, float *cell_sum, i
     int cell_in_col = (model->win_width -2*model->radius) / model->b_size[1];
 
     lbp_feat += wi+hj*(width-2*model->radius);
-    for(j=0; j < model->win_height-2*model->radius; j++) {
+    for(j=0; j < model->win_height-2*model->radius; j++) 
+    {
         bj = (j) / (model->b_size[1]) - 0.5f;
-        for(i=0; i < model->win_width -2*model->radius; i++) {
+        for(i=0; i < model->win_width -2*model->radius; i++) 
+        {
             bi = (i) / (model->b_size[0]) - 0.5f;
 
             idx = model->hist_bin_size*(bi+bj*cell_in_col);
@@ -303,7 +329,8 @@ static void lbp_cell_histogram(int *lbp_feat, float *feature, float *cell_sum, i
     }
 }
 
-return_t lbp_image(matrix_t *in, matrix_t *out, struct lbp_parameters_t *model) {
+return_t lbp_image(matrix_t *in, matrix_t *out, struct lbp_parameters_t *model) 
+{
 
     int feat_in_row = lbp_height(model);
     int feat_in_col = lbp_width(model);
@@ -311,15 +338,18 @@ return_t lbp_image(matrix_t *in, matrix_t *out, struct lbp_parameters_t *model) 
     return_t ret_val = matrix_resize(out, feat_in_row, feat_in_col, 1);
     check_return(ret_val, ret_val);
     /// if the struct lbp_t is called with the deafault value, use optimized version, else use extented struct lbp_t
-    if(model->radius == 1 && model->neighbors == 8) {
+    if(model->radius == 1 && model->neighbors == 8) 
+    {
         lbp_3x3(in, out->_data);
-    } else {
+    } else 
+    {
         lbp_nxn(in, out->_data, model);
     }
     return SUCCESS;
 }
 
-return_t lbp_extract(matrix_t *in, struct feature_t *par_model, float *feature) {
+return_t lbp_extract(matrix_t *in, struct feature_t *par_model, float *feature) 
+{
 
     struct lbp_parameters_t *model = par_model->parameters;
     uint32_t i,j, bin;
@@ -329,7 +359,8 @@ return_t lbp_extract(matrix_t *in, struct feature_t *par_model, float *feature) 
 
     int32_t *lbp_feat = data(int32_t, out);
     /// if uniform mode is on, compute the scores
-    if(model->uniform != model->neighbors) {
+    if(model->uniform != model->neighbors) 
+    {
         /// use the look up table for uniform struct lbp_t
         if(model->table != NULL) {
             for(i=0; i < volume(out); i++) { lbp_feat[i] = model->table[ lbp_feat[i] ]; }
@@ -358,11 +389,14 @@ return_t lbp_extract(matrix_t *in, struct feature_t *par_model, float *feature) 
 */
 
     /// now normalize the cell
-    for(j=0; j < cell_in_row; j++) {
-        for(i=0; i < cell_in_col; i++) {
+    for(j=0; j < cell_in_row; j++) 
+    {
+        for(i=0; i < cell_in_col; i++) 
+        {
             int idx = model->hist_bin_size*(i+j*cell_in_col);
             float norm = 1.0f / (imlab_epsilon + cell_sum[ i+j*cell_in_col ]);
-            for(bin=0; bin < model->hist_bin_size; bin++) {
+            for(bin=0; bin < model->hist_bin_size; bin++) 
+            {
                 feature[ idx + bin ] = feature[ idx + bin ] * norm;
             }
         }

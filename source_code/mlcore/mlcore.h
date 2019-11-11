@@ -13,24 +13,6 @@
 // maximum number of the class in multi class classification
 #define IM_MAX_MULTI_CLASS 100
 
-/*
-#define LSRL1 0
-#define LSRL2 1
-#define SVRL1 2
-#define SVRL2 3
-
-// regression models (x < 5 )
-#define IM_CLASSORREG 4.5
-// classification models ( x > 5)
-
-#define LREL1 6
-#define LREL2 7
-#define SVML1 8
-#define SVML2 9
-*/
-
-
-
 /**
 @struct glm_t
 @brief glm_t struct keeps the given GLM parameters in a single variable and computes the necessary parameters at the construction step.
@@ -195,14 +177,64 @@ struct glm_t;
 
 
 /// glm_t Functions are included
-// "-M 1000 -eta 0.1 -epsilon 0.001 -lambda 0.01"
+/**
+ * @param solver Solver type for the linear model. 
+ * LSRL1: Least Squares with L1 Regularization
+ * LSRL2: Least Squares with L2 Regularization
+ * 
+ * SVRL1: Support Vector Regressors with L1 Regularization
+ * SVRL2: Support Vector Regressors with L2 Regularization
+ * 
+ * LREL1: Logistice Regression Analysis with L1 Regularization
+ * LREL2: Logistice Regression Analysis with L2 Regularization
+ * 
+ * SVML1: Support Vector Machine Classifier with L1 Regularization
+ * SVML2: Support Vector Machine Classifier with L2 Regularization
+ * 
+ * @param options Options for the glm model. Parameters can be seperated by space e.g. "-max_iter:1000 -eta:0.2"
+ * -max_iter:# specify the maximum number of iterations
+ * -eta:# learning speed of the stochastic solver
+ * -epsilon:# epsilon value for the SVR algorithm
+ * -lambda:# L1 and L2 regularization coefficient
+*/
 struct glm_t *glm_create(uint32_t solver, char options[]);
+
+/**
+ * Prints the parameters of the generalized linear model
+ * @param model Input GLM structure
+*/
 return_t glm_view(struct glm_t *model);
+
 /// HIGH LEVEL FUNCTIONS TO CALL FROM THE IMLAB APPLICATIONS
-return_t glm_train(matrix_t *in, vector_t *label, struct glm_t *model);
+/**
+ * GLM train method
+ * @param in Feature matrix for the glm. Number of rows represents the number of samples and the number of columns represents the length of the feature space
+ * @param label Label matrix where the number of rows dedicated for the samples and number of columns represents the expected target labels
+ * For two class classification or regression task, label matrix should be Nx1
+ * For K class classification or regression tasks, label matrix should be NxK
+ * @param model Learned GLM structure
+*/
+return_t glm_train(matrix_t *in, matrix_t *label, struct glm_t *model);
+
+/**
+ * Prediction method for the GLM
+ * @param in Input feature matrix. Number of rows represents the number of samples and the number of columns represents the length of the feature space
+ * @param label Label matrix where the number of rows dedicated for the samples and number of columns will be filled with the predicted target labels
+ * @param model Learned GLM structure
+*/
 return_t glm_predict(matrix_t *in, matrix_t *label, struct glm_t *model);
-/// glm_t model import/export functions
+
+/**
+ * Read the input glm file and store it into the glm_t structure
+ * @param filename Input filename for glm file written with glm_write method
+ */
 struct glm_t* glm_read(const char *filename);
+
+/**
+ * Write the input glm file and store it into the glm_t structure
+ * @param net Input GLM structure to store in file
+ * @param filename Output filename for destination file. Written file can be read with glm_read method
+ */
 return_t glm_write(struct glm_t *net, const char *filename);
 
 

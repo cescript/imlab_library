@@ -110,56 +110,80 @@ return_t histogram(matrix_t *in, int32_t min, int32_t max, uint32_t **histogram)
 }
 
 // otsu algorithm for threshold value detection
-static uint32_t otsu(uint32_t *hist, uint32_t hist_length) {
+uint32_t otsu(uint32_t *histogram, uint32_t hist_length)
+{
+    uint32_t t = 0, thr = 0;
 
-    uint32_t i, t, thr = 0;
-    uint32_t sum  = 0, sum1  = 0, sum2  = 0;
-    uint32_t wsum = 0, wsum1 = 0, wsum2 = 0;
-    float avg1, avg2, sigma = 0;
+    float sum = 0, sum1 = 0, sum2 = 0;
+    float wsum = 0, wsum1 = 0, wsum2 = 0;
+    float sigma = 0;
 
-    for( i=0; i < hist_length; i++) {
-        wsum += i*hist[i];
-        sum   += hist[i];
+    for (t = 0; t < hist_length; t++)
+    {
+        sum += histogram[t];
+        wsum += t * histogram[t];
     }
 
-    for(t=0; t < hist_length; t++) {
+    for (t = 0; t < 256; t++)
+    {
+        sum1 += histogram[t];
+        sum2 = (sum - sum1);
 
-        sum1 += hist[t];
-        if( sum1 == 0 ) { continue; }
+        // if the weighted sum under threshold t is 0, continue to the next threshold
+        if (sum1 == 0)
+        {
+            continue;
+        }
 
-        sum2 = (sum-sum1);
-        if( sum2 == 0) { break; }
+        // if the weighted sum over threshold t is 0, break the threshold search
+        if (sum2 == 0)
+        {
+            break;
+        }
 
-        wsum1 += t*hist[t];
-        wsum2 = wsum - wsum1;
+        wsum1 += t * histogram[t];
+        wsum2 = (wsum - wsum1);
 
-        avg1 = (float) wsum1 / sum1;
-        avg2 = (float) wsum2 / sum2;
+        // find the average
+        float avg1 = wsum1 / sum1;
+        float avg2 = wsum2 / wsum2;
 
-        float std = sum1*sum2*(avg1-avg2)*(avg1-avg2);
+        // compute the standart deviation
+        float std = sum1 * sum2 * (avg1 - avg2) * (avg1 - avg2);
 
-        if(std > sigma) { sigma = std; thr = t; }
-     }
+        // if the current value of the std is higher, choose it as the best threshold
+        if (std > sigma)
+        {
+            sigma = std;
+            thr = t;
+        }
+    }
+
     return thr;
 }
 
 uint32_t imotsu(matrix_t *in) {
 
-    int cond = is_image(in) & (channels(in) == 1);
+    int cond = is_image(in) && (channels(in) == 1);
     check_condition(cond, -1, "input must be a grayscale image");
+
     // get histogram of the input image
-    uint32_t *hist = (uint32_t*) calloc(256, sizeof(int));
+    uint32_t *hist = (uint32_t *)calloc(256, sizeof(uint32_t));
     // get histogram for gray or color image
     uint32_t n;
 
     // TODO: create in_data pointer based on the input type
     uint8_t *in_data  = data(uint8_t, in);
 
-    for(n=0; n < width(in)*height(in); n++) {
+    for(n = 0; n < width(in)*height(in); n++) 
+    {
         hist[in_data[n]]++;
     }
+
     // compute otsu threshold on the input
-    int otsuthr = otsu(hist, 256);
+    uint32_t otsuthr = otsu(hist, 256);
+
+    // clear unused memory
     free(hist);
 
     return otsuthr;

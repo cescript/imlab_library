@@ -8,19 +8,18 @@
 #include "../../mlcore/private/mlcore_private.h"
 #include "../../lacore/private/lacore_private.h"
 
-struct encoder_parameters_t {
+struct encoder_parameters_t 
+{
     int type;
-
-    uint32_t width;
-    uint32_t height;
     uint32_t feature_size;
 };
 
 return_t imencode_gray(matrix_t *in, float *feature);
-struct feature_t *encoder_create(int width, int height, char options[]);
+struct feature_t *encoder_create(uint32_t width, uint32_t height, uint32_t channels, char options[]);
 return_t encoder_extract(matrix_t *in, struct feature_t *par_model, float *feature);
 
-struct lbp_parameters_t {
+struct lbp_parameters_t 
+{
     uint32_t radius;
     uint32_t neighbors;
     uint32_t uniform;
@@ -33,7 +32,7 @@ struct lbp_parameters_t {
     uint32_t *table;
 };
 
-struct feature_t *lbp_create(int width, int height, char options[]);
+struct feature_t *lbp_create(uint32_t width, uint32_t height, uint32_t channels, char options[]);
 void lbp_view(struct feature_t *model);
 uint32_t  lbp_feature_size(struct feature_t *model);
 uint32_t  lbp_width(struct lbp_parameters_t *model);
@@ -43,8 +42,11 @@ return_t lbp_image(matrix_t *in, matrix_t *out, struct lbp_parameters_t *model);
 return_t lbp_extract(matrix_t *in, struct feature_t *model, float *feature);
 void lbp_detect(matrix_t *in, struct lbp_parameters_t *model, struct glm_t *net, float threshold, matrix_t *out);
 
+void lbp_3x3(matrix_t *in, int *lbp_feat);
+void lbp_nxn(matrix_t *in, int *lbp_feat, struct lbp_parameters_t *model);
 
-struct hog_parameters_t {
+struct hog_parameters_t 
+{
     uint32_t nbins;
     uint32_t b_size[2];
     uint32_t c_size[2];
@@ -63,10 +65,11 @@ struct hog_parameters_t {
  * Create a new HOG model from the given inputs.
  * @param width Width of the image that the features will be extracted.
  * @param height Height of the image that the features will be extracted.
+ * @param height Channels of the image that the features will be extracted.
  * @param options Optional parameters in the IMLAB parameter format.
  * @return Created feature model for the later usage.
  */
-struct feature_t *hog_create(uint32_t width, uint32_t height, char options[]);
+struct feature_t *hog_create(uint32_t width, uint32_t height, uint32_t channels, char options[]);
 /**
  * Displays the created HOG model.
  * @param model Created HOG model which will be displayed.
@@ -89,8 +92,24 @@ return_t hog_extract(matrix_t *in, struct feature_t *model, float *feature);
 //matrix_t* hog_detect(matrix_t *in, struct hog_parameters_t *model, struct glm_t *net, float threshold);
 matrix_t *hog2image(float *feature, struct hog_parameters_t *model);
 
-void lbp_3x3(matrix_t *in, int *lbp_feat);
-void lbp_nxn(matrix_t *in, int *lbp_feat, struct lbp_parameters_t *model);
+struct npd_parameters_t 
+{
+    uint32_t min_distance;
+    uint32_t max_distance;
+    uint32_t n_sample;
+
+    // input dependent parameters (do not play with these)
+    uint32_t feature_size;
+
+    // these arrays will be used many times, so allocating them here will save some time during the operation
+    uint32_t *selected[2];
+};
+
+struct feature_t *npd_create(uint32_t width, uint32_t height, uint32_t channels, char options[]);
+void npd_view(struct feature_t *par_model);
+
+return_t npd_extract(matrix_t *in, struct feature_t *par_model, float *feature);
+int npd_parameters(uint32_t width, uint32_t height, uint32_t channels, char *options, struct npd_parameters_t *out);
 
 struct haar_feature_t
 {

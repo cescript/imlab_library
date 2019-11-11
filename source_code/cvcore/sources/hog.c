@@ -3,8 +3,8 @@
 #include "private/iocore_private.h"
 #include "private/cvcore_private.h"
 
-uint32_t hog_parameters(int32_t width, uint32_t height, char options[], struct hog_parameters_t *model) {
-
+uint32_t hog_parameters(int32_t width, uint32_t height, uint32_t channels, char options[], struct hog_parameters_t *model) 
+{
     // fill the default values
     model->nbins     = 9;
     model->stride[0] = 2;
@@ -21,10 +21,13 @@ uint32_t hog_parameters(int32_t width, uint32_t height, char options[], struct h
     getopt(uint32_t, options, "cell", model->c_size);
 
     // check the width and height is ok
-    if( (width%model->c_size[1]) > 0 || (height%model->c_size[0]) > 0 ) {
+    if( (width%model->c_size[1]) > 0 || (height%model->c_size[0]) > 0 ) 
+    {
         message(ERROR, "image size should be divisible by the cell size");
         return 0;
-    } else {
+    } 
+    else 
+    {
         // set the hog width and height
         model->hog_width  = (width) / model->c_size[1];
         model->hog_height = (height) / model->c_size[0];
@@ -35,16 +38,19 @@ uint32_t hog_parameters(int32_t width, uint32_t height, char options[], struct h
         model->feature_size = model->b_size[0]*model->b_size[1]*model->nbins*model->block_width*model->block_height;
         // allocate memory fro the gradients and histograms
         model->cell_hist = (float*) calloc(model->hog_height*model->hog_width*model->nbins, sizeof(float));
-        if(model->cell_hist == NULL) {
+        if(model->cell_hist == NULL) 
+        {
             return 0;
         }
         model->grad_mag  = (float*) malloc(width*height*sizeof(float));
-        if(model->grad_mag == NULL) {
+        if(model->grad_mag == NULL) 
+        {
             free(model->cell_hist);
             return 0;
         }
         model->grad_ori  = (float*) malloc(width*height*sizeof(float));
-        if(model->grad_ori == NULL) {
+        if(model->grad_ori == NULL) 
+        {
             free(model->cell_hist);
             free(model->grad_ori);
             return 0;
@@ -54,44 +60,53 @@ uint32_t hog_parameters(int32_t width, uint32_t height, char options[], struct h
 }
 
 // creates a HOG model
-struct feature_t *hog_create(uint32_t width, uint32_t height, char options[]) {
+struct feature_t *hog_create(uint32_t width, uint32_t height, uint32_t channels, char options[]) 
+{
     // create a feature model for the output
     struct feature_t *model = (struct feature_t*) malloc(sizeof(struct feature_t));
     check_memory(model, NULL);
+
     // fill the algorithm name
     model->algorithm = CV_HOG;
     model->image_width = width;
     model->image_height = height;
+    model->image_channels = channels;
+
     // get space for the parameters of the algorithm
     model->parameters = malloc(sizeof(struct hog_parameters_t));
-    check_memory(model->parameters) {
+    check_memory(model->parameters) 
+    {
         free(model);
         return NULL;
     }
     // fill the parameters
-    model->feature_size = hog_parameters(width, height, options, model->parameters);
-    if(model->feature_size == 0) {
+    model->feature_size = hog_parameters(width, height, channels, options, model->parameters);
+
+    if(model->feature_size == 0) 
+    {
         free(model->parameters);
         free(model);
         return NULL;
     }
     // get the default feature extraction method
     model->method = hog_extract;
+
     // return the created model
     return model;
 }
 
 
-void hog_view(struct feature_t *par_model) {
+void hog_view(struct feature_t *par_model) 
+{
     // get the HOG parameters from the given generic model
     struct hog_parameters_t *model = par_model->parameters;
 
     printf("Parameters of the Histogram of Oriented Gradient Model\n");
     printf("Options:\n");
-    printf("> Orientation   : %d\n", model->nbins);
-    printf("> Block Size    : [%d %d]\n", model->b_size[0], model->b_size[1]);
-    printf("> Cell Size     : [%d %d]\n", model->c_size[0], model->c_size[1]);
-    printf("> Stride        : [%d %d]\n", model->stride[0], model->stride[1]);
+    printf("> Orientation     : %d\n", model->nbins);
+    printf("> Block Size      : [%d %d]\n", model->b_size[0], model->b_size[1]);
+    printf("> Cell Size       : [%d %d]\n", model->c_size[0], model->c_size[1]);
+    printf("> Stride          : [%d %d]\n", model->stride[0], model->stride[1]);
 
     printf("Computed Values:\n");
     printf("> HOG window size : [%d %d]\n", model->hog_width, model->hog_height);
@@ -100,11 +115,13 @@ void hog_view(struct feature_t *par_model) {
     printf("> Feature Size    : %d\n", model->feature_size);
 }
 
-uint32_t  hog_feature_size(struct feature_t *model) {
+uint32_t  hog_feature_size(struct feature_t *model) 
+{
     return ((struct hog_parameters_t*)(model->parameters))->feature_size;
 }
 
-static inline float get_gradx(matrix_t *in, uint32_t wx, uint32_t hy, uint32_t d) {
+static inline float get_gradx(matrix_t *in, uint32_t wx, uint32_t hy, uint32_t d) 
+{
     //@TODO add support for floating point images
     uint8_t *in_data = data(uint8_t, in);
     // gx = data[x+1][y] - data[x-1][y];
@@ -117,7 +134,8 @@ static inline float get_gradx(matrix_t *in, uint32_t wx, uint32_t hy, uint32_t d
     //if(wx == width(in)-1)        return -(in_data[channels(in)*(hy*width(in) + width(in)-2) + d]) / 255.0f;
 }
 
-static inline float get_grady(matrix_t *in, uint32_t wx, uint32_t hy, uint32_t d) {
+static inline float get_grady(matrix_t *in, uint32_t wx, uint32_t hy, uint32_t d) 
+{
     //@TODO add support for floating point images
     uint8_t *in_data = data(uint8_t, in);
     // gy = data[x][y+1] - data[x][y-1];
@@ -129,8 +147,8 @@ static inline float get_grady(matrix_t *in, uint32_t wx, uint32_t hy, uint32_t d
     //if(hy == height(in)-1)        return -(in_data[channels(in)*((height(in)-2)*width(in) + wx) + d]) / 255.0f;
 }
 
-static void imgradient(matrix_t *in, float *mag, float *ori, int nbin) {
-
+static void imgradient(matrix_t *in, float *mag, float *ori, int nbin) 
+{
     uint32_t i,j,d;
 
     float grad,gx, gy, grad_x, grad_y;
@@ -139,19 +157,24 @@ static void imgradient(matrix_t *in, float *mag, float *ori, int nbin) {
     uint8_t *in_data = data(uint8_t, in);
 
     // fill the borders
-    for(j=0; j < height(in); j++) {
+    for(j=0; j < height(in); j++) 
+    {
         mag[0 + j*width(in)] = 0;
         mag[width(in)-1 + j*width(in)] = 0;
     }
-    for(i=0; i < width(in); i++) {
+    for(i=0; i < width(in); i++) 
+    {
         mag[i + 0*width(in)] = 0;
         mag[i + (height(in)-1)*width(in)] = 0;
     }
     // compute the gradient in the inside of the image
-    for(j=1; j < height(in)-1; j++) {
-        for(i=1; i < width(in)-1; i++) {
+    for(j=1; j < height(in)-1; j++) 
+    {
+        for(i=1; i < width(in)-1; i++) 
+        {
             grad = -2.0f;
-            for(d=0; d < channels(in); d++) {
+            for(d=0; d < channels(in); d++) 
+            {
                 // get the image gradient around i+wi, j+hj
                 grad_x = (in_data[ channels(in)*(i+1 + j*width(in)) + d ] - in_data[ channels(in)*(i-1+  j*width(in)) + d ]) / 255.0f;
                 grad_y = (in_data[ channels(in)*(i+(j+1)*width(in)) + d ] - in_data[ channels(in)*(i+(j-1)*width(in)) + d ]) / 255.0f;
@@ -171,8 +194,8 @@ static void imgradient(matrix_t *in, float *mag, float *ori, int nbin) {
 }
 
 
-static void hog_cell_histogram(float *mag, float *ori, float *cell_hist, int width, int height, int wi, int hj, struct hog_parameters_t *model) {
-
+static void hog_cell_histogram(float *mag, float *ori, float *cell_hist, int width, int height, int wi, int hj, struct hog_parameters_t *model) 
+{
     uint32_t i,j,ci,cj, idx;
 
     float fbin;
@@ -185,9 +208,11 @@ static void hog_cell_histogram(float *mag, float *ori, float *cell_hist, int wid
     ori += wi+width*hj;
     mag += wi+width*hj;
     // loop in the window and compute the histogram for each cell
-    for(j=0; j < model->height; j++) {
+    for(j=0; j < model->height; j++) 
+    {
         cj = j/model->c_size[0];//*inc_j;
-        for(i=0; i < model->width; i++) {
+        for(i=0; i < model->width; i++) 
+        {
             // cell index of the current column
             ci = i/model->c_size[1];//*inc_i;
 
@@ -227,21 +252,27 @@ void hog_cell_int_histogram(float **hist_int, float *cell_hist, int width, int h
     //done
 }
 */
-static void hog_block_histogram(float *cell_hist, float *feature, struct hog_parameters_t *model) {
+static void hog_block_histogram(float *cell_hist, float *feature, struct hog_parameters_t *model) 
+{
 
     uint32_t i, bi,bj, ci,cj;
     float *hist = feature;
 
-    for(cj=0; cj < model->hog_height-model->b_size[1]+1; cj+=model->stride[1]) {
-        for(ci=0; ci < model->hog_width-model->b_size[0]+1; ci+=model->stride[0]) {
+    for(cj=0; cj < model->hog_height-model->b_size[1]+1; cj+=model->stride[1]) 
+    {
+        for(ci=0; ci < model->hog_width-model->b_size[0]+1; ci+=model->stride[0]) 
+        {
 
             int fcount = 0;
             // concatenate the histograms to create block histogram
             // compute the normalization constants
             float norm = imlab_epsilon;
-            for(bj=0; bj < model->b_size[1]; bj++) {
-                for(bi=0; bi < model->b_size[0]; bi++) {
-                    for(i=0; i < model->nbins; i++) {
+            for(bj=0; bj < model->b_size[1]; bj++) 
+            {
+                for(bi=0; bi < model->b_size[0]; bi++) 
+                {
+                    for(i=0; i < model->nbins; i++) 
+                    {
                         hist[fcount] = cell_hist[model->nbins*(ci+bi+model->hog_width*(cj+bj)) + i];
                         norm += hist[fcount];
                         fcount++;
@@ -250,7 +281,8 @@ static void hog_block_histogram(float *cell_hist, float *feature, struct hog_par
             }
             // normalize the histogram and fill the feature vector
             norm = 1/(norm);
-            for(i=0; i < model->b_size[0]*model->b_size[1]*model->nbins; i++) {
+            for(i=0; i < model->b_size[0]*model->b_size[1]*model->nbins; i++) 
+            {
                 hist[i] = sqrtf(hist[i]*norm);
             }
             hist += model->b_size[0]*model->b_size[1]*model->nbins;
@@ -260,7 +292,8 @@ static void hog_block_histogram(float *cell_hist, float *feature, struct hog_par
 }
 
 // extract hog from the given image
-return_t hog_extract(matrix_t *in, struct feature_t *par_model, float *feature) {
+return_t hog_extract(matrix_t *in, struct feature_t *par_model, float *feature) 
+{
     // get the HOG parameters from the given model
     struct hog_parameters_t *model = par_model->parameters;
     // keep the histogram for each bin
@@ -513,8 +546,8 @@ float*** hog_extract(matrix_t *in, float *feature, struct hog_t *model) {
 }
 */
 
-matrix_t *hog2image(float *feature, struct hog_parameters_t *model) {
-
+matrix_t *hog2image(float *feature, struct hog_parameters_t *model) 
+{
     uint32_t i,j,b,ci,cj;
 
     uint32_t cell_width  = model->c_size[0] * 2;
@@ -524,7 +557,8 @@ matrix_t *hog2image(float *feature, struct hog_parameters_t *model) {
     matrix_t *patch = matrix_create(uint8_t, cell_height, cell_width, 1);
     matrix_t *rotpatch = matrix_create(uint8_t, cell_height, cell_width, 1);
 
-    if(image == NULL || patch == NULL || rotpatch == NULL) {
+    if(image == NULL || patch == NULL || rotpatch == NULL) 
+    {
         return NULL;
     };
     // @TODO add support for floatimg point images
@@ -532,8 +566,10 @@ matrix_t *hog2image(float *feature, struct hog_parameters_t *model) {
     uint8_t *patch_data    = data(uint8_t, patch);
     uint8_t *image_data    = data(uint8_t, image);
 
-    for(i=0; i < cell_width; i++) {
-        for(j=-2; j < 3; j++) {
+    for(i=0; i < cell_width; i++) 
+    {
+        for(j=-2; j < 3; j++) 
+        {
             patch_data[i + (height(patch)/2+j)*width(patch)] = 255;
         }
     }
@@ -556,14 +592,15 @@ matrix_t *hog2image(float *feature, struct hog_parameters_t *model) {
 
                 float sc = feature[ NumHistInBlock*(ci+cj*model->block_width) + b ];
 
-                for(j=0; j < cell_height; j++) {
-                    for(i=0; i < cell_width; i++) {
+                for(j=0; j < cell_height; j++) 
+                {
+                    for(i=0; i < cell_width; i++) 
+                    {
                         idx = idx_w+i+ (idx_h+j)*width(image);
                         // suppress if the values are similar
                         image_data[idx] += rotpatch_data[i + j*width(rotpatch)] * (sc*sc*10);
                     }
                 }
-
 
             // continue with the other cells
             }

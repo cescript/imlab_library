@@ -109,7 +109,7 @@ float rL1loss(float w, float l) { return l*( (w > 0.0f) - (w < 0.0f) ); }
 float rL2loss(float w, float l) { return l*w; }
 
 /* Stochastic Gradient Descent Algorithm */
-void sgd_solve (float *data, float *label, float *weight, float *bias, int SampleCount, int FeatureCount,
+void sgd_solve (matrix_t *feature, matrix_t *labels, uint32_t label, float *weight, float *bias,
      // learning parameters
      const int   SGD_SOL,//solver
      const float SGD_EPS,//epsilon
@@ -123,11 +123,14 @@ void sgd_solve (float *data, float *label, float *weight, float *bias, int Sampl
 
     float rho = 0;
 
+    uint32_t sample_size = rows(feature);
+    uint32_t feature_size = cols(feature);
+
     // select label -1 and +1 and do training over them
-    uint32_t *idx = random_permutation(SampleCount);
+    uint32_t *idx = random_permutation(sample_size);
     // arrays to hold gradient and regularization loss
     float grho, rrho;
-    float *gloss = (float*) malloc(FeatureCount*sizeof(float));
+    float *gloss = (float*) malloc(feature_size * sizeof(float));
 
     // generic gradient loss function
     float (*gXloss)(float,float,float,float);
@@ -143,36 +146,42 @@ void sgd_solve (float *data, float *label, float *weight, float *bias, int Sampl
     if(SGD_SOL == SVRL1) { gXloss = gSVRloss; rXloss = rL1loss; }
     if(SGD_SOL == SVRL2) { gXloss = gSVRloss; rXloss = rL2loss; }
 
-    for(iter=0; iter < SGD_MAX; iter++) {
-
+    for(iter=0; iter < SGD_MAX; iter++) 
+    {
         /* compute learning rate */
         float eta = SGD_ETA / (1 + SGD_LAM*SGD_ETA*iter);
 
         // pick a random_people in dataset
-        int s = idx[iter%SampleCount];
-        float *data_s = data + s*FeatureCount;
+        int s = idx[iter%sample_size];
+
+        float *data_s = data(float, feature, s,0);
+        float label_s = at(float, labels, s, label);
 
         // compute the xTx
         float acc = rho;
-        for (i = 0 ; i < FeatureCount; ++i) {
+        for (i = 0 ; i < feature_size; ++i)
+         {
             acc += weight[i]*data_s[i];
         }
         // gradient step generic loss function is used
-        for (i = 0 ; i < FeatureCount; ++i) {
-            gloss[i] = gXloss(acc,label[s],data_s[i],SGD_EPS);
+        for (i = 0 ; i < feature_size; ++i) 
+        {
+            gloss[i] = gXloss(acc,label_s,data_s[i],SGD_EPS);
         }
-        grho = gXloss(acc,label[s],1,SGD_EPS);
+        grho = gXloss(acc,label_s,1,SGD_EPS);
 
         // regularization step
         float rloss = 0;
-        for (i = 0 ; i < FeatureCount ; ++i) {
+        for (i = 0 ; i < feature_size ; ++i) 
+        {
             rloss += rXloss(weight[i], SGD_LAM);
         }
-        rloss /= FeatureCount;
+        rloss /= feature_size;
         rrho = rXloss(rho, SGD_LAM);
 
         // update step
-        for (i = 0 ; i < FeatureCount; ++i) {
+        for (i = 0 ; i < feature_size; ++i) 
+        {
             weight[i] -= eta*(gloss[i] + rloss);
         }
         rho -= eta*(grho + rrho);
@@ -185,41 +194,14 @@ void sgd_solve (float *data, float *label, float *weight, float *bias, int Sampl
 
 //! TODO FIXME: ICERIYE DIKKAT ET
 // HIGH LEVEL FUNCTIONS TO CALL FROM THE IMLAB APPLICATIONS
-return_t glm_train(matrix_t *input, vector_t *label, struct glm_t *model) {
+return_t glm_train(matrix_t *input, matrix_t *label, struct glm_t *model) {
 
     uint32_t i = 0, c = 0;
-    uint32_t numberOfClass = 0;
-    /*
-    vector_t *output_labels = vector_create(uint32_t);
-    vector_unique(label, output_labels, NULL);
-    numberOfClass = length(output_labels);
-    */
-    uint32_t *label_data = data(uint32_t, label);
-    for(i=0; i < length(label); i++) {
-        if(label_data[i] > numberOfClass) {
-            numberOfClass = label_data[i];
-        }
-    }
-    // for two class we have actually one class, otherwise we will have numberOfClass
-    if(numberOfClass > 1) {
-        numberOfClass++;
-    }
-    // create temp output matrix
-    matrix_t *output = matrix_create(float, numberOfClass, length(label));
-    for(c=0; c < numberOfClass; c++) {
-        for(i=0; i < length(label); i++) {
-            if(label_data[i] == c) {
-                at(float, output, c, i) = 1;
-            } else {
-                at(float, output, c, i) = 0;
-            }
-        }
-    }
-
+    uint32_t numberOfClass = cols(label);
 
     //This function assumes that the given input is either y in [-1,1] or y={-1,1}
-    if(rows(input) != cols(output)) {
-        message(ERROR, "input and output matrice have different number of samples");
+    if(rows(input) != rows(label)) {
+        message(ERROR, "input and label matrice have different number of samples");
         return ERROR_DIMENSION_MISMATCH;
     }
     if(channels(input) != 1) {
@@ -249,10 +231,8 @@ return_t glm_train(matrix_t *input, vector_t *label, struct glm_t *model) {
         model->beta[i]      = (float*) calloc(cols(input), sizeof(float));
         // train linear classifier or regressor
         // bu değerler artık ouput->cols ile belli olacak. artık çoklu eğitim desteklencek
-        sgd_solve(data(float, input), data(float, output, i, 0), model->beta[i], &model->bias[i], rows(input), cols(input), model->options.solver, eps, eta, lam, miter);
+        sgd_solve(input, label, i, model->beta[i], &model->bias[i], model->options.solver, eps, eta, lam, miter);
     }
-    //DONE
-    matrix_free(&output);
 
     return SUCCESS;
 }
@@ -269,13 +249,19 @@ return_t glm_predict(matrix_t *input, matrix_t *label, struct glm_t *model) {
     if(solv == LREL1 || solv == LREL2) { tform = lre_transform; }
     if(solv == SVML1 || solv == SVML2) { tform = svm_transform; }
 
-    for(class=0; class < model->nr_learner; class++) {
-        for(i=0; i < rows(input); i++) {
+    for(class=0; class < model->nr_learner; class++) 
+    {
+        for(i=0; i < rows(input); i++)
+        {
             // test each class
+            float *data_s = data(float, input, i, 0);
             float lab = model->bias[class];
-            for(k = 0; k < cols(input); k++ ) {
-                lab += model->beta[class][k]*at(float,input,i,k);
+
+            for(k = 0; k < cols(input); k++ ) 
+            {
+                lab += model->beta[class][k]*data_s[k];
             }
+            
             at(float, label, i, class) = tform(lab);
         }
     }

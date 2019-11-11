@@ -20,7 +20,7 @@ int main()
     matrix_t *gray  = matrix_create(uint8_t, height(img), width(img), 1);
     rgb2gray(img, gray);
 
-    struct feature_t *model = feature_create(CV_LBP, width(gray),height(gray), "");
+    struct feature_t *model = feature_create(CV_LBP, width(gray),height(gray), channels(gray), "");
 
 
     matrix_t *lbp_img = matrix_create(int32_t);
@@ -54,11 +54,11 @@ int main()
     printf("%s\n", c_str(stream));
 
     // create an LBP model with the default parameters
-    struct feature_t *lbp = feature_create(CV_LBP, width(gray),height(gray), "");
+    struct feature_t *lbp = feature_create(CV_LBP, width(gray),height(gray), channels(gray), "");
     feature_view(lbp);
 
     // create a HOG model with the given parameters
-    struct feature_t *hog = feature_create(CV_HOG, width(gray),height(gray), "bins:18 stride:1x1 block:6x6 cell:16x16");
+    struct feature_t *hog = feature_create(CV_HOG, width(gray),height(gray), channels(gray), "bins:18 stride:1x1 block:6x6 cell:16x16");
     feature_view(hog);
 
 

@@ -81,25 +81,27 @@ enum cv_algorithm_t {
 };
 
 // return type for the feature module
-struct feature_t {
+struct feature_t 
+{
     enum cv_algorithm_t algorithm;
     uint32_t feature_size;
     uint32_t image_width;
     uint32_t image_height;
+    uint32_t image_channels;
     void *parameters;
     return_t (*method)(matrix_t*, struct feature_t*, float*);
 };
-
 
 /**
  * \brief Construct a feature extraction algorithm with the given parameters
  * @param algorithm Algorithm to be used for feature extraction
  * @param width Width of the input image that the features will be extracted
  * @param height Height of the input image that the features will be extracted
+ * @param channels Channels of the input image that the features will be extracted
  * @param options Optional algorithm parameters. Parameters that are not given by the \p options are used with the default values.
  * @return feature_t object than can be used for feature extraction
  */
-struct feature_t *feature_create(enum cv_algorithm_t algorithm, uint32_t  width, uint32_t height, char *options);
+struct feature_t *feature_create(enum cv_algorithm_t algorithm, uint32_t  width, uint32_t height, uint32_t channels, char *options);
 
 /**
  * \brief Returns the feature size of the model
