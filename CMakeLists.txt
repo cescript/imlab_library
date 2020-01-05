@@ -5,7 +5,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # set copiler flags for debug and release
 set(CMAKE_C_FLAGS_DEBUG "-std=c99 -fgnu89-inline -pg -D_DEBUG -Wall -Wno-int-conversion -Wno-parentheses -Wno-unused-variable -Wno-unknown-pragmas -Wno-unused-result -Wno-format -Wno-format-extra-args")
-set(CMAKE_C_FLAGS_RELEASE "-std=c99 -fgnu89-inline -O2")
+set(CMAKE_C_FLAGS_RELEASE "-std=c99 -fgnu89-inline -O2 -Wno-unused-result")
 
 # add OS definitions
 if (WIN32)

@@ -251,4 +251,25 @@ matrix_t* fern_visualize(uint32_t out_width, uint32_t out_height, uint32_t scale
 struct fern_t* fern_read(const char *filename);
 return_t fern_write(struct fern_t *model, const char *filename);
 
+
+// reinforcement Q learning
+
+// create q table, allocate the memory
+struct q_table_t *q_table_create(uint32_t num_states, uint32_t num_actions, float gamma);
+
+// deallocate the memory allocated by the q table
+void q_table_free(struct q_table_t **in);
+
+// Q[state, action] = Q[state, action] + alpha * (reward + gamma * max(Q [next_state, :]) — Q[state, action])
+return_t q_table_update(struct q_table_t *Q, uint32_t state, uint32_t action, uint32_t next_state, float alpha, float reward);
+
+// get the action proposed by the q learning algorithm
+uint32_t q_table_get_action(struct q_table_t *Q, uint32_t state, float exploration);
+
+// create q table, allocate the memory
+struct q_table_t *q_table_read(const char *filename);
+
+// write the given qtable with the given name
+return_t q_table_write(struct q_table_t *inp, const char *filename);
+
 #endif

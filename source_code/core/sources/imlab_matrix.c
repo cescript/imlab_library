@@ -303,7 +303,7 @@ void matrix_view(matrix_t *in)
     } else if(total_size > 1024) {
         printf("Memory Size  : %3.2f kB\n", total_size / (float)(1024));
     } else {
-        printf("Memory Size  : %d bytes\n", total_size);
+        printf("Memory Size  : %zu bytes\n", total_size);
     }
 
 

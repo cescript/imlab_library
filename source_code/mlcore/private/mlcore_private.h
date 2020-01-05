@@ -8,7 +8,8 @@
 #include "private/core_private.h"
 #include "../mlcore.h"
 
-struct sgd_parameters {
+struct sgd_parameters 
+{
     uint32_t solver;
     // training features
     uint32_t max_iter;
@@ -18,7 +19,8 @@ struct sgd_parameters {
 };
 
 // glm_t output
-struct glm_t{
+struct glm_t
+{
     // parameters for the linear model
     struct sgd_parameters options;
     //
@@ -30,7 +32,8 @@ struct glm_t{
     float **beta;
 };
 
-struct fern_t {
+struct fern_t 
+{
 
     // filled in fern constructor
     uint8_t  solver;
@@ -54,6 +57,15 @@ struct fern_t {
     float ***weights; // [forest_size][2^tree_depth][CLASSIFICATION ? nr_class : nr_learner]
 
 
+};
+
+struct q_table_t
+{
+    float gamma; // discount factor
+
+    uint32_t num_states;
+    uint32_t num_actions;
+    float **qtable;
 };
 
 #endif //IMLAB_MLCORE_PRIVATE_H
