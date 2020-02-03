@@ -407,6 +407,90 @@ return_t lbp_extract(matrix_t *in, struct feature_t *par_model, float *feature)
     //done
     return SUCCESS;
 }
+
+matrix_t *lbp2image(float *feature, struct feature_t *par_model)
+{
+    // get the LBP model
+    struct lbp_parameters_t *model = par_model->parameters;
+
+    // compute the cell in single row and cell in single column
+    uint32_t cell_in_row = lbp_height(model) / model->b_size[0];
+    uint32_t cell_in_col = lbp_width(model) / model->b_size[1];
+
+    uint32_t output_cell_size = 16;
+
+    // compute the necessary image size
+    uint32_t image_width = output_cell_size * cell_in_col;
+    uint32_t image_height = output_cell_size * cell_in_row;
+
+    // create the output image
+    matrix_t *image = matrix_create(uint8_t, image_height, image_width, 3);
+
+    // check that the necessary memories are allocated
+    check_null(image, matrix_null());
+    
+    uint32_t i, j, bin;
+
+    /// now normalize the cell
+    for (j = 0; j < cell_in_row; j++)
+    {
+        for (i = 0; i < cell_in_col; i++)
+        {
+            // find the most occured two patterns in the cell
+            uint32_t idx = model->hist_bin_size * (i + j * cell_in_col);
+
+            uint32_t bin1 = 0;
+            uint32_t bin2 = 0;
+
+            // search for the maximum
+            for (bin = 0; bin < model->hist_bin_size; bin++)
+            {
+                if(feature[idx + bin] >= feature[idx + bin1])
+                {
+                    bin2 = bin1;
+                    bin1 = bin;
+                }
+            }
+
+            // find the color
+            struct color_t b1 = HSV(map(bin1, 0, model->hist_bin_size - 1, 0, 255), 200, 200);
+            struct color_t b2 = HSV(map(bin2, 0, model->hist_bin_size - 1, 0, 255), 200, 200);
+
+            // now colorize the output image
+            uint32_t x, x1 = i * output_cell_size;
+            uint32_t y, y1 = j * output_cell_size;
+
+            // continue if empty or too small
+            if( (feature[idx + bin1] + feature[idx + bin2]) < 1e-5)
+            {
+                continue;
+            }
+
+            uint32_t t = output_cell_size * (feature[idx + bin1] / (feature[idx + bin1] + feature[idx + bin2]));
+
+            // fill the grid
+            for (y = 0; y < output_cell_size; y++)
+            {
+                for (x = 0; x < t; x++)
+                {
+                    atui8(image, y + y1, x + x1, 0) = b1.blue;
+                    atui8(image, y + y1, x + x1, 1) = b1.green;
+                    atui8(image, y + y1, x + x1, 2) = b1.red;
+                }
+                for (x = t; x < output_cell_size; x++)
+                {
+                    atui8(image, y + y1, x + x1, 0) = b2.blue;
+                    atui8(image, y + y1, x + x1, 1) = b2.green;
+                    atui8(image, y + y1, x + x1, 2) = b2.red;
+                }
+            }
+        }
+    }
+
+    //done
+    return image;
+}
+
 /*
 static void lbp_cell_normalize(float *feature, float *cell_sum, int cell_in_row, int cell_in_col, int hist_bin_size) {
 

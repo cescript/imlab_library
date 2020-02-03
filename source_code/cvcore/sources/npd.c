@@ -119,3 +119,37 @@ return_t npd_extract(matrix_t *in, struct feature_t *par_model, float *feature)
 
     return SUCCESS;
 }
+
+matrix_t *npd2image(float *feature, struct feature_t *par_model)
+{
+    matrix_t *image = matrix_create(uint8_t, par_model->image_height, par_model->image_width, 3);
+    
+    // check that the necessary memories are allocated
+    check_null(image, matrix_null());
+
+    // get the NPD parameters
+    struct npd_parameters_t *model = par_model->parameters;
+
+    uint32_t f;
+    for (f = 0; f < model->feature_size; f++)
+    {
+        uint32_t k1 = (model->selected[0][f] / par_model->image_channels);
+        uint32_t y1 = k1 / par_model->image_width;
+        uint32_t x1 = k1 % par_model->image_width;
+
+        uint32_t k2 = (model->selected[1][f] / par_model->image_channels);
+        uint32_t y2 = k2 / par_model->image_width;
+        uint32_t x2 = k2 % par_model->image_width;
+
+        struct point_t p1 = point(x1, y1, 0);
+        struct point_t p2 = point(x2, y2, 0);
+
+        // map the feature into color
+        uint32_t value = map(feature[f], -1.0, 1.0, 0, 255);
+
+        draw_line(image, p1, p2, HSV(value, 200, 200), 3);
+    }
+
+    // return the output image
+    return image;
+}

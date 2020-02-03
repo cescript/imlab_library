@@ -115,6 +115,14 @@ uint32_t  feature_size(struct feature_t *model);
  */
 void feature_view(struct feature_t *model);
 
+/**
+ * \brief Visualize the given feature vector as an image
+ * @param feature Extracted feature vector using feature_extract
+ * @param model Input model to be used for feature representation
+ * @return An image created by using the given feature vector
+ */
+matrix_t *feature_visualize(float *feature, struct feature_t *model);
+
 //
 /**
  * \brief Extract the features from the given image and fills the output array

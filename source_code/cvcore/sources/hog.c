@@ -180,14 +180,15 @@ static void imgradient(matrix_t *in, float *mag, float *ori, int nbin)
                 grad_y = (in_data[ channels(in)*(i+(j+1)*width(in)) + d ] - in_data[ channels(in)*(i+(j-1)*width(in)) + d ]) / 255.0f;
 
                 // get the gradient
-                if(grad_x*grad_x + grad_y*grad_y > grad) {
+                if(grad_x*grad_x + grad_y*grad_y > grad) 
+                {
                     grad   = grad_x*grad_x + grad_y*grad_y;
                     gx = grad_x;
                     gy = grad_y;
                 }
             }
-            mag[ i+j*width(in) ] = sqrt(grad);
-            ori[ i+j*width(in) ] = (nbin-1)*(0.5 + atan2f(gx,gy)/(6.284)) ;//map( atan2f(gx,gy), -3.15, 3.15, 0, nbin-0.1 );;
+            mag[i + j * width(in)] = sqrt(grad);
+            ori[i + j * width(in)] = map(fabs(atan2f(gy, gx)), 0.0f, 3.141593f, 0, nbin - 1);
         }
     }
     //done
@@ -198,15 +199,10 @@ static void hog_cell_histogram(float *mag, float *ori, float *cell_hist, int wid
 {
     uint32_t i,j,ci,cj, idx;
 
-    float fbin;
-    uint32_t ibin;
-
-    // TODO: remove this
-    if(width == height) {
-    }
     // set pointers to the (wi,hj) position
     ori += wi+width*hj;
     mag += wi+width*hj;
+
     // loop in the window and compute the histogram for each cell
     for(j=0; j < model->height; j++) 
     {
@@ -217,9 +213,11 @@ static void hog_cell_histogram(float *mag, float *ori, float *cell_hist, int wid
             ci = i/model->c_size[1];//*inc_i;
 
             idx = model->nbins*(ci+model->hog_width*cj);
+
             //scale the ori in [0,1] and multiply by the nbins-1
-            fbin = ori[i];
-            ibin = (uint32_t)fbin;
+            float fbin = ori[i];
+            uint32_t ibin = (uint32_t)fbin;
+
             // computes hog for a cell ci,cj
             // use bilinear interpolation and cyclic index
             cell_hist[idx + ibin]   += (1-(fbin-ibin))*mag[i];
@@ -232,26 +230,6 @@ static void hog_cell_histogram(float *mag, float *ori, float *cell_hist, int wid
     //done
 }
 
-
-/*
-void hog_cell_int_histogram(float **hist_int, float *cell_hist, int width, int height, int wi, int hj, struct hog_t *model) {
-
-    int i,j,ci,cj, idx;
-
-    for(cj=0; cj < model->hog_height; cj++) {
-        for(ci=0; ci < model->hog_width; ci++) {
-            ///InvArea*(ssum[i+j*M] + ssum[i+WS+(j+WS)*M] - ssum[i+WS+j*M] - ssum[i+(j+WS)*M])
-            for(i=0; i < model->nbins; i++) {
-                cell_hist[i] += hist_int[i][wi + hj*width]+hist_int[i][wi+ci*model->c_size[1] + (hj+cj*model->c_size[0])*width];
-                cell_hist[i] -= hist_int[i][wi+ci*model->c_size[1] + hj*width]+hist_int[i][wi + (hj+cj*model->c_size[0])*width];
-            }
-            cell_hist += model->nbins;
-        }
-        cell_hist += model->nbins*(model->hog_width);
-    }
-    //done
-}
-*/
 static void hog_block_histogram(float *cell_hist, float *feature, struct hog_parameters_t *model) 
 {
 
@@ -307,307 +285,83 @@ return_t hog_extract(matrix_t *in, struct feature_t *par_model, float *feature)
     //done
     return SUCCESS;
 }
-/*
-matrix_t* hog_detect(matrix_t *in, struct hog_t *model, struct glm_t *net, float threshold) {
 
-    int i,j;
-    // detection options
-    static int MaxDet  = 1024;
-    int WS, WindowSize = 20;
-    float ScaleFactor  = 1.2;
-    int stride = 10;
-
-
-    matrix_t *out = matrix_create(in, in->_data);
-    // @TODO add support for floatimg point images
-    uint8_t *out_data = data(uint8_t, out);
-
-    for(j=0; j < height(out)-model->height; j++) {
-        for(i=0; i < width(out)-model->width; i++) {
-            out_data[ channels(out)*(i+model->width/2 + width(out)*(j+model->height/2)) + 0 ] *= 0.2;
-            out_data[ channels(out)*(i+model->width/2 + width(out)*(j+model->height/2)) + 1 ] *= 0.2;
-            out_data[ channels(out)*(i+model->width/2 + width(out)*(j+model->height/2)) + 2 ] *= 0.2;
-        }
-    }
-
-    /// cell histogram will be kept here
-    float *cell_hist = (float*) malloc(model->hog_height*model->hog_width*model->nbins*sizeof(float));
-
-    ///step 1: get the gradient of the image
-    float  *grad_mag  = (float*)  malloc(width(in)*height(in)*sizeof(float));
-    float  *grad_ori  = (float*)  malloc(width(in)*height(in)*sizeof(float));
-
-    imgradient(in, grad_mag, grad_ori, model->nbins);
-
-    matrix_t *feature = matrix_create(float, 1,model->feature_size);
-    float *feature_data = data(float, feature);
-
-    float label;
-
-    //#pragma omp parallel for private(i,j, label)
-    for(j=0; j < height(in)-model->height; j+=stride) {
-        //printf("Progress: %3.2f\r", 100.0f*j/(height(in)-model->height));
-        for(i=0; i < width(in)-model->width; i+=stride) {
-            //hog_extract(I,i,j,feature->data[0], model);
-
-            ///step 2: get nbin-gradient histogram of the input for each cell
-            memset(cell_hist, 0, model->hog_height*model->hog_width*model->nbins*sizeof(float));
-            // clear cell_hist before call
-            hog_cell_histogram(grad_mag, grad_ori, cell_hist, width(in), height(in), i, j, model);
-            //hog_cell_int_histogram(hist_int, cell_hist, width(in), height(in), i,j, model);
-            ///step 3: use cell features and merge those by b_size x b_size
-            hog_block_histogram(cell_hist, feature_data, model);
-
-            glm_predict(feature, &label, net);
-            //label = max2(-1, min2(1, label));
-            label = label > threshold ? 1:-1;
-            //#pragma omp critical
-
-            out_data[ channels(out)*(i+model->width/2 + width(out)*(j+model->height/2)) + 0 ] += 76*(label+1);
-            out_data[ channels(out)*(i+model->width/2 + width(out)*(j+model->height/2)) + 1 ] += 96*(label+1);
-            out_data[ channels(out)*(i+model->width/2 + width(out)*(j+model->height/2)) + 2 ] += 10*(label+1);
-
-        }
-    }
-    free(cell_hist);
-    free(grad_mag);
-    free(grad_ori);
-
-    return out;
-}
-*/
-
-/*
-matrix_t* hog_fast_detect(matrix_t *in, struct hog_t *model, GLM *net, float threshold) {
-
-    int i,j,k, ii,jj;
-    // detection options
-    static int MaxDet  = 1024;
-    int WS, WindowSize = 20;
-    float ScaleFactor  = 1.2;
-
-    matrix_t *out = imclone(in);
-
-    for(j=0; j < height(out)-model->height; j++) {
-        for(i=0; i < width(out)-model->width; i++) {
-            out_data[ channels(out)*(i+model->width/2 + width(out)*(j+model->height/2)) + 0 ] *= 0.2;
-            out_data[ channels(out)*(i+model->width/2 + width(out)*(j+model->height/2)) + 1 ] *= 0.2;
-            out_data[ channels(out)*(i+model->width/2 + width(out)*(j+model->height/2)) + 2 ] *= 0.2;
-        }
-    }
-
-
-    ///step 1: get the gradient of the image
-    float  *grad_mag  = (float*)  malloc(width(in)*height(in)*sizeof(float));
-    float  *grad_ori  = (float*)  malloc(width(in)*height(in)*sizeof(float));
-
-    imgradient(in, grad_mag, grad_ori, model->nbins);
-
-    int ci,cj, idx;
-
-    int ImageCellinRow = height(in) / model->c_size[0];
-    int ImageCellinCol = width(in)  / model->c_size[1];
-
-    float fbin;
-    int ibin;
-
-    /// cell histogram will be kept here
-    float *cell_hist = (float*) malloc(ImageCellinRow*ImageCellinCol*model->nbins*sizeof(float));
-
-    // loop in the window and compute the histogram for each cell
-    for(cj=0; cj < ImageCellinRow; cj++) {
-        jj = cj*model->c_size[0];
-        for(ci=0; ci < ImageCellinCol; ci++) {
-            // cell index of the current column
-            ii = ci*model->c_size[1];
-
-            idx = model->nbins*(ci + ImageCellinCol*cj);
-            // compute histogram for the ii,jj cell
-            for(j=jj; j < jj+model->c_size[0]; j++) {
-                for(i=ii; i < ii+model->c_size[1]; i++) {
-
-                    fbin = grad_ori[ i + j*width(in) ];
-                    ibin = (int)fbin;
-                    // computes hog for a cell ci,cj
-                    // use bilinear interpolation and cyclic index
-                    cell_hist[idx + ibin]   += (1-(fbin-ibin))*grad_mag[i + j*width(in)];
-                    if(ibin == model->nbins-1) { ibin = -1; }
-                    cell_hist[idx + ibin + 1] += (fbin-ibin)*grad_mag[i + j*width(in)];
-
-                }
-            }
-        }
-    }
-
-    float *feature;
-    float label, norm;
-
-    // create solver and find the transform function
-    float (*tform)(float);
-    int solv = net->options.solver;
-
-    if(solv == LSRL1 || solv == LSRL2) { tform = lsr_transform; }
-    if(solv == SVRL1 || solv == SVRL2) { tform = svr_transform; }
-    if(solv == LREL1 || solv == LREL2) { tform = lre_transform; }
-    if(solv == SVML1 || solv == SVML2) { tform = svm_transform; }
-
-    //#pragma omp parallel for private(i,j, label)
-    for(cj=0; cj < ImageCellinRow-model->b_size[0]; cj++) {
-        //printf("Progress: %3.2f\r", 100.0f*cj/(ImageCellinRow-model->b_size[0]));
-        for(ci=0; ci < ImageCellinCol-model->b_size[1]; ci++) {
-            //hog_extract(I,i,j,feature->data[0], model);
-
-            // create block histogram
-            norm  = IM_EPS;
-            feature = cell_hist + model->nbins*(ci + ImageCellinCol*cj);
-
-            for(j=0; j < model->b_size[0]; j++) {
-                for(k = 0; k < model->nbins * model->b_size[1]; k++ ) {
-                    norm += feature[k];
-                }
-                feature += model->nbins*ImageCellinCol;
-            }
-
-            norm = 1.0f/norm;
-            feature = cell_hist+ model->nbins*(ci + ImageCellinCol*cj);
-            idx = 0;
-            label = net->bias[0];
-            for(j=0; j < model->b_size[0]; j++) {
-                for(k = 0; k < model->nbins * model->b_size[1]; k++ ) {
-                    label += net->beta[0][idx++]*sqrt(feature[k]*norm);
-                }
-                feature += model->nbins*ImageCellinCol;
-            }
-
-            label = tform(label);
-            if(label > threshold) {
-                printf("%3.2f\n", label);
-            }
-            //label = max2(-1, min2(1, label));
-            label = 1;//label > threshold ? 1:-1;
-            i = ci*model->c_size[1];
-            j = cj*model->c_size[0];
-            out_data[ channels(out)*(i+model->width/2 + width(out)*(j+model->height/2)) + 0 ] += 76*(label+1);
-            out_data[ channels(out)*(i+model->width/2 + width(out)*(j+model->height/2)) + 1 ] += 96*(label+1);
-            out_data[ channels(out)*(i+model->width/2 + width(out)*(j+model->height/2)) + 2 ] += 10*(label+1);
-        }
-    }
-    free(cell_hist);
-    free(grad_mag);
-    free(grad_ori);
-
-    return out;
-}
-*/
-/*
-// extract hog from the given image
-float*** hog_extract(matrix_t *in, float *feature, struct hog_t *model) {
-
-    int i,j, ci, cj;
-
-    // strange way to keep 3d histogram
-    float ***cell_norm = (float***) calloc(model->hog_height,sizeof(float**));
-    for(i=0; i < model->hog_height; i++) {
-        cell_norm[i] = (float**) calloc(model->hog_width,sizeof(float*));
-        for(j=0; j < model->hog_width; j++) {
-            cell_norm[i][j] = (float*) calloc(4*model->nbins,sizeof(float));
-        }
-    }
-
-    float *hist = (float*) calloc(model->nbins,sizeof(float));
-    ///step 1: get gradient of the input for each cell
-    for(cj=0; cj < model->hog_height; cj++) {
-        for(ci=0; ci < model->hog_width; ci++) {
-
-            // computes hog for a cell ci,cj
-            cell_histogram(data, ci, cj, width, height, model->c_size[1], model->c_size[0], model->nbins, hist);
-
-            // compute energy of the histogram vector
-            float l1 = IM_EPS, l2 = IM_EPS, l2h = IM_EPS;
-            for(i=0; i < model->nbins; i++) {
-                l1  += hist[i]; // l1 sum of the vector
-                l2  += hist[i]*hist[i]; // l2 sum of the vector
-                l2h += min2(hist[i], 0.2f)*min2(hist[i], 0.2f); // l2 hys
-            }
-            // compute the 4 normalized feature vector for each cell
-            for(i=0; i < model->nbins; i++) {
-                cell_norm[cj][ci][0*model->nbins  + i] = hist[i]/l1;
-                cell_norm[cj][ci][1*model->nbins  + i] = sqrt(hist[i]/l1);
-                cell_norm[cj][ci][2*model->nbins  + i] = hist[i]/sqrt(l2);
-                cell_norm[cj][ci][3*model->nbins  + i] = max2(hist[i], 0.2f)/sqrt(l2h);
-
-                // now we are done with the hist[i], clear it for the later pass
-                hist[i] = 0;
-            }
-        }
-    }
-    return cell_norm;
-    /// use cell features and merge those by b_size x b_size
-}
-*/
-
-matrix_t *hog2image(float *feature, struct hog_parameters_t *model) 
+// convert input feature map to HOG visualization
+matrix_t *hog2image(float *feature, struct feature_t *par_model)
 {
-    uint32_t i,j,b,ci,cj;
+    // get the HOG parameters
+    struct hog_parameters_t *model = par_model->parameters;
 
-    uint32_t cell_width  = model->c_size[0] * 2;
-    uint32_t cell_height = model->c_size[1] * 2;
+    // double the size of the cell for better visualization
+    uint32_t cell_width  = 2 * model->c_size[0] + 1;
+    uint32_t cell_height = 2 * model->c_size[1] + 1;
 
-    matrix_t *image = matrix_create(uint8_t, model->block_height*cell_height,model->block_width*cell_width, 1);
-    matrix_t *patch = matrix_create(uint8_t, cell_height, cell_width, 1);
-    matrix_t *rotpatch = matrix_create(uint8_t, cell_height, cell_width, 1);
+    // create an output image
+    matrix_t *image = matrix_create(uint8_t, model->block_height * cell_height, model->block_width * cell_width, 3);
 
-    if(image == NULL || patch == NULL || rotpatch == NULL) 
+    // check that the necessary memories are allocated
+    check_null(image, matrix_null());
+
+    // find the number of histogram in one block
+    uint32_t number_of_histograms_in_block = model->nbins * model->b_size[0] * model->b_size[1];
+
+    // compute the orientation bins
+    float orientation_step = 3.1415945f / model->nbins;
+    
+    // allocate space for cell normalization
+    float *cell_histogram = (float *)calloc(model->nbins, sizeof(float));
+
+    uint32_t b, ci, cj;
+    for (cj = 0; cj < model->block_height; cj++)
     {
-        return NULL;
-    };
-    // @TODO add support for floatimg point images
-    uint8_t *rotpatch_data = data(uint8_t, rotpatch);
-    uint8_t *patch_data    = data(uint8_t, patch);
-    uint8_t *image_data    = data(uint8_t, image);
-
-    for(i=0; i < cell_width; i++) 
-    {
-        for(j=-2; j < 3; j++) 
+        for (ci = 0; ci < model->block_width; ci++)
         {
-            patch_data[i + (height(patch)/2+j)*width(patch)] = 255;
-        }
-    }
-    int NumHistInBlock = model->nbins*model->b_size[0]*model->b_size[1];
+            // set the starting orientation
+            float orientation = orientation_step / 2;
 
-    float ori = 0;
-    float ori_step = 180.0f/model->nbins;
-    for(b=0; b < model->nbins; b++) {
-        //create an image in b direction
-        imtransform(patch, rot2tform(width(patch)/2, height(patch)/2, ori, 1), rotpatch);
-        ori += ori_step;
+            // first find the normalized cell histogram
+            float cell_sum = 0;
+            for(b = 0; b < model->nbins; b++)
+            {
+                cell_histogram[b] = feature[number_of_histograms_in_block * (ci + cj * model->block_width) + b];
+                cell_sum += cell_histogram[b];
+            }
 
-        for(cj=0; cj < model->block_height; cj++) {
-            for(ci=0; ci < model->block_width; ci++) {
+            // if the sum of the cell histogram is too low, do not print anything
+            if (cell_sum < 1e-5)
+            {
+                continue;
+            }
+
+            // draw line for each orientation for the current cell
+            for (b = 0; b < model->nbins; b++)
+            {
+                // draw the line with the appropriate orientation
+                float x0 = model->c_size[0] * cos(orientation);
+                float y0 = model->c_size[1] * sin(orientation);
 
                 // assign pixels
-                int idx_w = ci*cell_width;
-                int idx_h = cj*cell_height;
-                int idx;
+                uint32_t x = ci * cell_width + model->c_size[0];
+                uint32_t y = cj * cell_height + model->c_size[1];
 
-                float sc = feature[ NumHistInBlock*(ci+cj*model->block_width) + b ];
+                struct point_t p1 = point(x + x0, y + y0, 0);
+                struct point_t p2 = point(x - x0, y - y0, 0);
 
-                for(j=0; j < cell_height; j++) 
-                {
-                    for(i=0; i < cell_width; i++) 
-                    {
-                        idx = idx_w+i+ (idx_h+j)*width(image);
-                        // suppress if the values are similar
-                        image_data[idx] += rotpatch_data[i + j*width(rotpatch)] * (sc*sc*10);
-                    }
-                }
+                // get the corresponding value for the patch
+                float fval = cell_histogram[b] / cell_sum;
 
-            // continue with the other cells
+                // map the value between 0-1
+                uint32_t value = map(fval, 0, 1.0, 0, 255);
+
+                // draw the line on the image
+                draw_line(image, p1, p2, HSV(value, 200, value), 1);
+
+                // get the nex orientation angle
+                orientation += orientation_step;
             }
         }
     }
-    matrix_free(&patch);
-    matrix_free(&rotpatch);
 
+    // return the result
     return image;
 }

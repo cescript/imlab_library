@@ -17,6 +17,7 @@ struct encoder_parameters_t
 return_t imencode_gray(matrix_t *in, float *feature);
 struct feature_t *encoder_create(uint32_t width, uint32_t height, uint32_t channels, char options[]);
 return_t encoder_extract(matrix_t *in, struct feature_t *par_model, float *feature);
+matrix_t *encoder2image(float *feature, struct feature_t *par_model);
 
 struct lbp_parameters_t 
 {
@@ -44,6 +45,7 @@ void lbp_detect(matrix_t *in, struct lbp_parameters_t *model, struct glm_t *net,
 
 void lbp_3x3(matrix_t *in, int *lbp_feat);
 void lbp_nxn(matrix_t *in, int *lbp_feat, struct lbp_parameters_t *model);
+matrix_t *lbp2image(float *feature, struct feature_t *par_model);
 
 struct hog_parameters_t 
 {
@@ -89,8 +91,9 @@ uint32_t  hog_feature_size(struct feature_t *model);
  * @return SUCCESS if the features are extracted correctly or the causing error.
  */
 return_t hog_extract(matrix_t *in, struct feature_t *model, float *feature);
-//matrix_t* hog_detect(matrix_t *in, struct hog_parameters_t *model, struct glm_t *net, float threshold);
-matrix_t *hog2image(float *feature, struct hog_parameters_t *model);
+
+// convert hog feature into image
+matrix_t *hog2image(float *feature, struct feature_t *model);
 
 struct npd_parameters_t 
 {
@@ -105,11 +108,38 @@ struct npd_parameters_t
     uint32_t *selected[2];
 };
 
+/**
+ * Create Normalized Pizel Difference feature extractor
+ * @param width Width of the image that the features will be extracted.
+ * @param height Height of the image that the features will be extracted.
+ * @param height Channels of the image that the features will be extracted.
+ * @param options Optional parameters in the IMLAB parameter format.
+ * @return Created feature model for the later usage.
+ */
 struct feature_t *npd_create(uint32_t width, uint32_t height, uint32_t channels, char options[]);
+
+/**
+ * Displays the parameters of the created NPD model.
+ * @param model Created NPD model which will be displayed.
+ */
 void npd_view(struct feature_t *par_model);
 
+/**
+ * Extracts the NPD features from the given image using the previously created model.
+ * @param in Input image to be used for feature extraction
+ * @param feature Output vector where the features will be written. It should be allocated before calling this function.
+ * @param model Created NPD model to be used for feature extraction.
+ * @return SUCCESS if the features are extracted correctly or the causing error.
+ */
 return_t npd_extract(matrix_t *in, struct feature_t *par_model, float *feature);
+
+/**
+ * Create NPD structure with the given parameters
+ */
 int npd_parameters(uint32_t width, uint32_t height, uint32_t channels, char *options, struct npd_parameters_t *out);
+
+// convert NPD feature into image
+matrix_t *npd2image(float *feature, struct feature_t *model);
 
 struct haar_feature_t
 {

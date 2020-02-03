@@ -68,4 +68,57 @@ struct q_table_t
     float **qtable;
 };
 
+struct layer_t
+{
+    // type of the neuron
+    char type;
+    uint32_t num_neuron;
+
+    // activation function and derivative of it
+    float (*activation)(float); // sigmoid-tangent-relu
+    float (*derivative)(float); // derivative of the above activation functions
+
+    // for each input we should have a weight and one bias
+    float *bias;
+    float **weights;
+
+    float *net_inputs;
+    float *outputs;
+};
+
+struct ann_t
+{
+    // options for the learning
+    // training features
+    uint32_t max_iter;
+    uint32_t batch_size; // size of the batch for stochastic gradient descent
+    float epsilon;
+    float eta;
+
+    // structure of the layer
+    char *layer_type;
+    uint32_t *num_neuron;
+
+    // all the variables thta we need
+    uint32_t num_feature; // num input
+    uint32_t num_class;   // num output
+    uint32_t num_layer;   // number of layers
+
+    // layer structure
+    struct layer_t **layer;
+};
+
+// COMMON UTILITY FUNCTIONS
+// logistic function and its derivatives
+float sigmoid(float x);
+float sigmoid_d(float x);
+
+// tangent hyperbolic function and its derivative
+float tanhyper(float x);
+float tanhyper_d(float x);
+
+// relu function and its derivative
+float relu(float x);
+float relu_d(float x);
+
 #endif //IMLAB_MLCORE_PRIVATE_H

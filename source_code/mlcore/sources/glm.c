@@ -86,8 +86,6 @@ return_t glm_view(struct glm_t *model) {
     return SUCCESS;
 }
 
-float sigmoid(float x)       { return 1/(1+expf(-x)); }
-
 float lsr_transform(float x) { return x; }
 float svr_transform(float x) { return x; }
 

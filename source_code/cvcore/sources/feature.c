@@ -51,6 +51,32 @@ void feature_view(struct feature_t *model)
     return;
 }
 
+matrix_t *feature_visualize(float *feature, struct feature_t *model)
+{
+    // if the input is null, warn the user
+    check_null(model, matrix_null());
+
+    if (model->algorithm == CV_ENCODER)
+    {
+        return encoder2image(feature, model);
+    }
+    else if (model->algorithm == CV_LBP)
+    {
+        return lbp2image(feature, model);
+    }
+    else if (model->algorithm == CV_HOG)
+    {
+        return hog2image(feature, model);
+    }
+    else if (model->algorithm == CV_NPD)
+    {
+        return npd2image(feature, model);
+    }
+
+    // return nothing
+    return matrix_null();
+}
+
 // return the length of the feature using the model
 uint32_t  feature_size(struct feature_t *model) 
 {

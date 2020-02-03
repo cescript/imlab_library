@@ -92,3 +92,27 @@ return_t imencode_gray(matrix_t *in, float *feature)
     }
     return SUCCESS;
 }
+
+matrix_t *encoder2image(float *feature, struct feature_t *par_model)
+{
+    // get the encoder parameters
+    struct encoder_parameters_t *model = par_model->parameters;
+
+    // create an output image
+    matrix_t *image = matrix_create(uint8_t, par_model->image_height, par_model->image_width, 3);
+
+    // check that the necessary memories are allocated
+    check_null(image, matrix_null());
+    
+    uint8_t *img_pointer = mdata(image, 0);
+
+    uint32_t idx_gray = 0, idx = 0;
+    for (idx_gray = 0; idx_gray < par_model->image_height * par_model->image_width; idx_gray++, idx += 3)
+    {
+        img_pointer[idx + 0] = feature[idx_gray] * 255;
+        img_pointer[idx + 1] = feature[idx_gray] * 255;
+        img_pointer[idx + 2] = feature[idx_gray] * 255;
+    }
+
+    return image;
+}

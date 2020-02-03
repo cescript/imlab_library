@@ -272,4 +272,67 @@ struct q_table_t *q_table_read(const char *filename);
 // write the given qtable with the given name
 return_t q_table_write(struct q_table_t *inp, const char *filename);
 
+// ann learning
+
+// create and return an object from the ann_t class
+/***
+ * Create and return an object from the ann_t class with the given parameters
+ * @param layers Layer structure of the ann model. 
+ * An integer followed by the layer type indicator must be given.
+ * For example, '5L' creates a layer with 5 neurons which have (L)ogistic activation function
+ * For multi layer design parameters must be seperated by '-' e.g. "5L-3T-8L-7R-1L"
+ * Supported activation methods are
+ * (L)ogistic
+ * (T)angent Hyperbolic
+ * (R)ectified Linear Unit (ReLU)
+ * Number of neurons in the last layer must match the label data given to ann_train.
+ * 
+ * @param options Options for the ann model.
+ *  Parameters can be seperated by space e.g. "-max_iter:1000 -eta:0.2"
+ * -max_iter:# specify the maximum number of iterations
+ * -batch_size:# specify the batch size for the stochastic gradient computation
+ * -eta:# learning speed of the stochastic solver
+ * -epsilon:# epsilon value for the ann algorithm (not used)
+ */
+struct ann_t *ann_create(const char *layers, char options[]);
+
+/**
+ * Prints the parameters of the artifical neural network model
+ * @param model Input ANN structure
+*/
+void ann_view(struct ann_t *model);
+
+/**
+ * Train method for the Artificial Neural Network model
+ * @param input Feature matrix for the ann. Number of rows represents the number of samples and the number of columns represents the length of the feature space
+ * @param output Label matrix where the number of rows dedicated for the samples and number of columns represents the expected target labels
+ * For two class classification or regression task, label matrix should be Nx1 and between 0-1
+ * For K class classification or regression tasks, label matrix should be NxK and between 0-1
+ * @param model Learned ANN structure
+*/
+return_t ann_train(matrix_t *input, matrix_t *output, struct ann_t *model);
+
+/**
+ * Prediction method for the Artificial Neural Network model
+ * @param input Feature matrix for the ann. Number of rows represents the number of samples and the number of columns represents the length of the feature space
+ * @param output Label matrix where the number of rows dedicated for the samples and number of columns represents the predicted target labels
+ * For two class classification or regression task, label matrix should be Nx1 and between 0-1
+ * For K class classification or regression tasks, label matrix should be NxK and between 0-1
+ * @param model Learned ANN structure
+*/
+return_t ann_predict(matrix_t *input, matrix_t *output, struct ann_t *model);
+
+/**
+ * Read the input ann file and store it into the ann_t structure
+ * @param filename Input filename for ann file written with ann_write method
+ */
+struct ann_t *ann_read(const char *filename);
+
+/**
+ * Write the input ann structure into the file
+ * @param net Input ANN structure to store in file
+ * @param filename Output filename for destination file. Written file can be read with ann_read method
+ */
+return_t ann_write(struct ann_t *net, const char *filename);
+
 #endif
