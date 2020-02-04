@@ -36,8 +36,10 @@ uint32_t hog_parameters(int32_t width, uint32_t height, uint32_t channels, char 
         model->block_width  = 1+(model->hog_width -model->b_size[1])/model->stride[1];
         model->block_height = 1+(model->hog_height-model->b_size[0])/model->stride[0];
         model->feature_size = model->b_size[0]*model->b_size[1]*model->nbins*model->block_width*model->block_height;
+
         // allocate memory fro the gradients and histograms
         model->cell_hist = (float*) calloc(model->hog_height*model->hog_width*model->nbins, sizeof(float));
+
         if(model->cell_hist == NULL) 
         {
             return 0;
@@ -120,75 +122,21 @@ uint32_t  hog_feature_size(struct feature_t *model)
     return ((struct hog_parameters_t*)(model->parameters))->feature_size;
 }
 
-static inline float get_gradx(matrix_t *in, uint32_t wx, uint32_t hy, uint32_t d) 
-{
-    //@TODO add support for floating point images
-    uint8_t *in_data = data(uint8_t, in);
-    // gx = data[x+1][y] - data[x-1][y];
-    if(wx > 0 && wx < width(in))
-        return (in_data[ channels(in)*(wx+1+  hy*width(in)) + d ] - in_data[ channels(in)*(wx-1+  hy*width(in)) + d ]) / 255.0f;
-    else return 0;
-    // if x==0 --> gx = data[1][y] - 0
-    //if(wx == 0)                 return (in_data[channels(in)*(hy*width(in) + 1) + d]) / 255.0f;
-    // if x==w --> gx = 0 - data[w-1][y]
-    //if(wx == width(in)-1)        return -(in_data[channels(in)*(hy*width(in) + width(in)-2) + d]) / 255.0f;
-}
-
-static inline float get_grady(matrix_t *in, uint32_t wx, uint32_t hy, uint32_t d) 
-{
-    //@TODO add support for floating point images
-    uint8_t *in_data = data(uint8_t, in);
-    // gy = data[x][y+1] - data[x][y-1];
-    if(hy > 0 && hy < width(in)) return (in_data[ channels(in)*(wx+(hy+1)*width(in)) + d ] - in_data[ channels(in)*(wx+(hy-1)*width(in)) + d ]) / 255.0f;
-    else return 0;
-    // if y==0 --> gy = data[x][1] - 0
-    //if(hy == 0)                 return (in_data[channels(in)*(width(in) + wx) + d]) / 255.0f;
-    // if x==w --> gy = 0 - data[x][y-1]
-    //if(hy == height(in)-1)        return -(in_data[channels(in)*((height(in)-2)*width(in) + wx) + d]) / 255.0f;
-}
-
 static void imgradient(matrix_t *in, float *mag, float *ori, int nbin) 
 {
-    uint32_t i,j,d;
-
-    float grad,gx, gy, grad_x, grad_y;
-
-    //@TODO add support for floating point images
-    uint8_t *in_data = data(uint8_t, in);
-
-    // fill the borders
-    for(j=0; j < height(in); j++) 
-    {
-        mag[0 + j*width(in)] = 0;
-        mag[width(in)-1 + j*width(in)] = 0;
-    }
-    for(i=0; i < width(in); i++) 
-    {
-        mag[i + 0*width(in)] = 0;
-        mag[i + (height(in)-1)*width(in)] = 0;
-    }
+    uint32_t r, c;
     // compute the gradient in the inside of the image
-    for(j=1; j < height(in)-1; j++) 
+    for(r = 1; r < rows(in) - 1; r++) 
     {
-        for(i=1; i < width(in)-1; i++) 
+        for(c = 1; c < cols(in) - 1; c++) 
         {
-            grad = -2.0f;
-            for(d=0; d < channels(in); d++) 
-            {
-                // get the image gradient around i+wi, j+hj
-                grad_x = (in_data[ channels(in)*(i+1 + j*width(in)) + d ] - in_data[ channels(in)*(i-1+  j*width(in)) + d ]) / 255.0f;
-                grad_y = (in_data[ channels(in)*(i+(j+1)*width(in)) + d ] - in_data[ channels(in)*(i+(j-1)*width(in)) + d ]) / 255.0f;
+            // get the x and y gradients
+            float gx = (atui8(in, r, c + 1, 0) - atui8(in, r, c - 1, 0)) / 255.0f;
+            float gy = (atui8(in, r + 1, c, 0) - atui8(in, r - 1, c, 0)) / 255.0f;
 
-                // get the gradient
-                if(grad_x*grad_x + grad_y*grad_y > grad) 
-                {
-                    grad   = grad_x*grad_x + grad_y*grad_y;
-                    gx = grad_x;
-                    gy = grad_y;
-                }
-            }
-            mag[i + j * width(in)] = sqrt(grad);
-            ori[i + j * width(in)] = map(fabs(atan2f(gy, gx)), 0.0f, 3.141593f, 0, nbin - 1);
+            // fill the gradient and magnitude arrays
+            mag[c + r * cols(in)] = sqrt(gx * gx + gy * gy);
+            ori[c + r * cols(in)] = map(fabs(atan2f(gy, gx)), 0.0f, 3.141593f, 0, nbin - 1);
         }
     }
     //done
@@ -197,22 +145,22 @@ static void imgradient(matrix_t *in, float *mag, float *ori, int nbin)
 
 static void hog_cell_histogram(float *mag, float *ori, float *cell_hist, int width, int height, int wi, int hj, struct hog_parameters_t *model) 
 {
-    uint32_t i,j,ci,cj, idx;
+    uint32_t i,j, idx;
 
     // set pointers to the (wi,hj) position
-    ori += wi+width*hj;
-    mag += wi+width*hj;
+    ori += wi + width * hj;
+    mag += wi + width * hj;
 
     // loop in the window and compute the histogram for each cell
-    for(j=0; j < model->height; j++) 
+    for(j = 0; j < model->height; j++) 
     {
-        cj = j/model->c_size[0];//*inc_j;
-        for(i=0; i < model->width; i++) 
+        uint32_t cj = j / model->c_size[0]; //*inc_j;
+        for(i = 0; i < model->width; i++) 
         {
             // cell index of the current column
-            ci = i/model->c_size[1];//*inc_i;
+            uint32_t ci = i / model->c_size[1]; //*inc_i;
 
-            idx = model->nbins*(ci+model->hog_width*cj);
+            uint32_t idx = model->nbins * (ci + model->hog_width * cj);
 
             //scale the ori in [0,1] and multiply by the nbins-1
             float fbin = ori[i];
@@ -220,10 +168,11 @@ static void hog_cell_histogram(float *mag, float *ori, float *cell_hist, int wid
 
             // computes hog for a cell ci,cj
             // use bilinear interpolation and cyclic index
-            cell_hist[idx + ibin]   += (1-(fbin-ibin))*mag[i];
+            cell_hist[idx + ibin]   += (1-(fbin-ibin)) * mag[i];
             if(ibin == model->nbins-1) { ibin = -1; }
-            cell_hist[idx + ibin + 1] += (fbin-ibin)*mag[i];
+            cell_hist[idx + ibin + 1] += (fbin-ibin) * mag[i];
         }
+
         ori += width;
         mag += width;
     }
@@ -272,16 +221,32 @@ static void hog_block_histogram(float *cell_hist, float *feature, struct hog_par
 // extract hog from the given image
 return_t hog_extract(matrix_t *in, struct feature_t *par_model, float *feature) 
 {
+    // check_numeric(element, ERROR_TYPE_MISMATCH);
+
+    int cond1 = is_image(in);
+    check_condition(cond1, ERROR_TYPE_MISMATCH, "input must be uint8 array");
+
+    int cond2 = channels(in) == 1;
+    check_condition(cond2, ERROR_DIMENSION_MISMATCH, "input must be 2D arrays");
+
     // get the HOG parameters from the given model
     struct hog_parameters_t *model = par_model->parameters;
-    // keep the histogram for each bin
+
+    // clear the magnitude, orientation and cell histograms vectors
+    memset(model->grad_mag, 0, model->width * model->height * sizeof(float));
+    memset(model->grad_ori, 0, model->width * model->height * sizeof(float));
+    memset(model->cell_hist, 0, model->hog_height * model->hog_width * model->nbins * sizeof(float));
+
     ///step 1: get the gradient of the image
     imgradient(in, model->grad_mag, model->grad_ori, model->nbins);
+
     ///step 2: get nbin-gradient histogram of the input for each cell
     // clear cell_hist before call
     hog_cell_histogram(model->grad_mag, model->grad_ori, model->cell_hist, width(in), height(in), 0, 0, model);
+
     ///step 3: use cell features and merge those by b_size x b_size
     hog_block_histogram(model->cell_hist, feature, model);
+
     //done
     return SUCCESS;
 }
