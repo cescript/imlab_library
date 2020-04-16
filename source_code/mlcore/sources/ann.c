@@ -70,7 +70,6 @@ struct layer_t *layer_create(uint32_t num_input, uint32_t num_neuron, char layer
     }
 
     // we allocate all the spaces that we need
-    out->bias = (float *)calloc(out->num_neuron, sizeof(float));
     out->weights = (float **)calloc(out->num_neuron, sizeof(float *));
 
     out->net_inputs = (float *)calloc(out->num_neuron, sizeof(float));
@@ -80,14 +79,13 @@ struct layer_t *layer_create(uint32_t num_input, uint32_t num_neuron, char layer
     int i, j;
     for (i = 0; i < out->num_neuron; i++)
     {
-        out->bias[i] = random_float(-1, 1);
-        out->weights[i] = (float *)calloc(num_input, sizeof(float));
+        out->weights[i] = (float *)calloc(num_input + 1, sizeof(float));
 
         // if the space allocated, fill the weights
         if (out->weights[i] != NULL)
         {
             // fill weights with random numbers
-            for (j = 0; j < num_input; j++)
+            for (j = 0; j < num_input + 1; j++)
             {
                 out->weights[i][j] = random_float(-1, 1);
             }
@@ -102,22 +100,32 @@ struct layer_t *layer_create(uint32_t num_input, uint32_t num_neuron, char layer
 }
 
 // create function for the ann_t class
-// ann(LOGLOSS, "5L,3T,5S")
-struct ann_t *ann_create(const char *layers, char options[])
+// ann(ANN_OPTIMIZER_ADAM, "5L,3T,5S")
+struct ann_t *ann_create(uint32_t optimizer, const char *layers, char options[])
 {
     // allocate memory for the output network
     struct ann_t *model = (struct ann_t *)malloc(sizeof(struct ann_t));
 
+    // get the optimizer type
+    model->optimizer = optimizer;
+
+    // set the default values for the parameters
     model->max_iter = 1000;
     model->batch_size = 1;
     model->epsilon = 0.001f;
+    model->momentum = 0.0f;
     model->eta = 0.001f;
+    model->rho = 0.9f;
+    model->beta = 0.9f;
 
     // get values from configuration
     getopt(uint32_t, options, "max_iter", &model->max_iter);
     getopt(uint32_t, options, "batch_size", &model->batch_size);
     getopt(float, options, "eta", &model->eta);
+    getopt(float, options, "momentum", &model->momentum);
     getopt(float, options, "epsilon", &model->epsilon);
+    getopt(float, options, "rho", &model->rho);
+    getopt(float, options, "beta", &model->beta);
 
     // allocate enough space for the layer type and number of neurons
     model->layer_type = (char *)calloc(strlen(layers), sizeof(char));
@@ -168,11 +176,15 @@ void ann_view(struct ann_t *model)
 {
     printf("Parameters of the Artificial Neural Network\n");
     printf("Options:\n");
+    printf("> Optimizer    : %d\n", model->optimizer);
     printf("> MaxIter      : %d\n", model->max_iter);
     printf("> Batch Size   : %d\n", model->batch_size);
     printf("> Eta          : %3.5f\n", model->eta);
+    printf("> Momentum     : %3.5f\n", model->momentum);
     printf("> Epsilon      : %3.5f\n", model->epsilon);
-
+    printf("> Rho          : %3.5f\n", model->rho);
+    printf("> Beta         : %3.5f\n", model->beta);
+    
     // print the layer configuration
     if (model->num_layer > 1)
     {
@@ -222,7 +234,7 @@ return_t ann_train(matrix_t *input, matrix_t *output, struct ann_t *model)
 
     // before everything we will compute the number of inputs for the layer and allocate space for the computations
     // output of the nput layer will be the input of the first layer
-    uint32_t iter, b, i, j, l; // iteration, batch element, num neuron, num inputs, layer
+    uint32_t iter, batchiter = 0, b, i, j, l; // iteration, batch iteration(k), batch element, num neuron, num inputs, layer
     for (l = 0; l < model->num_layer; l++)
     {
         model->layer[l] = layer_create(get_input_size(model, l), model->num_neuron[l], model->layer_type[l]);
@@ -236,17 +248,22 @@ return_t ann_train(matrix_t *input, matrix_t *output, struct ann_t *model)
     }
 
     // allocate memory to store weight change
-    float **bias_update = (float **)calloc(model->num_layer, sizeof(float *));
-    float ***weight_update = (float ***)calloc(model->num_layer, sizeof(float **));
+    float ***gradient = (float ***)calloc(model->num_layer, sizeof(float **));
+    float ***auxptr1 = (float ***)calloc(model->num_layer, sizeof(float **));
+    float ***auxptr2 = (float ***)calloc(model->num_layer, sizeof(float **));
+
     for (l = 0; l < model->num_layer; l++)
     {
-        bias_update[l] = (float *)calloc(model->layer[l]->num_neuron, sizeof(float));
-        weight_update[l] = (float **)calloc(model->layer[l]->num_neuron, sizeof(float *));
+        gradient[l] = (float **)calloc(model->layer[l]->num_neuron, sizeof(float *));
+        auxptr1[l] = (float **)calloc(model->layer[l]->num_neuron, sizeof(float *));
+        auxptr2[l] = (float **)calloc(model->layer[l]->num_neuron, sizeof(float *));
 
         // allocate weight update array for each input
         for (i = 0; i < model->layer[l]->num_neuron; i++)
         {
-            weight_update[l][i] = (float *)calloc(get_input_size(model, l), sizeof(float));
+            gradient[l][i] = (float *)calloc(get_input_size(model, l) + 1, sizeof(float));
+            auxptr1[l][i] = (float *)calloc(get_input_size(model, l) + 1, sizeof(float));
+            auxptr2[l][i] = (float *)calloc(get_input_size(model, l) + 1, sizeof(float));
         }
     }
 
@@ -286,7 +303,7 @@ return_t ann_train(matrix_t *input, matrix_t *output, struct ann_t *model)
                     for (i = 0; i < model->layer[l]->num_neuron; i++)
                     {
                         // compute the neuron net input
-                        double neuron_signal = model->layer[l]->bias[i];
+                        double neuron_signal = model->layer[l]->weights[i][input_size];
                         //#pragma omp parallel for reduction(+:neuron_signal)
                         for (j = 0; j < input_size; j++)
                         {
@@ -342,41 +359,132 @@ return_t ann_train(matrix_t *input, matrix_t *output, struct ann_t *model)
                     // set the inputs for the weight update
                     inputs = l == 0 ? data(float, input, s, 0) : model->layer[l - 1]->outputs;
 
-                    // update the weights
+                    // update the gradients
                     for (j = 0; j < model->layer[l]->num_neuron; j++)
                     {
-                        // update the biases
-                        bias_update[l][j] += delta[l][j];
-
-                        // update the weights
+                        // find the sum of gradient over the current batch (weights)
                         for (i = 0; i < input_size; i++)
                         {
-                            weight_update[l][j][i] += delta[l][j] * inputs[i];
+                            gradient[l][j][i] += delta[l][j] * inputs[i];
+                        }
+
+                        // find the sum of gradient over the current batch (bias)
+                        gradient[l][j][input_size] += delta[l][j];
+                    }
+                }
+            }
+            
+            // increase the number of batch iteration
+            ++batchiter;
+
+            // now update the weights using the gradient changes over the all network
+            for (l = 0; l < model->num_layer; l++)
+            {
+                uint32_t input_size = get_input_size(model, l);
+                uint32_t output_size = get_output_size(model, l);
+
+                // update the weights using rmsprop
+                if(model->optimizer == ANN_OPTIMIZER_RMSPROP)
+                {
+                    for (j = 0; j < model->layer[l]->num_neuron; j++)
+                    {
+                        // update the weights
+                        for (i = 0; i < input_size + 1; i++)
+                        {
+                            // compute the moving average second moments of the gradient for RMSProp algorithms
+                            auxptr1[l][j][i] = model->rho * auxptr1[l][j][i] + (1-model->rho) * gradient[l][j][i] * gradient[l][j][i];
+
+                            float rms = sqrt(auxptr1[l][j][i]) + model->epsilon;
+
+                            // compute the descent direction using momentum and RMSprop
+                            auxptr2[l][j][i]   = model->momentum * auxptr2[l][j][i] + (1 - model->momentum) * gradient[l][j][i] / rms;
+
+                            // update the weights
+                            model->layer[l]->weights[j][i] -= model->eta * auxptr2[l][j][i];
+
+                            // set the batch sum to zero
+                            gradient[l][j][i] = 0;
+                        }
+                    }
+                }
+                // update the weights using adadelta
+                // Paper: ADADELTA: AN ADAPTIVE LEARNING RATE METHOD
+                else if(model->optimizer == ANN_OPTIMIZER_ADADELTA)
+                {
+                    for (j = 0; j < model->layer[l]->num_neuron; j++)
+                    {
+                        // update the weights
+                        for (i = 0; i < input_size + 1; i++)
+                        {
+                            // compute the moving average second moments of the gradient for ADADELTA algorithms
+                            auxptr1[l][j][i] = model->rho * auxptr1[l][j][i] + (1-model->rho) * gradient[l][j][i] * gradient[l][j][i];
+
+                            float rmsDg = sqrt(auxptr1[l][j][i]) + model->epsilon;
+                            float rmsDx = sqrt(auxptr2[l][j][i]) + model->epsilon;
+
+                            // compute the update
+                            float deltaW = rmsDx * gradient[l][j][i] / rmsDg;
+
+                            // compute the moving average second moments of the deltaX
+                            auxptr2[l][j][i] = model->rho * auxptr2[l][j][i] + (1-model->rho) * deltaW * deltaW;
+
+                            // update the weights
+                            model->layer[l]->weights[j][i] -= deltaW;
+
+                            // set the batch sum to zero
+                            gradient[l][j][i] = 0;
+                        }
+                    }
+                }
+                // update the weights using ADAM
+                // Paper: ADAM: A METHOD FOR STOCHASTIC OPTIMIZATION
+                else if(model->optimizer == ANN_OPTIMIZER_ADAM)
+                {
+                    // do batch normalization and optmization
+                    float rhoNormalizer = (1 - powf(model->rho, batchiter));
+                    float betaNormalizer = (1 - powf(model->beta, batchiter));
+
+                    for (j = 0; j < model->layer[l]->num_neuron; j++)
+                    {
+                        // update the weights
+                        for (i = 0; i < input_size + 1; i++)
+                        {
+                           // compute the moving average moments of the grad for ADAMalgorithms
+                            auxptr1[l][j][i] = model->rho * auxptr1[l][j][i] + (1-model->rho) * gradient[l][j][i];
+                            auxptr2[l][j][i] = model->beta * auxptr2[l][j][i] + (1-model->beta) * gradient[l][j][i] * gradient[l][j][i];
+
+                            float mhi = auxptr1[l][j][i] / rhoNormalizer;
+                            float vhi = sqrt(auxptr2[l][j][i] / betaNormalizer) + model->epsilon;
+
+                            // update the weights
+                            model->layer[l]->weights[j][i] -= model->eta * mhi / vhi;
+
+                            // set the batch sum to zero
+                            gradient[l][j][i] = 0;
+                        }
+                    }
+                }
+                // update the weights using momentum
+                else
+                {
+                    for (j = 0; j < model->layer[l]->num_neuron; j++)
+                    {
+                        // update the weights
+                        for (i = 0; i < input_size + 1; i++)
+                        {
+                            // compute the descent direction using momentum
+                            auxptr1[l][j][i]   = model->momentum * auxptr1[l][j][i] + (1 - model->momentum) * gradient[l][j][i];
+
+                            // update the weights
+                            model->layer[l]->weights[j][i] -= model->eta * auxptr1[l][j][i];
+
+                            // set the batch sum to zero
+                            gradient[l][j][i] = 0;
                         }
                     }
                 }
             }
-
-            // allow weight update after the whole batch is processed
-            for (l = 0; l < model->num_layer; l++)
-            {
-                uint32_t input_size = get_input_size(model, l);
-
-                for (j = 0; j < model->layer[l]->num_neuron; j++)
-                {
-                    // update the biases
-                    model->layer[l]->bias[j] -= (model->eta * bias_update[l][j]) / batchSize;
-                    bias_update[l][j] = 0;
-
-                    // update the weights
-                    for (i = 0; i < input_size; i++)
-                    {
-                        model->layer[l]->weights[j][i] -= (model->eta * weight_update[l][j][i]) / batchSize;
-                        weight_update[l][j][i] = 0;
-                    }
-                }
-            }
-
+            
             // update the remaining sample size for the next iterations
             remainingSampleSize -= batchSize;
             sampleIndexFromStart += batchSize;
@@ -402,14 +510,18 @@ return_t ann_train(matrix_t *input, matrix_t *output, struct ann_t *model)
         // allocate weight update array for each input
         for (i = 0; i < model->layer[l]->num_neuron; i++)
         {
-            free(weight_update[l][i]);
+            free(gradient[l][i]);
+            free(auxptr1[l][i]);
+            free(auxptr2[l][i]);
         }
 
-        free(weight_update[l]);
-        free(bias_update[l]);
+        free(gradient[l]);
+        free(auxptr1[l]);
+        free(auxptr2[l]);
     }
-    free(weight_update);
-    free(bias_update);
+    free(gradient);
+    free(auxptr1);
+    free(auxptr2);
 }
 
 // train the network with the given inputs and net configurations
@@ -447,7 +559,7 @@ return_t ann_predict(matrix_t *input, matrix_t *output, struct ann_t *model)
             for (i = 0; i < model->layer[l]->num_neuron; i++)
             {
                 // compute the neuron net input
-                double neuron_signal = model->layer[l]->bias[i];
+                double neuron_signal = model->layer[l]->weights[i][input_size];
                 for (j = 0; j < input_size; j++)
                 {
                     neuron_signal += model->layer[l]->weights[i][j] * inputs[j];
@@ -478,10 +590,14 @@ struct ann_t *ann_read(const char *filename)
     struct ann_t *net = (struct ann_t *)calloc(1, sizeof(struct ann_t));
 
     // now read the options
+    fread(&net->optimizer, sizeof(uint32_t), 1, fp);
     fread(&net->max_iter, sizeof(uint32_t), 1, fp);
     fread(&net->batch_size, sizeof(uint32_t), 1, fp);
     fread(&net->epsilon, sizeof(float), 1, fp);
     fread(&net->eta, sizeof(float), 1, fp);
+    fread(&net->momentum, sizeof(float), 1, fp);
+    fread(&net->rho, sizeof(float), 1, fp);
+    fread(&net->beta, sizeof(float), 1, fp);
 
     // read the array sizes
     fread(&net->num_feature, sizeof(uint32_t), 1, fp);
@@ -508,12 +624,9 @@ struct ann_t *ann_read(const char *filename)
             // create a layer
             net->layer[l] = layer_create(input_size, net->num_neuron[l], net->layer_type[l]);
 
-            // read bias and weights
-            fread(net->layer[l]->bias, sizeof(float), net->layer[l]->num_neuron, fp);
-
             for (i = 0; i < net->layer[l]->num_neuron; i++)
             {
-                fread(net->layer[l]->weights[i], sizeof(float), input_size, fp);
+                fread(net->layer[l]->weights[i], sizeof(float), input_size + 1, fp);
             }
         }
     }
@@ -538,10 +651,14 @@ return_t ann_write(struct ann_t *net, const char *filename)
     check_file(fp);
 
     // now read the options
+    fwrite(&net->optimizer, sizeof(uint32_t), 1, fp);
     fwrite(&net->max_iter, sizeof(uint32_t), 1, fp);
     fwrite(&net->batch_size, sizeof(uint32_t), 1, fp);
     fwrite(&net->epsilon, sizeof(float), 1, fp);
     fwrite(&net->eta, sizeof(float), 1, fp);
+    fwrite(&net->momentum, sizeof(float), 1, fp);
+    fwrite(&net->rho, sizeof(float), 1, fp);
+    fwrite(&net->beta, sizeof(float), 1, fp);
 
     // read the array sizes
     fwrite(&net->num_feature, sizeof(uint32_t), 1, fp);
@@ -560,12 +677,9 @@ return_t ann_write(struct ann_t *net, const char *filename)
         {
             uint32_t input_size = get_input_size(net, l);
 
-            // read bias and weights
-            fwrite(net->layer[l]->bias, sizeof(float), net->layer[l]->num_neuron, fp);
-
             for (i = 0; i < net->layer[l]->num_neuron; i++)
             {
-                fwrite(net->layer[l]->weights[i], sizeof(float), input_size, fp);
+                fwrite(net->layer[l]->weights[i], sizeof(float), input_size + 1, fp);
             }
         }
     }

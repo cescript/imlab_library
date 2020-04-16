@@ -13,6 +13,7 @@
 .vscode/
 build/
 bins/
+references/
 
 
 # Ignore Cache Files #

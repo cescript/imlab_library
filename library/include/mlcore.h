@@ -174,7 +174,10 @@ struct glm_t;
 #define FERN_RANDOM_CLASSIFIER 4 // random feature selector + regressor
 #define FERN_CORRELATION_CLASSIFIER 5 // correlation based feature selector + regressor
 
-
+#define ANN_OPTIMIZER_NONE 0
+#define ANN_OPTIMIZER_ADADELTA 1
+#define ANN_OPTIMIZER_RMSPROP 2
+#define ANN_OPTIMIZER_ADAM 3
 
 /// glm_t Functions are included
 /**
@@ -277,6 +280,11 @@ return_t q_table_write(struct q_table_t *inp, const char *filename);
 // create and return an object from the ann_t class
 /***
  * Create and return an object from the ann_t class with the given parameters
+ * @param optimizer Optmizer type for the ann SGD solver
+ * ANN_OPTIMIZER_NONE     = 0
+ * ANN_OPTIMIZER_ADADELTA = 1
+ * ANN_OPTIMIZER_RMSPROP  = 2
+ * ANN_OPTIMIZER_ADAM     = 3
  * @param layers Layer structure of the ann model. 
  * An integer followed by the layer type indicator must be given.
  * For example, '5L' creates a layer with 5 neurons which have (L)ogistic activation function
@@ -290,11 +298,20 @@ return_t q_table_write(struct q_table_t *inp, const char *filename);
  * @param options Options for the ann model.
  *  Parameters can be seperated by space e.g. "-max_iter:1000 -eta:0.2"
  * -max_iter:# specify the maximum number of iterations
- * -batch_size:# specify the batch size for the stochastic gradient computation
+ * -batch_size:# specify the mini batch size for the stochastic gradient computation
  * -eta:# learning speed of the stochastic solver
- * -epsilon:# epsilon value for the ann algorithm (not used)
+ * -momentum: # momentum parameter for SGD
+ * -rho: # free parameter for optimization methods (ANN_OPTIMIZER_ADADELTA, ANN_OPTIMIZER_RMSPROP and ANN_OPTIMIZER_ADAM), see the table below.
+ * -beta: # free parameter for optimization methods (ANN_OPTIMIZER_ADAM), see the table below.
+ * -epsilon:# epsilon value for the ann algorithm (used to avoid zero divisions)
+ *    @optimizer          | -eta          | -momentum | -rho                                                  | -beta                          |
+ * -----------------------| --------------| ----------|-------------------------------------------------------| -------------------------------|
+ * ANN_OPTIMIZER_NONE     | learning rate | momentum  | unused                                                | unused                         |
+ * ANN_OPTIMIZER_ADADELTA | unused        | unused    | decay factor for $(\nabla f(x))^2$ and $(\delta x)^2$ | unused                         |
+ * ANN_OPTIMIZER_RMSPROP  | learning rate | momentum  | decay factor for $(\nabla f(x))^2$                    | unused                         |
+ * ANN_OPTIMIZER_ADAM     | learning rate | unused    | decay factor for $(\nabla f(x))^2$                    | decay factor for $\nabla f(x)$ |
  */
-struct ann_t *ann_create(const char *layers, char options[]);
+struct ann_t *ann_create(uint32_t optimizer, const char *layers, char options[]);
 
 /**
  * Prints the parameters of the artifical neural network model

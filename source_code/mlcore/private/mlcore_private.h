@@ -79,7 +79,6 @@ struct layer_t
     float (*derivative)(float); // derivative of the above activation functions
 
     // for each input we should have a weight and one bias
-    float *bias;
     float **weights;
 
     float *net_inputs;
@@ -94,6 +93,11 @@ struct ann_t
     uint32_t batch_size; // size of the batch for stochastic gradient descent
     float epsilon;
     float eta;
+
+    uint32_t optimizer; // optimizer type
+    float momentum;// using in gradient direction calculations
+    float rho;     // used in RMSprop and Adadelta and ADAM
+    float beta; // used in ADAM
 
     // structure of the layer
     char *layer_type;
