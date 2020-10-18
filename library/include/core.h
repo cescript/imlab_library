@@ -1180,7 +1180,7 @@ typedef struct _string { uint32_t _length; uint32_t _capacity; char *_data; } st
  * @param cstr Input C string (char*)
  * @return string_t object
  */
-string_t string(char *cstr);
+string_t string(const char *cstr);
 
 /**
  * Return the C-compatible string of the string object
@@ -1195,7 +1195,7 @@ char *c_str(string_t str);
  * @param str Output string_t object
  * @return Success or relative error
  */
-return_t string_append(char *cstr, string_t *str);
+return_t string_append(const char *cstr, string_t *str);
 
 /**
  * Merges the given two string_t object and writes the output string into the first element
@@ -1204,6 +1204,12 @@ return_t string_append(char *cstr, string_t *str);
  * @return Success or relative error
  */
 return_t string_merge(string_t *out_str, string_t *in_str);
+
+/**
+ * Free space used by the string data
+ * @param str Input string to be freed
+*/
+void string_free(string_t *str);
 
 /**
  * Destructor of string_t *data array

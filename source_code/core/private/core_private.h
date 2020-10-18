@@ -77,7 +77,7 @@ return_t imlab_type_write(struct imlab_type_t* in, FILE *out);
 struct imlab_type_t* imlab_type_read(FILE *in);
 
 // strdup implementation
-char *imlab_strdup(char *cstr);
+char *imlab_strdup(const char *cstr);
 
 void imlab_type_set_destructor(struct imlab_type_t *_type, void (*func)(void*, uint32_t));
 
