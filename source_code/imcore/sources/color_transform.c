@@ -365,8 +365,8 @@ return_t rgb2hsv(matrix_t *in, matrix_t *out) {
     #pragma omp parallel for private(h, mx, mn)
     for(h=0; h < width(in)*height(in); h++) {
 
-        mx = max(in_data[3*h+0], max(in_data[3*h+1], in_data[3*h+2]));
-        mn = min(in_data[3*h+0], min(in_data[3*h+1], in_data[3*h+2]));
+        mx = maximum(in_data[3*h+0], maximum(in_data[3*h+1], in_data[3*h+2]));
+        mn = minimum(in_data[3*h+0], minimum(in_data[3*h+1], in_data[3*h+2]));
         // set value to it
         out_data[3*h + 0] = mx; out_data[3*h + 1] = 0; out_data[3*h + 2] = 0;
         if(mx == mn) { continue; }

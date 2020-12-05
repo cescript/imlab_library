@@ -101,15 +101,6 @@ void csv_close(struct csv_t **out);
 return_t imlab_mkdir(const char *pathname);
 
 /**
- * Create and return a unique filename that is not in the current directory.
- * @param filename Name of the file
- * @param extension Extension of the filename
- * @return filename_%d.extension formatted char pointer
- */
-char *imlab_filename(const char *filename, const char *extension);
-
-
-/**
 \file iocore.h
 Here the defintions of the Input/output functions provided by the IMLAB library.
 */

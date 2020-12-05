@@ -8,10 +8,8 @@
 
 int main()
 {
-
     message(SUCCESS, "starting to test IMLAB computer vision library");
 
-    int i,j,c;
     // create an output directory
     imlab_mkdir("results");
 

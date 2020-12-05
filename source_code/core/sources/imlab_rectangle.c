@@ -26,14 +26,14 @@ struct rectangle_t rectangle(int32_t x, int32_t y, int32_t width, int32_t height
 // mode 1: normalze the overlapping area with respect to the input rectangles area
 float rectangle_overlap(struct rectangle_t r1, struct rectangle_t r2, uint8_t mode) {
     //
-    float left  = max(r1.x, r2.x);
-    float right = min(r1.x + r1.width, r2.x + r2.width);
+    float left  = maximum(r1.x, r2.x);
+    float right = minimum(r1.x + r1.width, r2.x + r2.width);
 
-    float top    = max(r1.y, r2.y);
-    float bottom = min(r1.y + r1.height, r2.y + r2.height);
+    float top    = maximum(r1.y, r2.y);
+    float bottom = minimum(r1.y + r1.height, r2.y + r2.height);
 
     // compute the intersection area
-    float intersection_area = max(0, (bottom - top)) * max(0, (right - left));
+    float intersection_area = maximum(0, (bottom - top)) * maximum(0, (right - left));
 
     float result = 0;
     // if the mode is zero, return the intersecting area

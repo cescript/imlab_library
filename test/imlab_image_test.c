@@ -61,7 +61,7 @@ int main()
     matrix_free(&img2);
 
     matrix_t *gray  = matrix_create(uint8_t, height(img), width(img), 1);
-    matrix_t *bwimg = matrix_create(gray, data(void, gray)); // create a matrix from the gray matrix
+    matrix_t *bwimg = matrix_create(gray, mdata(gray, 0)); // create a matrix from the gray matrix
     matrix_t *img2x = matrix_create(uint8_t);
     matrix_t *label = matrix_create(uint32_t);
 

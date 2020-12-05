@@ -168,9 +168,9 @@ vector_t* haar_detector(matrix_t *img, struct haar_t *cascade, float minSize, fl
         float InvArea = 1.0f / (currentWindowWidth * currentWindowHeight);
         int stride = round(scale * stepSize);
 
-        for (j = 0; j < rows(img) - currentWindowHeight; j += max(1,stride))
+        for (j = 0; j < rows(img) - currentWindowHeight; j += maximum(1,stride))
         {
-            for (i = 0; i < cols(img) - currentWindowWidth; i += max(1, stride))
+            for (i = 0; i < cols(img) - currentWindowWidth; i += maximum(1, stride))
             {
                 // get variance and mean
 

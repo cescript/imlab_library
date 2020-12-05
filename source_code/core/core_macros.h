@@ -155,19 +155,19 @@
 /**@hideinitializer
  * Max macro for different number of arguments (up to 9 arguments)
  \code{.c}
- max(1,2);     // 2
- max(min(7,8),11,12); // 12
+ maximum(1,2);     // 2
+ maximum(minimum(7,8),11,12); // 12
  \endcode
  */
-#define max(...) call(max, __VA_ARGS__)
+#define maximum(...) call(max, __VA_ARGS__)
 /**@hideinitializer
  * Min macro for different number of arguments (up to 9 arguments)
  \code{.c}
- min(1.2345);  // 1.2345
- min(a,b,c,d); // compares the values in (a,b,c,d) and return the minimum
+ minimum(1.2345);  // 1.2345
+ minimum(a,b,c,d); // compares the values in (a,b,c,d) and return the minimum
  \endcode
  */
-#define min(...) call(min, __VA_ARGS__)
+#define minimum(...) call(min, __VA_ARGS__)
 
 #ifndef DOXYGEN_SKIP_IMLAB_HIDDEN_MACRO_NAMES
 // implementation of max/min macro for different number of argumnets

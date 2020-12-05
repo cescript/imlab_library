@@ -62,7 +62,7 @@ return_t q_table_update(struct q_table_t *Q, uint32_t state, uint32_t action, ui
     float max_q = Q->qtable[next_state][0];
     for (a = 1; a < Q->num_actions; a++)
     {
-        max_q = max(max_q, Q->qtable[next_state][a]);
+        max_q = maximum(max_q, Q->qtable[next_state][a]);
     }
 
     // update the table

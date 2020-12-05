@@ -7,7 +7,8 @@
     do                                                                                                                \
     {                                                                                                                 \
         uint32_t _m, _n, _c, _idx, _step;                                                                             \
-        output_type _sm[channels], _ss[channels];                                                                     \
+        output_type *_sm = malloc(channels * sizeof(output_type));                                                    \
+        output_type *_ss = malloc(channels * sizeof(output_type));                                                    \
         output_type _inv1 = 1.0 / max_value;                                                                          \
         output_type _inv2 = _inv1 * _inv1;                                                                            \
         input_type *_imge = imgep;                                                                                    \
@@ -50,6 +51,8 @@
                 _idx += channels;                                                                                     \
             }                                                                                                         \
         }                                                                                                             \
+        free(_sm);                                                                                                    \
+        free(_ss);                                                                                                    \
         /* done */                                                                                                    \
     } while (0);
 

@@ -179,7 +179,7 @@ return_t json_parse_array(char *data, size_t *pos, size_t length, struct json_da
 
     // we will start from 0
     if(data[*pos] != '[') {
-        printf("JSON Array must start with an %c but %c found at position %ld\n", 123, data[*pos], *pos);
+        printf("JSON Array must start with an %c but %c found at position %zu\n", 123, data[*pos], *pos);
         return ERROR_TYPE_MISMATCH;
     }
     // a temp data that will be pushed into the vector
@@ -217,7 +217,7 @@ return_t json_parse_object(char *data, size_t *pos, size_t data_length, struct j
 
     // we will start from 0
     if(data[*pos] != '{') {
-        printf("JSON Object must start with an %c but %c found at position %ld\n", 123, data[*pos], *pos);
+        printf("JSON Object must start with an %c but %c found at position %zu\n", 123, data[*pos], *pos);
         return ERROR_TYPE_MISMATCH;
     }
     // create a dummy object

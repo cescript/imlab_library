@@ -1,6 +1,6 @@
 #include "private/imcore_private.h"
 
-#ifdef UNIX
+#ifdef _IMLAB_PLATFORM_UNIX
 
 struct window_t* window_create(char *filename, uint32_t options) {
     message(WARNING_NOT_SUPPORTED, "Unix platform currently is not supported");

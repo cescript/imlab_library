@@ -111,8 +111,8 @@ return_t imdilate(matrix_t *in, matrix_t *element, matrix_t *out) {
 void resolve(int *list, int u, int v, int N) {
 
     int i = 0;
-    int m = min(list[u], list[v]);
-    int n = max(list[u], list[v]);
+    int m = minimum(list[u], list[v]);
+    int n = maximum(list[u], list[v]);
 
     for(i=1; i < N; i++) {
         if(list[i]==n) {list[i] = m;}
@@ -481,8 +481,8 @@ return_t distance_transform(float *distance, uint32_t width, uint32_t height)
     uint32_t w,h;
     float inf = 1e24;
 
-    uint32_t *v = (uint32_t*) malloc( (max(width, height)+1) * sizeof(uint32_t)); //(∗ Locations of parabolas in lower envelope ∗)
-    float *z = (float*) malloc( (max(width, height)+1) * sizeof(float)); //(∗ Locations of boundaries between parabolas ∗)
+    uint32_t *v = (uint32_t*) malloc( (maximum(width, height)+1) * sizeof(uint32_t)); //(∗ Locations of parabolas in lower envelope ∗)
+    float *z = (float*) malloc( (maximum(width, height)+1) * sizeof(float)); //(∗ Locations of boundaries between parabolas ∗)
 
 
     // first pass along the rows
@@ -575,7 +575,7 @@ return_t bwdist(matrix_t *in, matrix_t *out) {
 
     // fill out the grid
     for(h=0; h < height(in)*width(in); h++) {
-        out_data[h] = in_data[h] == 0 ? 0 : max(width(in), height(in));
+        out_data[h] = in_data[h] == 0 ? 0 : maximum(width(in), height(in));
     }
     // compute the distance transform
     distance_transform(out_data, width(in), height(in));

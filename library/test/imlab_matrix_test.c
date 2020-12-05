@@ -16,7 +16,7 @@ int main() {
     matrix_t *matc_1 = matrix_create(uint8_t);
     matrix_t *matf_1 = matrix_create(float);
     // create a matrix with two arguments
-    matrix_t *matc_2 = matrix_create(matc_1, data(void, matc_1)); // make a clone of the matc_1
+    matrix_t *matc_2 = matrix_create(matc_1, mdata(matc_1, 0)); // make a clone of the matc_1
     matrix_t *matd_2 = matrix_create(matc_1, NULL); // just copy the size of matc_1
     // create a matrix with three arguments
     matrix_t *mati_3 = matrix_create(int, 100, 100); // create a 100x100 matrix

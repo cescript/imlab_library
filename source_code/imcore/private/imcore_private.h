@@ -4,10 +4,10 @@
 #include "../imcore.h"
 #include "../../core/private/core_private.h"
 
-#ifdef WIN32
+#ifdef _IMLAB_PLATFORM_WINDOWS
     // include windows header for win32 display functions
     #include <windows.h>
-#elif UNIX
+#elif _IMLAB_PLATFORM_UNIX
     // include xlib ...
 #endif
 
@@ -19,13 +19,13 @@ struct window_t {
     uint32_t width, height, bpp;
     uint8_t *data; // pointer to the image
 
-#ifdef WIN32
+#ifdef _IMLAB_PLATFORM_WINDOWS
     HWND hwnd; // handle to main window
     HDC hdc; // handle device context
     BITMAPINFO* binfo; // bitmap info
     HGDIOBJ image; // image
     HINSTANCE hinstance; // module handle
-#elif  UNIX
+#elif  _IMLAB_PLATFORM_UNIX
     // do xlib stuff here
 #endif
 

@@ -1,6 +1,6 @@
 #include "private/imcore_private.h"
 
-#ifdef WIN32
+#ifdef _IMLAB_PLATFORM_WINDOWS
 
 
 LRESULT CALLBACK WinProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)

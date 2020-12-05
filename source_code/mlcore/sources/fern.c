@@ -125,6 +125,7 @@ struct fern_t* fern_default(uint8_t solver) {
 
     // allocate a fern model for the output
     struct fern_t *model = (struct fern_t*) malloc(sizeof(struct fern_t));
+    check_null(model, NULL);
 
     // set via constructor
     model->solver = solver;
@@ -263,7 +264,7 @@ uint32_t train_fern_regressor(float *data, float *output,
 }
 
 uint32_t predict_fern_regressor(matrix_t *in, matrix_t *output, struct fern_t *model) {
-    uint32_t p, t, f, forest;
+    uint32_t p, f, forest;
 
     // compute fern index of each person for the selected feature set
     for(p = 0; p < rows(in); p++) {
@@ -286,7 +287,7 @@ uint32_t predict_fern_regressor(matrix_t *in, matrix_t *output, struct fern_t *m
 }
 
 uint32_t predict_fern_classifier(matrix_t *in, matrix_t *output, struct fern_t *model) {
-    uint32_t p, t, f, forest;
+    uint32_t p, f, forest;
 
     uint32_t *class_probability = (uint32_t*) malloc(model->nr_class * sizeof(uint32_t));
     // compute fern index of each person for the selected feature set

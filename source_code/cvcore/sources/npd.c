@@ -5,7 +5,7 @@
 int npd_parameters(uint32_t width, uint32_t height, uint32_t channels, char *options, struct npd_parameters_t *out) 
 {
     out->min_distance = 0;
-    out->max_distance = max(width,height);
+    out->max_distance = maximum(width,height);
     out->n_sample = 1000;
 
     // get the user given parameters

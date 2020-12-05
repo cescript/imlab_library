@@ -13,25 +13,25 @@ return_t imcrop(matrix_t *in, struct rectangle_t crop_region, matrix_t *out)
     check_condition(cond2, ERROR_DIMENSION_MISMATCH, "width and height of the crop region must be positive");
 
     // compute the start and end of the crop region
-    int32_t x1 = 0, xs = min(crop_region.x, width(in) - 1), xe = min(xs + crop_region.width - 1, width(in) - 1);
+    int32_t x1 = 0, xs = minimum(crop_region.x, width(in) - 1), xe = minimum(xs + crop_region.width - 1, width(in) - 1);
     // if the crop region starts with a negative number, recompute the values
     if (crop_region.x < 0)
     {
-        x1 = min(-crop_region.x, width(in) - 1);
+        x1 = minimum(-crop_region.x, width(in) - 1);
 
         xs = 0;
-        xe = min(crop_region.x + crop_region.width - 1, width(in) - 1);
+        xe = minimum(crop_region.x + crop_region.width - 1, width(in) - 1);
     }
 
     // compute the start and end of the crop region
-    int32_t y1 = 0, ys = min(crop_region.y, height(in) - 1), ye = min(ys + crop_region.height - 1, height(in) - 1);
+    int32_t y1 = 0, ys = minimum(crop_region.y, height(in) - 1), ye = minimum(ys + crop_region.height - 1, height(in) - 1);
     // if the crop region starts with a negative number, recompute the values
     if (crop_region.y < 0)
     {
-        y1 = min(-crop_region.y, height(in) - 1);
+        y1 = minimum(-crop_region.y, height(in) - 1);
 
         ys = 0;
-        ye = min(crop_region.y + crop_region.height - 1, height(in) - 1);
+        ye = minimum(crop_region.y + crop_region.height - 1, height(in) - 1);
     }
 
     // allocate out before use it
@@ -53,7 +53,7 @@ return_t imcrop(matrix_t *in, struct rectangle_t crop_region, matrix_t *out)
     // TODO: create in_data pointer based on the input type
     uint8_t *in_data = data(uint8_t, in, ys, xs, 0);
     uint8_t *out_data = data(uint8_t, out, y1, x1, 0);
-
+    
     for (h = 0; h < (ye - ys + 1); h++, out_data += outputStep, in_data += inputStep)
     {
         memcpy(out_data, in_data, blockSize);

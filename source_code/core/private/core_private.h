@@ -60,7 +60,7 @@
 return_t check_return_func(return_t cond, int line, const char *func);
  */
 
-#define imlab_pi 3.14159
+#define imlab_pi 3.14159265358979323846
 #define imlab_epsilon 0.0000001
 
 

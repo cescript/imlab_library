@@ -33,9 +33,9 @@ struct glm_t *glm_default(uint32_t solver) {
     // fill the default values
     model->options.solver   = solver;
     model->options.max_iter = 1000;
-    model->options.eta      = 0.01;
-    model->options.epsilon  = 0.001;
-    model->options.lambda   = 0.001;
+    model->options.eta      = 0.01f;
+    model->options.epsilon  = 0.001f;
+    model->options.lambda   = 0.001f;
     // initilaize with 0, shows that the model is not trained
     model->nr_feature = 0;
     model->nr_class   = 0;
@@ -66,7 +66,6 @@ struct glm_t *glm_create(uint32_t solver, char options[]) {
 
 return_t glm_view(struct glm_t *model) {
 
-    int i;
     printf("Parameters of the Generalized Linear Model\n");
     printf("Options:\n");
     printf("> Solver : %d\n", model->options.solver);
@@ -117,7 +116,7 @@ void sgd_solve (matrix_t *feature, matrix_t *labels, uint32_t label, float *weig
      )
 {
 
-    int i,k,f, iter = 0;
+    int i, iter = 0;
 
     float rho = 0;
 
@@ -314,7 +313,7 @@ return_t glm_write(struct glm_t *net, const char *filename) {
 
     // open the file with the given key value pair
     FILE *fp = imlab_fopen(filename, "wb", "glm");
-    check_file(fp);
+    check_file(fp, ERROR_UNABLE_TO_OPEN);
 
     fwrite(&net->nr_feature, sizeof(int), 1, fp);
     fwrite(&net->nr_class,   sizeof(int), 1, fp);

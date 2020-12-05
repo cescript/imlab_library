@@ -111,14 +111,13 @@ return_t matrix_multiply(matrix_t inA, matrix_t inB, matrix_t *out) {
 #define cast_and_divide(_type, inA, out)                                                                 \
     do                                                                                                  \
     {                                                                                                   \
-        int i, j;                                                                                       \
-        int c, d, row, col, swap;                                                                       \
-        _type *swap_buffer = (_type *)malloc(max(cols(inA), cols(out)) * sizeof(_type));                \
+        int d, row, col, swapv;                                                                         \
+        _type *swap_buffer = (_type *)malloc(maximum(cols(inA), cols(out)) * sizeof(_type));                \
         _type *inA_data = mdata(inA, 0);                                                                \
         _type *out_data = mdata(out, 0);                                                                \
         for (d = 0; d < rows(inA); d++)                                                                 \
         {                                                                                               \
-            col = d, row = d, swap = 0;                                                                 \
+            col = d, row = d, swapv = 0;                                                                 \
             while (equal(inA_data[d + row * cols(inA)], 0, 0.0000001))                                  \
             {                                                                                           \
                 row++;                                                                                  \
@@ -127,9 +126,9 @@ return_t matrix_multiply(matrix_t inA, matrix_t inB, matrix_t *out) {
                     printf("Cannot solve A\\B, A is not inversible!\n");                                \
                    break;                                                                               \
                 }                                                                                       \
-                swap = 1;                                                                               \
+                swapv = 1;                                                                               \
             }                                                                                           \
-            if (swap)                                                                                   \
+            if (swapv)                                                                                   \
             {                                                                                           \
                 memcpy(swap_buffer, &inA_data[d * cols(inA)], cols(inA) * sizeof(_type));                \
                 memcpy(&inA_data[d * cols(inA)], &inA_data[row * cols(inA)], cols(inA) * sizeof(_type)); \
