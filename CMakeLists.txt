@@ -4,17 +4,34 @@ project(imlab C)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # set copiler flags for debug and release
-set(CMAKE_C_FLAGS_DEBUG "-std=c99 -fgnu89-inline -pg -D_DEBUG -Wall -Wno-int-conversion -Wno-parentheses -Wno-unused-variable -Wno-unknown-pragmas -Wno-unused-result -Wno-format -Wno-format-extra-args")
-set(CMAKE_C_FLAGS_RELEASE "-std=c99 -fgnu89-inline -O2 -Wno-unused-result")
+set(COMPILER_SPECIFIC_DEFINITIONS_DEBUG "")
+set(COMPILER_SPECIFIC_DEFINITIONS_RELEASE "")
 
 # add OS definitions
 if (WIN32)
-    add_definitions(-DWIN32)
+    add_definitions(-D_IMLAB_PLATFORM_WINDOWS)
 elseif (UNIX)
-    add_definitions(-DUNIX)
-elseif (APPLE)
-    add_definitions(-DAPPLE)
+    add_definitions(-D_IMLAB_PLATFORM_UNIX)
 endif (WIN32)
+
+# add COMPILER specific flags
+if (CMAKE_C_COMPILER_ID STREQUAL "MSVC")
+    # using visual studio
+    message(STATUS "Found compiler Visual Studio")
+    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+    set(COMPILER_SPECIFIC_DEFINITIONS_DEBUG ${COMPILER_SPECIFIC_DEFINITIONS_DEBUG} "/Od /TC /Zc:preprocessor")
+    set(COMPILER_SPECIFIC_DEFINITIONS_RELEASE ${COMPILER_SPECIFIC_DEFINITIONS_RELEASE} "/O2 /TC /Zc:preprocessor")
+elseif (CMAKE_C_COMPILER_ID STREQUAL "GNU")
+    # using GCC
+    message(STATUS "Found compiler GCC")
+    set(COMPILER_SPECIFIC_DEFINITIONS_DEBUG ${COMPILER_SPECIFIC_DEFINITIONS_DEBUG} "-std=c99 -fgnu89-inline -pg -D_DEBUG -Wall -Wno-int-conversion -Wno-parentheses -Wno-unused-variable -Wno-unknown-pragmas -Wno-unused-result -Wno-format -Wno-format-extra-args")
+    set(COMPILER_SPECIFIC_DEFINITIONS_RELEASE ${COMPILER_SPECIFIC_DEFINITIONS_RELEASE} "-std=c99 -O2 -fgnu89-inline -Wno-unused-result")
+else ()
+    message(FATAL "Unsupported compiler")
+endif()
+
+set(CMAKE_C_FLAGS_DEBUG ${COMPILER_SPECIFIC_DEFINITIONS_DEBUG})
+set(CMAKE_C_FLAGS_RELEASE ${COMPILER_SPECIFIC_DEFINITIONS_RELEASE})
 
 # set the include directory
 set(IMLAB_DIRECTORY ${PROJECT_SOURCE_DIR}/library/)
