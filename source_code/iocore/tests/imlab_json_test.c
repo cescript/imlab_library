@@ -11,10 +11,9 @@ int main() {
     imlab_mkdir("results");
 
     vector_t *root;
-    string_t buffer = string("");
     for(i = 0; i < 1; i++) {
         printf("Loading a JSON file into the memory %d / %d\n", i+1, 1);
-        root = json_read("../test/test_data/sample.json");
+        root = json_read("../../data/sample.json");
         printf("JSON file succesfully loaded into the memory\n");
         json_write("results//sample_shrinked.json", root, 0);
         // json_serialize(root, &buffer);

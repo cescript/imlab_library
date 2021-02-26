@@ -12,21 +12,9 @@ cmake .. && cmake --build . --target all
 
 #################################################
 
-
-
-################# RUN LOCAL TEST ################
-# no test for now
-
-#################################################
-
-
-
 ############### INSTALL THE LIBRRAY ##############
 # copy all the header and libs
 make install
-# copy all the test sources
-cp -R ../test ../library/
-
 
 ############## BUILD LIBRARY TEST FILES #########
 # change to test directory
@@ -41,4 +29,16 @@ cd build
 cmake ..
 # run cmake command
 cmake --build . --target all
+#################################################
+
+############### RUN ALL THE TESTS ###############
+cd ../bins/
+find . -type f -executable -not -path './results/*' | while read test
+do
+    $test
+    if [ $? -ne 0 ]
+    then
+        exit 1
+    fi
+done
 #################################################

@@ -28,7 +28,8 @@ int main() {
     // create a temperory variables
     json_t t1 = jsonf(1, 2.3);
 
-    for(int i=0; i < length(v); i++) {
+    uint32_t i;
+    for(i=0; i < length(v); i++) {
         json_t d = at(json_t, v, i);
 
         if(d.type == 1) {
@@ -60,7 +61,7 @@ int main() {
     vector_unique(in, un, NULL);
     // print the unique elements
     printf("unique elements are:\n");
-    for(int i=0; i < length(un); i++) {
+    for(i=0; i < length(un); i++) {
         printf("%d ", at(uint32_t, un, i));
     }
 

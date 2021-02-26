@@ -3,8 +3,8 @@
 #include "iocore.h"
 #include "prcore.h"
 
-int main() {
-
+int main() 
+{
     message(SUCCESS, "starting to test IMLAB types");
 
     // create an output directory
@@ -18,7 +18,14 @@ int main() {
     float d = point_distance(pts1, pts2);
 
     struct rectangle_t rect1 = rectangle(0,0,2,3, 0);
-    struct rectangle_t rect2 = rectangle(0,0,4,6, 0);
+    struct rectangle_t rect2 = rectangle(-1,1,4,1, 0);
+
+    // compute the overlap
+    float iou = rectangle_overlap(rect1, rect2, 1);
+    if (!equal(iou, 0.25, 1e-5))
+    {
+        message(ERROR, "rectangle overlap has a bug!, %5.3f", iou);
+    }
 
     matrix_t *img = matrix_create(uint8_t, 768, 1024, 3);
     struct color_t color = HSV(123,85,40);

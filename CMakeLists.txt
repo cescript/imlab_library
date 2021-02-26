@@ -37,7 +37,7 @@ set(CMAKE_C_FLAGS_RELEASE ${COMPILER_SPECIFIC_DEFINITIONS_RELEASE})
 set(IMLAB_DIRECTORY ${PROJECT_SOURCE_DIR}/library/)
 set(IMLAB_INCLUDE_DIRECTORY ${IMLAB_DIRECTORY}/include/)
 set(IMLAB_LIBRARY_DIRECTORY ${IMLAB_DIRECTORY}/lib/)
-set(IMLAB_TEST_BINARIES_DIRECTORY ${PROJECT_SOURCE_DIR}/bins/)
+set(IMLAB_TEST_FILES_DIRECTORY ${IMLAB_DIRECTORY}/test/)
 
 # set build type to release
 set(CMAKE_BUILD_TYPE Release)
@@ -82,6 +82,20 @@ file(GLOB src_prcore "source_code/prcore/sources/*.c")
 set(IMLAB_SOURCE_FILES ${src_core} ${src_alcore} ${src_cvcore} ${src_imcore} ${src_iocore} ${src_lacore} ${src_mlcore} ${src_prcore})
 # message(STATUS ${IMLAB_SOURCE_FILES})
 
+# get all test files
+file(GLOB test_core   "source_code/core/tests/*.c")
+file(GLOB test_alcore "source_code/alcore/tests/*.c")
+file(GLOB test_cvcore "source_code/cvcore/tests/*.c")
+file(GLOB test_imcore "source_code/imcore/tests/*.c")
+file(GLOB test_iocore "source_code/iocore/tests/*.c")
+file(GLOB test_lacore "source_code/lacore/tests/*.c")
+file(GLOB test_mlcore "source_code/mlcore/tests/*.c")
+file(GLOB test_prcore "source_code/prcore/tests/*.c")
+
+# set the source files and header files for the imlab library
+set(IMLAB_TEST_FILES ${test_core} ${test_alcore} ${test_cvcore} ${test_imcore} ${test_iocore} ${test_lacore} ${test_mlcore} ${test_prcore})
+# message(STATUS ${IMLAB_TEST_FILES})
+
 # create imlab library
 add_library(imlab STATIC ${IMLAB_SOURCE_FILES})
 
@@ -96,34 +110,10 @@ set_target_properties(imlab PROPERTIES LINKER_LANGUAGE C)
 set_target_properties(imlab PROPERTIES PUBLIC_HEADER "${IMLAB_PUBLIC_HEADER_FILES}")
 
 # install the imlab library
-INSTALL(TARGETS imlab 
+install(TARGETS imlab 
     ARCHIVE DESTINATION ${IMLAB_LIBRARY_DIRECTORY}
     PUBLIC_HEADER DESTINATION ${IMLAB_INCLUDE_DIRECTORY}
 )
 
-# get all .c files under each sub folder
-file(GLOB test_files "test/*.c")
-
-#for each c file in the samples directory
-foreach(test_target ${test_files})
-
-    #get the filename without the path
-    get_filename_component(test_source_name ${test_target} NAME_WE)
-
-    # print the status of the test file
-    message(STATUS ${test_source_name})
-
-    # create an executable_name via omitting the posix
-    string(REPLACE ".c" "" executable_name ${test_source_name})
-    add_executable(${executable_name} ${test_target})
-
-    # change the output dir of the target
-    set_target_properties( ${executable_name} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${IMLAB_TEST_BINARIES_DIRECTORY} )
-
-    # Make sure YourLib is linked to each app
-    target_link_libraries(${executable_name} imlab)
-
-    if(UNIX)
-        target_link_libraries(${executable_name} m)
-    endif(UNIX)
-endforeach(test_target ${test_files})
+# install the test files
+install(FILES ${IMLAB_TEST_FILES} DESTINATION ${IMLAB_TEST_FILES_DIRECTORY})

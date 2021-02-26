@@ -48,6 +48,14 @@ float random_float(float mint, float maxt);
 // int *perm = (int*) malloc(N*sizeof(N));
 uint32_t *random_permutation(uint32_t length);
 
-void *random_sample(uint8_t *in, uint32_t length, uint32_t sample, uint32_t elemsize);
+/**
+@brief Randomly sample #sample data from the input array using Reservoir sampling
+@param input Input array where the samples are taken from
+@param length Length of the input array
+@param sample Number of samples that are taken from the input
+@param elemsize Size of the single element in input buffer
+@param output Output array where the samples are inserted
+*/
+return_t random_sample(void *input, uint32_t length, uint32_t sample, uint32_t elemsize, void *output);
 
 #endif

@@ -13,7 +13,7 @@ int main()
     // create an output directory
     imlab_mkdir("results");
 
-    matrix_t *img   = imread("../test/test_data/sample.bmp");
+    matrix_t *img   = imread("../../data/sample.bmp");
 
     matrix_t *gray  = matrix_create(uint8_t, height(img), width(img), 1);
     rgb2gray(img, gray);
@@ -30,7 +30,7 @@ int main()
     double fill_inf[3] ={1,2,3.3};
 
 
-    float data[4] = {1.1, 2.2, 3.3, 4.4};
+    float data[4] = {1.1f, 2.2f, 3.3f, 4.4f};
     matrix_t *matA = matrix_create(float, 1,4,1, data);
     // print the type name
     printf("Type of matA: %s\n", typename(matA));

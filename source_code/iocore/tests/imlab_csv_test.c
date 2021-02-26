@@ -1,3 +1,4 @@
+#include <string.h>
 #include "iocore.h"
 #include "prcore.h"
 
@@ -8,7 +9,7 @@ int main()
     message(SUCCESS, "starting to test IMLAB csv library");
 
     // Complex file test
-    char *complexFileName = "../test/test_data/sample.csv";
+    char *complexFileName = "../../data/sample.csv";
     uint32_t counter = 0;
     // open a csv file with complex rows
     struct csv_t* complex_file_test = csv_open(complexFileName, 0, 1024);
@@ -32,7 +33,7 @@ int main()
     csv_close(&complex_file_test);
 
     // documentation example
-    struct csv_t *table = csv_open("../test/test_data/sample.csv", 0, 1024);
+    struct csv_t *table = csv_open("../../data/sample.csv", 0, 1024);
     int cols = csv_get_column_size(table);
     // scan the header line
     csv_get_next_line(table);

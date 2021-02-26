@@ -13,11 +13,11 @@ int main()
     // create an output directory
     imlab_mkdir("results");
 
-    int i,j,c;
+    int i;
 
     double fill_inf[3] ={1,2,3.3};
 
-    matrix_t *img   = imread("../test/test_data/sample.bmp");
+    matrix_t *img   = imread("../../data/sample.bmp");
     imwrite(img, "results//input_copy.bmp");
     // create an image display with the given name and property
     struct window_t *display = window_create("IMLAB IMAGE  DISPLAY TEST", 0);
@@ -52,7 +52,7 @@ int main()
 
     // create an empty matrix
     matrix_t *img2 = matrix_create(img, NULL);
-    imload("../test/test_data/sample.bmp", img2);
+    imload("../../data/sample.bmp", img2);
     // show the image
     imshow(img2, display);
     window_wait(display, 1000);
@@ -62,13 +62,11 @@ int main()
 
     matrix_t *gray  = matrix_create(uint8_t, height(img), width(img), 1);
     matrix_t *bwimg = matrix_create(gray, mdata(gray, 0)); // create a matrix from the gray matrix
-    matrix_t *img2x = matrix_create(uint8_t);
+    matrix_t *imgc = matrix_create(uint8_t, height(img), width(img), 1);
     matrix_t *label = matrix_create(uint32_t);
 
     rgb2gray(img, gray);
     imwrite(gray, "results//out_gray.bmp");
-    imscale2x(img, img2x);
-    imwrite(img2x,"results//scaled2x.bmp");
 
     // test color transforms
     imthreshold(gray, imotsu(gray), bwimg);
@@ -84,17 +82,11 @@ int main()
     window_wait(display, 1000);
     imwrite(img, "results//bwlabel.bmp");
 
-    matrix_t *dist = matrix_create(float);
-    bwdist(bwimg, dist);
-    matrix2image(dist, 0, gray);
-    imwrite(gray, "results//distance_transform.bmp");
-
     // test colorization
 
     struct color_t color = HSV(238,170,255);
-    matrix_view(img2x);
-    matrix_fill(img2x, &color);
-    imwrite(img2x, "results//hsv_colorization.bmp");
+    matrix_fill(imgc, &color);
+    imwrite(imgc, "results//hsv_colorization.bmp");
     // test geometric transform functions
     //point_t src[3] = {0,0,   img->width,0,  img->width,img->height};
     //point_t dst[3] = {0,0, img->width,0, img->width ,img->height/2};
@@ -102,16 +94,16 @@ int main()
     //float data[] = {0.5,0,0, 0,0.5,0, 0,0,1};
     //matrix_t tform = maketform( data ); // create TFORM from given affine matrix
     matrix_t *tform = rot2tform(width(img)/2, height(img)/2, 45, 0.5);
-    matrix_free(&img2x);
-    img2x = matrix_create(uint8_t);
+    matrix_free(&imgc);
+    imgc = matrix_create(uint8_t);
     rgb2any(img, RGB2SEPIA, img);
 
-    imtransform(img, tform, img2x);
+    imtransform(img, tform, imgc);
 
     // show the image
-    imshow(img2x, display);
+    imshow(imgc, display);
     window_wait(display, 1000);
-    imwrite(img2x, "results//transformed.bmp");
+    imwrite(imgc, "results//transformed.bmp");
 
     // test integral image
     matrix_free(&bwimg);
@@ -119,12 +111,16 @@ int main()
     color = RGB(128,128,128);
     matrix_fill(bwimg, &color);
 
+    // print size of the bwimg
+    matrix_view(bwimg);
+
     // create two different floating point matrce
     matrix_t *mat0x0f1 = matrix_create(float);
     matrix_t *mat0x0f2 = matrix_create(float);
 
-    integral(bwimg, mat0x0f1, mat0x0f2);
+    // integral(bwimg, mat0x0f1, mat0x0f2);
     matrix2image(mat0x0f1, 0, bwimg);
+
     // test imwrite
     imwrite(bwimg, "results//integral_image_result.bmp");
 

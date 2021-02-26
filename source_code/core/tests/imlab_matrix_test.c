@@ -24,7 +24,7 @@ int main() {
     // create a matrix with four arguments
     matrix_t *matd_4 = matrix_create(double, 121, 121, 2); // create a 121x121x2 matrix
     // create a matrix with five arguments
-    float matD[100] = {1.0, 1.1, 1.2, 1.3};
+    float matD[100] = {1.0f, 1.1f, 1.2f, 1.3f};
     matrix_t *matf_5 = matrix_create(float, 10, 10, 1, matD); // create a volume(100) matrix and initialize the data with matD[100]
     matrix_t *matd_5 = matrix_create(double, 121, 121, 2, NULL); // create a 121x121x2 matrix same as matd_4
 
