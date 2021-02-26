@@ -125,24 +125,44 @@ uint32_t *random_permutation(uint32_t length)
     return idx_list;
 }
 
-void *random_sample(uint8_t *in, uint32_t length, uint32_t sample, uint32_t elemsize)
+// implement simple reservoir sampling strategy to select sample over length
+return_t random_sample(void *input, uint32_t length, uint32_t sample, uint32_t elemsize, void *output)
 {
-    // allocate memory for the output
-    uint8_t *out = (uint8_t*) calloc(sample, elemsize);
-    // choose n(k)
-    size_t s;
-    for(s=0; s < length; s++) {
-        // get the accaptance threshold
-        float thres = random_float(0,1);
-        // TODO: possible error here
-        float score = (s+1) / (float)(sample - s);
-        // accept the input if the score is higher than the threshold
-        if(score > thres) {
-            memcpy(out, in, elemsize);
-            out += elemsize;
-        }
+    // check that the input and output arrays are allocated
+    check_null(input, ERROR_NULL_TYPE);
+    check_null(output, ERROR_NULL_TYPE);
+
+    // check that the array length is larger than the sample size
+    check_condition( sample, ERROR_DIMENSION_MISMATCH, "input length must be larger than the sample size");
+
+    // get the iterable pointer to the actual data
+    uint8_t *in = input;
+    uint8_t *out = output;
+
+    // first fill the array with the first values
+    uint32_t s;
+    for(s = 0; s < sample; s++)
+    {
+        memcpy(out + s*elemsize, in, elemsize);
         in += elemsize;
     }
-    // return the output
-    return (void*)out;
+
+    // check the remaining samples and select if probability confirms
+    for(; s < length; s++) 
+    {
+        // get the accaptance threshold
+        uint32_t r = (uint32_t)random_int(0, s);
+
+        // accept the input if the index is smaller than the sample size
+        if(r < sample) 
+        {
+            memcpy(out + r*elemsize, in, elemsize);
+        }
+
+        // make the input points to the next element
+        in += elemsize;
+    }
+
+    // return success
+    return SUCCESS;
 }
