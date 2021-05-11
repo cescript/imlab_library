@@ -6,7 +6,7 @@
 #define compute_integral_image(input_type, output_type, max_value, imgep, sumsp, ssump, width, height, channels)      \
     do                                                                                                                \
     {                                                                                                                 \
-        uint32_t _m, _n, _c, _idx, _step;                                                                             \
+        uint32_t _m, _n, _c, _idx = 0, _step;                                                                         \
         output_type *_sm = malloc(channels * sizeof(output_type));                                                    \
         output_type *_ss = malloc(channels * sizeof(output_type));                                                    \
         output_type _inv1 = 1.0 / max_value;                                                                          \
