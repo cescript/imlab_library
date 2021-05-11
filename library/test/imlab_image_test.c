@@ -118,7 +118,7 @@ int main()
     matrix_t *mat0x0f1 = matrix_create(float);
     matrix_t *mat0x0f2 = matrix_create(float);
 
-    // integral(bwimg, mat0x0f1, mat0x0f2);
+    integral(bwimg, mat0x0f1, mat0x0f2);
     matrix2image(mat0x0f1, 0, bwimg);
 
     // test imwrite
