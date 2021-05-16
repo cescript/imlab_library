@@ -20,6 +20,9 @@ message(STATUS "LIBRARY_DIRECTORY: ${IMLAB_LIBRARY_DIRECTORY}")
 # add imlab path to the link directories
 link_directories(${IMLAB_LIBRARY_DIRECTORY})
 
+# enable library testing
+enable_testing()
+
 # get the all folders in the samples directory
 set(test_sub_folder "test")
 
@@ -38,7 +41,8 @@ foreach(test_target ${test_files})
     # create an executable_name via omitting the posix
     string(REPLACE ".c" "" executable_name ${test_source_name})
     add_executable(${executable_name} ${test_target})
-
+    add_test(NAME ${executable_name} COMMAND ${executable_name})
+    
     #we created the lib, now test it with samples
     target_include_directories(${executable_name} PUBLIC ${IMLAB_INCLUDE_DIRECTORY})
 
