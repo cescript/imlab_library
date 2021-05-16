@@ -64,5 +64,5 @@ int main()
 
     message(SUCCESS, "all operations are done successfully!");
 
-    return 1;
+    return 0;
 }
