@@ -1,6 +1,4 @@
-# imlab (under heavy development) [![Build Status](https://travis-ci.com/cescript/imlab_library.svg?branch=master)](https://travis-ci.com/cescript/imlab_library)
-
-# IMLAB Image Processing Library
+# IMLAB Image Processing Library [![Build Status](https://github.com/cescript/imlab_library/actions/workflows/cmake.yml/badge.svg)](https://github.com/cescript/imlab_library/actions/workflows/cmake.yml)
 
 IMLAB is an easy to use computer vision library written purely in C language.
 It is designed to be tiny, simple and brief yet self contained. No addtitional libraries is needed. Most of the fundemental operations on images, vectors, matrice and files are written pureley in C as header files which can be used sepeartely depending on your project specifics.
