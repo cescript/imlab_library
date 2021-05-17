@@ -9,7 +9,7 @@ int main()
     message(SUCCESS, "starting to test IMLAB csv library");
 
     // Complex file test
-    char *complexFileName = "../../data/sample.csv";
+    char *complexFileName = "../data/sample.csv";
     uint32_t counter = 0;
     // open a csv file with complex rows
     struct csv_t* complex_file_test = csv_open(complexFileName, 0, 1024);

@@ -17,7 +17,7 @@ int main()
 
     double fill_inf[3] ={1,2,3.3};
 
-    matrix_t *img   = imread("../../data/sample.bmp");
+    matrix_t *img   = imread("../data/sample.bmp");
     imwrite(img, "results//input_copy.bmp");
     // create an image display with the given name and property
     struct window_t *display = window_create("IMLAB IMAGE  DISPLAY TEST", 0);

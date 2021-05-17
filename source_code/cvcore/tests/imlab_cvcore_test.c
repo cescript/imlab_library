@@ -13,7 +13,7 @@ int main()
     // create an output directory
     imlab_mkdir("results");
 
-    matrix_t *img   = imread("../../data/sample.bmp");
+    matrix_t *img   = imread("../data/sample.bmp");
 
     matrix_t *gray  = matrix_create(uint8_t, height(img), width(img), 1);
     rgb2gray(img, gray);

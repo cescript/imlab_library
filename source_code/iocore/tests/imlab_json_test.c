@@ -13,7 +13,7 @@ int main() {
     vector_t *root;
     for(i = 0; i < 1; i++) {
         printf("Loading a JSON file into the memory %d / %d\n", i+1, 1);
-        root = json_read("../../data/sample.json");
+        root = json_read("../data/sample.json");
         printf("JSON file succesfully loaded into the memory\n");
         json_write("results//sample_shrinked.json", root, 0);
         // json_serialize(root, &buffer);
