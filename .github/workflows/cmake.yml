@@ -27,11 +27,11 @@ jobs:
 
     # create directory for the results
     - name: Create Directory
-      working-directory: ${{github.workspace}}/bins
+      working-directory: ${{github.workspace}}/build
       run: mkdir -p results
     
     # run tests
     - name: Test
-      working-directory: ${{github.workspace}}/bins
+      working-directory: ${{github.workspace}}/build
       run: ctest -C ${{env.BUILD_TYPE}}
       
