@@ -52,3 +52,17 @@ This call of the #matrix_create will create a floating point data pointer and al
         }
      }
 ```
+
+## How To Build
+All the public library and header files are distributed under the [library](library) folder. This files are compiled with [GNU Compiler Collection](https://gcc.gnu.org) in [Alpine Linux](https://alpinelinux.org).
+
+If these files are not suitable for your project, you can rebuild the library using the following steps: 
+
+1. Download the library source files: `git clone https://github.com/cescript/imlab_library.git`
+2. Change directory to source folder: `cd imlab_library`
+3. Create a temporary build directory and step into: `mkdir build && cd build`
+4. Configure the build process with default options: `cmake ..`
+5. Build the library: `make -j8`
+6. Update the files under [library](library) folders: `make install`
+7. All done, you can use [library](library) folder to link imlab to your project
+8. You can find some example projects in [imlab.io](https://imlab.io)
