@@ -19,8 +19,9 @@ if (CMAKE_C_COMPILER_ID STREQUAL "MSVC")
     # using visual studio
     message(STATUS "Found compiler Visual Studio")
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
-    set(COMPILER_SPECIFIC_DEFINITIONS_DEBUG ${COMPILER_SPECIFIC_DEFINITIONS_DEBUG} "/Od /TC /Zc:preprocessor")
-    set(COMPILER_SPECIFIC_DEFINITIONS_RELEASE ${COMPILER_SPECIFIC_DEFINITIONS_RELEASE} "/O2 /TC /Zc:preprocessor")
+    # see bug about Zc:preprocessor and wd5105: https://docs.microsoft.com/en-us/cpp/error-messages/compiler-warnings/c5105?view=msvc-160
+    set(COMPILER_SPECIFIC_DEFINITIONS_DEBUG ${COMPILER_SPECIFIC_DEFINITIONS_DEBUG} "/Od /TC /Zc:preprocessor /wd5105")
+    set(COMPILER_SPECIFIC_DEFINITIONS_RELEASE ${COMPILER_SPECIFIC_DEFINITIONS_RELEASE} "/O2 /TC /Zc:preprocessor /wd5105")
 elseif (CMAKE_C_COMPILER_ID STREQUAL "GNU")
     # using GCC
     message(STATUS "Found compiler GCC")
