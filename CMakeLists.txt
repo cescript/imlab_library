@@ -3,6 +3,9 @@ project(imlab_library C)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# set build type to release
+set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE)
+
 # set copiler flags for debug and release
 set(COMPILER_SPECIFIC_DEFINITIONS_DEBUG "")
 set(COMPILER_SPECIFIC_DEFINITIONS_RELEASE "")
@@ -33,9 +36,6 @@ endif()
 
 set(CMAKE_C_FLAGS_DEBUG ${COMPILER_SPECIFIC_DEFINITIONS_DEBUG})
 set(CMAKE_C_FLAGS_RELEASE ${COMPILER_SPECIFIC_DEFINITIONS_RELEASE})
-
-# set build type to release
-set(CMAKE_BUILD_TYPE Release)
 
 # set the core libraries
 set(IMLAB_FOLDERS "core;alcore;cvcore;imcore;iocore;lacore;mlcore;prcore")
