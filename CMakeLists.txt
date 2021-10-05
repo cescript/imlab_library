@@ -92,6 +92,10 @@ install(TARGETS imlab
 # test files using the output library
 enable_testing()
 
+# change the output dir of the target
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/bins/ )
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/bins/ )
+
 #for each c file in the samples directory
 foreach(test_target ${IMLAB_TEST_FILES})
 
@@ -108,9 +112,6 @@ foreach(test_target ${IMLAB_TEST_FILES})
     
     #we created the lib, now test it with samples
     target_include_directories(${executable_name} PRIVATE ${IMLAB_HEADER_DIRECTORIES})
-
-    # change the output dir of the target
-    set_target_properties( ${executable_name} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bins/ )
 
     # Make sure YourLib is linked to each app
     target_link_libraries(${executable_name} imlab)
