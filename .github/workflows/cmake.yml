@@ -35,16 +35,16 @@ jobs:
 
       # create directory for the results
     - name: Create Directory
-      working-directory: ${{github.workspace}}/build
+      working-directory: ${{github.workspace}}/bins
       run: mkdir -p results
 
     # Execute tests defined by the CMake configuration.  
     - name: Test
-      working-directory: ${{github.workspace}}/build
+      working-directory: ${{github.workspace}}/bins
       run: ctest -C ${{env.BUILD_TYPE}}
     
     # List the all files under the results directory
     - name: List
-      working-directory: ${{github.workspace}}/build/results/
+      working-directory: ${{github.workspace}}/bins/results/
       run: ls -lah
      
