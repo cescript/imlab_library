@@ -88,6 +88,11 @@
 #define xstringify(txt) #txt
 #endif
 
+// expand the given routine in case of macro argumnets
+#ifndef DOXYGEN_SKIP_IMLAB_HIDDEN_MACRO_NAMES
+#define expand(routine) routine
+#endif
+
 /**@hideinitializer
  * Counts the number of arguments in variable length argument list. Argument count must be between 1-9.
  \code{.c}
@@ -97,26 +102,33 @@
  fun(a,b,c,d); // "fun called with 4 arguments"
  \endcode
  */
-#define va_nargs(...) va_nargs_(__VA_ARGS__, 9, 8, 7, 6, 5, 4, 3, 2, 1)
+
+#define va_nargs(...) va_args_private(__VA_ARGS__)
+
 #ifndef DOXYGEN_SKIP_IMLAB_HIDDEN_MACRO_NAMES
 // simple argument counter for variable argument functions
-#define va_nargs_(_1, _2, _3, _4, _5, _6, _7, _8, _9, N, ...) N
+#define va_args_private(...) expand(va_nargs_private(__VA_ARGS__, 9, 8, 7, 6, 5, 4, 3, 2, 1))
+#define va_nargs_private(_1, _2, _3, _4, _5, _6, _7, _8, _9, N, ...) N
 #endif
 
 //
 /**@hideinitializer
  * Call the given function_(#number of arguments) with the given arguments
  */
-#define call(func, ...) call_(func, va_nargs(__VA_ARGS__))(__VA_ARGS__)
+#define call(func, ...) call_private(func, va_nargs(__VA_ARGS__), __VA_ARGS__)
 #ifndef DOXYGEN_SKIP_IMLAB_HIDDEN_MACRO_NAMES
-#define call_(func, nargs) cat_3(func, _, nargs)
+#define call_private(func, nargs, ...) expand(cat_3(func, _, nargs)(__VA_ARGS__))
 #endif
 
 /**@hideinitializer
  * Get the argument _i in a variable length argument list (up to 9 arguments)
  */
-#define arg(_i, ...) cat_2(arg_, _i)(__VA_ARGS__, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+#define arg(_i, ...) arg_private(_i, __VA_ARGS__)
 #ifndef DOXYGEN_SKIP_IMLAB_HIDDEN_MACRO_NAMES
+
+// expand the result
+#define arg_private(_i, ...) expand(cat_2(arg_, _i)(__VA_ARGS__))
+
 // to get the argument at a specific position
 #define arg_1(N, ...) N
 #define arg_2(_1, N, ...) N

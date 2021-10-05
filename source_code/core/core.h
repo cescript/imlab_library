@@ -149,21 +149,21 @@ uint32_t m2data = at(uint32_t, mati, 5, 7); // m2data points to the mati->_data(
 uint32_t m3data = at(uint32_t, mati, 5, 7, 2); // m3data points to the mati->_data(5,7,2)
 @endcode
 **/
-#define at(_type, ...) ( ((_type *)(arg_1(__VA_ARGS__)->_data))[idx(__VA_ARGS__)] )
+#define at(_type, ...) ( ((_type *)(arg(1,__VA_ARGS__)->_data))[idx(__VA_ARGS__)] )
 
 #ifndef DOXYGEN_SKIP_IMLAB_HIDDEN_MACRO_NAMES
 
-#define atf(...) (((float *)(arg_1(__VA_ARGS__)->_data))[idx(__VA_ARGS__)])
-#define atd(...) (((double *)(arg_1(__VA_ARGS__)->_data))[idx(__VA_ARGS__)])
+#define atf(...) at(float, __VA_ARGS__)
+#define atd(...) at(double, __VA_ARGS__)
 
-#define ati8(...) (((int8_t *)(arg_1(__VA_ARGS__)->_data))[idx(__VA_ARGS__)])
-#define atui8(...) (((uint8_t *)(arg_1(__VA_ARGS__)->_data))[idx(__VA_ARGS__)])
+#define ati8(...) at(int8_t, __VA_ARGS__)
+#define atui8(...) at(uint8_t, __VA_ARGS__)
 
-#define ati16(...) (((int16_t *)(arg_1(__VA_ARGS__)->_data))[idx(__VA_ARGS__)])
-#define atui16(...) (((uint16_t *)(arg_1(__VA_ARGS__)->_data))[idx(__VA_ARGS__)])
+#define ati16(...) at(int16_t, __VA_ARGS__)
+#define atui16(...) at(uint16_t, __VA_ARGS__)
 
-#define ati32(...) (((int32_t *)(arg_1(__VA_ARGS__)->_data))[idx(__VA_ARGS__)])
-#define atui32(...) (((uint32_t *)(arg_1(__VA_ARGS__)->_data))[idx(__VA_ARGS__)])
+#define ati32(...) at(int32_t, __VA_ARGS__)
+#define atui32(...) at(uint32_t, __VA_ARGS__)
 
 #endif
 
@@ -191,7 +191,7 @@ uint32_t *m2data = data(uint32_t, mati, 5, 7); // m2data points to the &(mati->_
 uint32_t *m3data = data(uint32_t, mati, 5, 7, 2); // m3data points to the &(mati->_data(5,7,2))
 @endcode
 **/
-#define data(_type, ...) ( ((_type *)(arg_1(__VA_ARGS__)->_data)) + idx(__VA_ARGS__) )
+#define data(_type, ...) ( ((_type *)(arg(1,__VA_ARGS__)->_data)) + idx(__VA_ARGS__) )
 
 
 /**\name  IMLAB Type Comparators
