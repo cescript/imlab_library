@@ -285,7 +285,7 @@ vector_t* json_read(const char *filename) {
     struct json_data_t root;
 
     // open the file
-    FILE *js = fopen(filename,"r");
+    FILE *js = fopen(filename,"rb");
 
     // check the file
     check_file(js, vector_null());
