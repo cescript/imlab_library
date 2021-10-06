@@ -52,7 +52,7 @@ int main()
 
     // create an empty matrix
     matrix_t *img2 = matrix_create(img, NULL);
-    imload("../../data/sample.bmp", img2);
+    imload("../data/sample.bmp", img2);
     // show the image
     imshow(img2, display);
     window_wait(display, 1000);

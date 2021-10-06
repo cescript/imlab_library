@@ -33,7 +33,7 @@ int main()
     csv_close(&complex_file_test);
 
     // documentation example
-    struct csv_t *table = csv_open("../../data/sample.csv", 0, 1024);
+    struct csv_t *table = csv_open("../data/sample.csv", 0, 1024);
     int cols = csv_get_column_size(table);
     // scan the header line
     csv_get_next_line(table);
