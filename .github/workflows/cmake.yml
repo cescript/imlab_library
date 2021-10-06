@@ -43,4 +43,8 @@ jobs:
       working-directory: ${{github.workspace}}/build
       run: ctest -C ${{env.BUILD_TYPE}}
     
-     
+    # List the all files under the results directory
+    - name: List
+      working-directory: ${{github.workspace}}/build/results/
+      run: ls -lah
+      shell: bash
