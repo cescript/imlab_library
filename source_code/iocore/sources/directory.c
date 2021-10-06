@@ -2,10 +2,9 @@
 // Created by cescript on 13.04.2018.
 //
 #include "private/iocore_private.h"
-
+#include <errno.h>
 #ifdef _IMLAB_PLATFORM_WINDOWS
     #include <direct.h>
-    #include <errno.h>
 #elif _IMLAB_PLATFORM_UNIX
     #include <sys/stat.h>
     #include <sys/types.h>
@@ -13,18 +12,18 @@
 
 // create a directory with the given name
 return_t imlab_mkdir(const char *pathname) {
-    return_t status = SUCCESS;
+    return_t status = ERROR_UNABLE_TO_OPEN;
 #ifdef _IMLAB_PLATFORM_WINDOWS
-    if(_mkdir(pathname) != 0 && errno == ENOENT) {
-        status = ERROR_UNABLE_TO_OPEN;
+    if(_mkdir(pathname) == 0 || errno == EEXIST) {
+        status = SUCCESS;
     }
 #elif _IMLAB_PLATFORM_UNIX
-    status = mkdir(pathname, 777)  == 0 ? SUCCESS:ERROR_UNABLE_TO_OPEN;
+    if(mkdir(pathname, 777) == 0 || errno == EEXIST) {
+        status = SUCCESS;
+    }
 #else
-    message(ERROR_UNABLE_TO_OPEN, NULL);
+    message(status, NULL);
 #endif
-    // check status and return it
-    check_return(status, status);
     return status;
 }
 
